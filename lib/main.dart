@@ -20,6 +20,7 @@ class PortalECLB extends StatelessWidget {
       initialRoute: "/",
       routes: {
         "/" : (context) => new LoginPage(),
+        "/admin" : (context) => new PortalAdministrationPage()
       },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),

@@ -1,4 +1,5 @@
-import 'package:portal_eclb/resource/datamapper/abstract_patrimony_data_mapper.dart';
+
+import 'package:portal_eclb/resource/datamapper/patrimony/abstract_patrimony_data_mapper.dart';
 
 final class MariadbPatrimonyDataMapper extends AbstractPatrimonyDataMapper {
 

@@ -1,5 +1,5 @@
 import 'package:portal_eclb/model/patrimony/type_of_patrimony.dart';
-import 'package:portal_eclb/resource/datamapper/type_of_patrimony_data_mapper.dart';
+import 'package:portal_eclb/resource/datamapper/patrimony/type_of_patrimony_data_mapper.dart';
 
 ///Esta classe abstrata implementar parciamento o contrato de métodos definidos por
 ///TypeOdPatrimonyDataMapper. Somente os seguintes métodos foram implementados:

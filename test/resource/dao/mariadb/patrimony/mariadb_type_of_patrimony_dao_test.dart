@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:portal_eclb/model/patrimony/type_of_patrimony.dart';
-import 'package:portal_eclb/resource/dao/mariadb/patrimony/maria_db_type_of_patrimony_dao.dart';
-import 'package:portal_eclb/resource/dao/type_of_patrimony_dao.dart';
+import 'package:portal_eclb/resource/dao/mariadb/patrimony/mariadb_type_of_patrimony_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/mariadb_type_of_patrimony_data_mapper.dart';
-import 'package:portal_eclb/resource/datamapper/type_of_patrimony_data_mapper.dart';
+import 'package:portal_eclb/resource/datamapper/patrimony/type_of_patrimony_data_mapper.dart';
 import 'package:portal_eclb/resource/session/mariadb_database_session_manager.dart';
 import 'package:portal_eclb/transferency/dto/patrimony/type_of_patrimony_dto.dart';
 import 'package:portal_eclb/utils/environment_configuration.dart';
@@ -186,7 +186,7 @@ void main() {
         TypeOfPatrimonyDataMapper dataMapper = new MariaDBTypeOfPatrimonyDataMapper();
         TypeOfPatrimonyDAO dao = MariaDBTypeOfPatrimonyDAO(manager, dataMapper);
 
-        List typesOfPatrimonies = await dao.findAll(2, 1);
+        List typesOfPatrimonies = await dao.findAll(1, 2);
         expect(typesOfPatrimonies.length, equals(2));
 
         TypeOfPatrimony typeOfPatrimony = typesOfPatrimonies[0];
@@ -196,6 +196,93 @@ void main() {
         expect(typeOfPatrimony.description, equals("Natural"));
       } catch (e) {
         throw e;
+      } finally {
+        await manager.close();
+      }
+    });
+
+    test("testThrowEsceptionsWithCloseDatabaseSessionManager", () async {
+
+      EnvironmentConfiguration? configuration = await EnvironmentConfiguration.fromFile(".env_dev");
+      MariaDBDatabaseSessionManager manager = new MariaDBDatabaseSessionManager(configuration);
+
+      TypeOfPatrimonyDataMapper dataMapper = new MariaDBTypeOfPatrimonyDataMapper();
+      TypeOfPatrimonyDAO dao = MariaDBTypeOfPatrimonyDAO(manager, dataMapper);
+
+      TypeOfPatrimonyDTO dto = new TypeOfPatrimonyDTO(description: "Teste Data Transfer Object");
+
+      try {
+        await dao.insert(dto);
+      } catch (e) {
+        expect(e.toString(), contains("Database session is not opened."));
+      }
+
+      try {
+        await dao.update(dto);
+      } catch (e) {
+        expect(e.toString(), contains("Database session is not opened."));
+      }
+
+      try {
+        await dao.delete(10);
+      } catch (e) {
+        expect(e.toString(), contains("Database session is not opened."));
+      }
+
+      try {
+        await dao.findById(10);
+      } catch (e) {
+        expect(e.toString(), contains("Database session is not opened."));
+      }
+
+      try {
+        await dao.findAll();
+      } catch (e) {
+        expect(e.toString(), contains("Database session is not opened."));
+      }
+
+      try {
+        await dao.findByDescription("Material");
+      } catch (e) {
+        expect(e.toString(), contains("Database session is not opened."));
+      }
+
+    });
+
+    test("testThrowOtherExceptions", () async {
+      EnvironmentConfiguration? configuration = await EnvironmentConfiguration.fromFile(".env_dev");
+      MariaDBDatabaseSessionManager manager = new MariaDBDatabaseSessionManager(configuration);
+
+      TypeOfPatrimonyDataMapper dataMapper = new MariaDBTypeOfPatrimonyDataMapper();
+      TypeOfPatrimonyDAO dao = MariaDBTypeOfPatrimonyDAO(manager, dataMapper);
+
+      try {
+        await manager.open();
+
+        try {
+          await dao.findAll(-1, -1);
+        } catch (e) {
+          expect(e.toString(), contains("Invalid parameter for findAll method."));
+        }
+
+        try {
+          await dao.findAll();
+        } catch (e) {
+          expect(e.toString(), contains("No record found."));
+        }
+
+        try {
+          await dao.findByDescription("");
+        } catch (e) {
+          expect(e.toString(), contains("Description can not be empty"));
+        }
+
+        try {
+          await dao.findByDescription("Teste");
+        } catch (e) {
+          expect(e.toString(), contains("Type of patrimony was not found."));
+        }
+
       } finally {
         await manager.close();
       }

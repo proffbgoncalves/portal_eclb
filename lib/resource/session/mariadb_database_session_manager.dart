@@ -1,3 +1,4 @@
+import 'package:get_it/get_it.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:portal_eclb/resource/session/abstract_database_session_manager.dart';
 import 'package:portal_eclb/utils/environment_configuration.dart';
@@ -13,7 +14,6 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
 
   MariaDBDatabaseSessionManager(this._environmentConfiguration);
 
-  @override
   Future<bool> open() async {
     if (this._connection == null) {
       ConnectionSettings settings = new ConnectionSettings(
@@ -26,9 +26,6 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
 
       try {
         this._connection = await MySqlConnection.connect(settings);
-        if (this._connection == null) {
-          throw new Exception("Database connection failed.");
-        }
         super.isOpened = true;
       } catch(e) {
         String msg = e.toString();
@@ -40,26 +37,27 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
     return super.isOpened;
   }
 
-  @override
   Future close() async{
     if (this._connection == null) {
       throw new Exception("Session is not opened.");
     }
-    print(await this._connection?.close());
     super.isOpened = false;
     this._connection = null;
     super.isOnTransaction = false;
+    await this._connection?.close();
   }
 
-  @override
   Future<bool> commit() async {
     if (this._connection == null) {
       throw new Exception("Session is not opened.");
     }
+    if (!this.isOnTransaction) {
+      throw new Exception("Transaction was not started.");
+    }
     Results? results;
     try {
       results = await this._connection?.query("COMMIT");
-      super.isOnTransaction = false;
+      this.isOnTransaction = false;
     } catch (e) {
       String msg = e.toString();
       throw new Exception(msg.split(":")[1]);
@@ -67,11 +65,17 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
     return results != null;
   }
 
-  @override
   Future<bool> execute(String sql, [List? values]) async {
+    if (this._connection == null) {
+      throw new Exception("Session is not opened.");
+    }
+    if (!this.isOnTransaction) {
+      throw new Exception("Transaction was not started.");
+    }
     if (sql == "") {
       throw new Exception("Statement sql can not be empty.");
     }
+
 
     Results? results = null;
 
@@ -90,12 +94,11 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
 
   }
 
-  @override
   Future<Iterable?> executeQuery(String sql, [List<Object>? values]) async {
-    if (sql == "") {
-      throw new Exception("Statement sql can not be empty.");
-    }
-    Results? results = null;
+    throwIf(this._connection == null, new Exception("Session is not opened."));
+    throwIf(sql == "", new Exception("Statement sql can not be empty."));
+
+    Results? results;
 
     try {
       if (values == null) {
@@ -111,33 +114,30 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
     return results;
   }
 
-  @override
   String getType() {
     return this._environmentConfiguration.get("dbms");
   }
 
-  @override
   Future rollback() async {
     if (this._connection == null) {
       throw new Exception("Session is not opened.");
     }
     try {
+      this.isOnTransaction = false;
       await this._connection?.query("ROLLBACK");
-      super.isOnTransaction = false;
     } catch (e) {
       String msg = e.toString();
       throw new Exception(msg.split(":")[1]);
     }
   }
 
-  @override
+
   Future startTransaction() async {
     if (this._connection == null) {
       throw new Exception("Session is not opened.");
     }
-    await this._connection?.query("START TRANSACTION");
     super.isOnTransaction = true;
-
+    await this._connection?.query("START TRANSACTION");
   }
 
 }

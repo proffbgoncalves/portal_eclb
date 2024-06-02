@@ -1,8 +1,8 @@
 import 'package:portal_eclb/resource/dao/abstract_dao_factory.dart';
-import 'package:portal_eclb/resource/dao/mariadb/patrimony/maria_db_type_of_patrimony_dao.dart';
-import 'package:portal_eclb/resource/dao/type_of_patrimony_dao.dart';
+import 'package:portal_eclb/resource/dao/mariadb/patrimony/mariadb_type_of_patrimony_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/mariadb_type_of_patrimony_data_mapper.dart';
-import 'package:portal_eclb/resource/datamapper/type_of_patrimony_data_mapper.dart';
+import 'package:portal_eclb/resource/datamapper/patrimony/type_of_patrimony_data_mapper.dart';
 import 'package:portal_eclb/resource/session/abstract_database_session_manager.dart';
 import 'package:portal_eclb/resource/session/database_session_manager.dart';
 import 'package:portal_eclb/utils/environment_configuration.dart';

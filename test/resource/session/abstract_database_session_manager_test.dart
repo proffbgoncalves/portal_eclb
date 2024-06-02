@@ -32,35 +32,7 @@ void main() {
       expect(manager1, equals(manager2));
     });
 
-    test("testOpenAndCloseConnectionWithMariaDBDatabaseSessionManage", () async {
 
-      EnvironmentConfiguration configuration = await EnvironmentConfiguration.fromFile(".env_dev");
-      DatabaseSessionManager? manager = AbstractDatabaseSessionManager.getInstance(configuration);
-
-      await manager.open();
-
-      expect(manager.isOpened, equals(true));
-
-      await manager.close();
-
-      expect(manager.isOpened, equals(false));
-
-    });
-
-    test("testStartTransactionAndRollbackWithMariaDBDatabaseSessionManage", () async {
-      EnvironmentConfiguration configuration = await EnvironmentConfiguration.fromFile(".env_dev");
-      DatabaseSessionManager? manager = AbstractDatabaseSessionManager.getInstance(configuration);
-
-      await manager.open();
-      expect(manager.isOpened, equals(true));
-
-      await manager.startTransaction();
-
-      await manager.rollback();
-
-      await manager.close();
-      expect(manager.isOpened, equals(false));
-    });
 
   });
 

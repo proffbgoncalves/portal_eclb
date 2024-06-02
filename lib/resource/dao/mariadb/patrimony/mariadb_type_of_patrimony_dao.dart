@@ -1,8 +1,8 @@
 import 'package:mysql1/mysql1.dart';
 import 'package:portal_eclb/model/patrimony/type_of_patrimony.dart';
 import 'package:portal_eclb/resource/dao/abstract_dao.dart';
-import 'package:portal_eclb/resource/dao/type_of_patrimony_dao.dart';
-import 'package:portal_eclb/resource/datamapper/type_of_patrimony_data_mapper.dart';
+import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart';
+import 'package:portal_eclb/resource/datamapper/patrimony/type_of_patrimony_data_mapper.dart';
 import 'package:portal_eclb/transferency/dto/patrimony/type_of_patrimony_dto.dart';
 
 ///Esta classe implementa um DAO concreto capaz de acessor e manupular dados na
@@ -28,7 +28,7 @@ final class MariaDBTypeOfPatrimonyDAO extends AbstractDAO implements TypeOfPatri
 
       return insertResult;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 

@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:portal_eclb/dependency/dependecy_injector.dart';
+import 'package:portal_eclb/resource/dao/abstract_dao_factory.dart';
+import 'package:portal_eclb/resource/dao/dao_factory.dart';
 import 'package:portal_eclb/resource/dao/mariadb/mariadb_dao_factory.dart';
 import 'package:portal_eclb/resource/session/mariadb_database_session_manager.dart';
 import 'package:portal_eclb/utils/environment_configuration.dart';
@@ -23,9 +25,12 @@ void main() {
       }
     });
 
-    test("testGetInstanceOfMariaDBDAOFactory", () {
+    test("testGetInstanceOfMariaDBDAOFactory", () async {
+      EnvironmentConfiguration environmentConfiguration = await EnvironmentConfiguration.fromFile(".env_dev");
+      DAOFactory factory = AbstractDAOFactory.getInstance(environmentConfiguration);
 
-
+      expect(factory is MariaDBDAOFactory, isTrue);
+      expect(AbstractDAOFactory.getInstance(environmentConfiguration), equals(factory));
 
     });
 

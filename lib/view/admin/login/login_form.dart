@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portal_eclb/view/admin/portal_administration_page.dart';
 
 class LoginForm extends StatefulWidget {
 
@@ -63,12 +64,12 @@ class _LoginFormState extends State<LoginForm> {
                 children: <Widget>[
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(9, 65, 0, 100),
+                      backgroundColor: Color.fromRGBO(0, 58, 0, 100),
                       foregroundColor: Colors.white,
                     ),
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
-                        // Process data.
+                        Navigator.pushReplacementNamed(context, "/admin");
                       }
                     },
                     child: Text('Acessar'),
@@ -76,12 +77,13 @@ class _LoginFormState extends State<LoginForm> {
                   SizedBox(width: 40),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromRGBO(240, 246, 239, 100),
                       foregroundColor: Color.fromRGBO(9, 65, 0, 100),
-                      overlayColor: Color.fromRGBO(9, 65, 0, 100),
+                      overlayColor: Color.fromRGBO(0, 58, 0, 100),
                     ),
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
-                        // Process data.
+
                       }
                     },
                     child: Text('Cancelar'),

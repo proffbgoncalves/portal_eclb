@@ -34,7 +34,7 @@ abstract class AbstractDAO implements DAO {
       await this._sessionManager.execute(statement?[0], statement?[1]);
       return true;
     } catch(e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -65,8 +65,7 @@ abstract class AbstractDAO implements DAO {
       await this._sessionManager.execute(statement?[0], statement?[1]);
       return true;
     } catch(e) {
-      String msg = e.toString();
-      throw new Exception(msg.split(":")[1]);
+      rethrow;
     }
   }
 
@@ -82,14 +81,13 @@ abstract class AbstractDAO implements DAO {
       Object? modelObject = this._dataMapper!.generateObject(resultSet!);
       return modelObject;
     } catch(e) {
-      String msg = e.toString();
-      throw new Exception(msg.split(":")[1]);
+      rethrow;
     }
   }
 
   ///Este método é a implementação padrão para a operação de recuperar várias linhas
   ///em uma tabela em um esquema de banco de dados.
-  Future<List> findAll([int offset = 0, int limit = 0]) async {
+  Future<List> findAll([int limit = 0, int offset = 0]) async {
     if (!this._sessionManager.isOpened) {
       throw new Exception("Database session is not opened.");
     }
@@ -110,13 +108,12 @@ abstract class AbstractDAO implements DAO {
       }
 
       if ((resultSet as Iterable).length == 0) {
-        throw new Exception("Types of patrimonies table is empty.");
+          throw new Exception("No record found.");
       }
 
       return this._dataMapper!.generateList(resultSet);
     } catch(e) {
-      String msg = e.toString();
-      throw new Exception(msg.split(":")[1]);
+      rethrow;
     }
   }
 

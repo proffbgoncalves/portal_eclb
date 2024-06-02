@@ -1,6 +1,6 @@
 import 'package:mysql1/mysql1.dart';
 import 'package:portal_eclb/model/patrimony/type_of_patrimony.dart';
-import 'package:portal_eclb/resource/datamapper/abstract_type_of_patrimony_data_mapper.dart';
+import 'package:portal_eclb/resource/datamapper/patrimony/abstract_type_of_patrimony_data_mapper.dart';
 import 'package:portal_eclb/transferency/dto/patrimony/type_of_patrimony_dto.dart';
 
 final class MariaDBTypeOfPatrimonyDataMapper extends AbstractTypeOfPatrimonyDataMapper {

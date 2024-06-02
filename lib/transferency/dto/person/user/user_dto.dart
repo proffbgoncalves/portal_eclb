@@ -1,7 +1,7 @@
 import 'package:portal_eclb/model/person/user/user.dart';
-import 'package:portal_eclb/transferency/dto/person/abstact_person_dto.dart';
+import 'package:portal_eclb/transferency/dto/person/abstract_person_dto.dart';
 
-final class UserDTO extends AbstactPersonDTO implements User {
+final class UserDTO extends AbstractPersonDTO implements User {
 
   String? _login;
   String? _password;

@@ -1,4 +1,4 @@
-import 'package:portal_eclb/resource/datamapper/patrimony_data_mapper.dart';
+import 'package:portal_eclb/resource/datamapper/patrimony/patrimony_data_mapper.dart';
 
 abstract class AbstractPatrimonyDataMapper implements PatrimonyDataMapper {
 

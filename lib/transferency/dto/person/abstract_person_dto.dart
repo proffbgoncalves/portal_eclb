@@ -1,11 +1,11 @@
 import 'package:portal_eclb/model/person/person.dart';
 
-abstract class AbstactPersonDTO implements Person {
+abstract class AbstractPersonDTO implements Person {
 
   int? _id;
   String? _name;
 
-  AbstactPersonDTO({int? id, String? name}) {
+  AbstractPersonDTO({int? id, String? name}) {
     this._id = id;
     this._name = name;
   }
