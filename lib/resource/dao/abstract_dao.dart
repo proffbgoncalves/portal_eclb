@@ -49,8 +49,7 @@ abstract class AbstractDAO implements DAO {
       await this._sessionManager.execute(statement?[0], statement?[1]);
       return true;
     } catch(e) {
-      String msg = e.toString();
-      throw new Exception(msg.split(":")[1]);
+      rethrow;
     }
   }
 

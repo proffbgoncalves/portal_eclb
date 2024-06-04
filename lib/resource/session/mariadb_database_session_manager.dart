@@ -28,9 +28,7 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
         this._connection = await MySqlConnection.connect(settings);
         super.isOpened = true;
       } catch(e) {
-        String msg = e.toString();
-
-        throw new Exception(msg.split(":")[1]);
+        rethrow;
       }
     }
 

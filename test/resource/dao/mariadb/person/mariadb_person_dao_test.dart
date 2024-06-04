@@ -82,8 +82,8 @@ void main() {
         expect(persons.length, equals(3));
 
         expect((persons[0] as Person).name, equals("José"));
-        expect((persons[1] as Person).name, equals("Marcos"));
-        expect((persons[2] as Person).name, equals("Pedro"));
+        expect((persons[1] as Person).name, equals("Pedro"));
+        expect((persons[2] as Person).name, equals("Marcos"));
 
       } catch(e) {
         rethrow;
@@ -108,8 +108,8 @@ void main() {
         expect(persons.length, equals(3));
 
         expect((persons[0] as Person).name, equals("José"));
-        expect((persons[1] as Person).name, equals("Marcos"));
-        expect((persons[2] as Person).name, equals("Pedro"));
+        expect((persons[1] as Person).name, equals("Pedro"));
+        expect((persons[2] as Person).name, equals("Marcos"));
 
         await manager.startTransaction();
         expect(manager.isOnTransaction, isTrue);
@@ -152,8 +152,8 @@ void main() {
         expect(persons.length, equals(3));
 
         expect((persons[0] as Person).name, equals("José"));
-        expect((persons[1] as Person).name, equals("Marcos"));
-        expect((persons[2] as Person).name, equals("Pedro"));
+        expect((persons[1] as Person).name, equals("Pedro"));
+        expect((persons[2] as Person).name, equals("Marcos"));
 
       } catch(e) {
         rethrow;
@@ -178,8 +178,8 @@ void main() {
         expect(persons.length, equals(3));
 
         expect((persons[0] as Person).name, equals("José"));
-        expect((persons[1] as Person).name, equals("Marcos"));
-        expect((persons[2] as Person).name, equals("Pedro"));
+        expect((persons[1] as Person).name, equals("Pedro"));
+        expect((persons[2] as Person).name, equals("Marcos"));
 
         await manager.startTransaction();
         expect(manager.isOnTransaction, isTrue);

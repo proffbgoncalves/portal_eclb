@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portal_eclb/view/admin/portal_administration_page.dart';
+import 'package:portal_eclb/view/admin/abstract_portal_administration_page.dart';
 
 class LoginForm extends StatefulWidget {
 
@@ -91,7 +91,6 @@ class _LoginFormState extends State<LoginForm> {
 
                 ],
               )
-
             ],
           ),
         ),
