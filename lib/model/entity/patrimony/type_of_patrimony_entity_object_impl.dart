@@ -41,7 +41,7 @@ class TypeOfPatimonyEntityObjectImpl extends AbstractEntityObject implements Typ
 
   @override
   set id(int? int) {
-    throw new Exception("Identity can not be defined.");
+    throw new Exception("Identity can not be redefined.");
   }
 
   @override

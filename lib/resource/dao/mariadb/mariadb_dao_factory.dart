@@ -1,7 +1,11 @@
 import 'package:portal_eclb/resource/dao/abstract_dao_factory.dart';
+import 'package:portal_eclb/resource/dao/mariadb/patrimony/mariadb_patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/mariadb_type_of_patrimony_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart';
+import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/mariadb_patrimony_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/mariadb_type_of_patrimony_data_mapper.dart';
+import 'package:portal_eclb/resource/datamapper/patrimony/patrimony_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/patrimony/type_of_patrimony_data_mapper.dart';
 import 'package:portal_eclb/resource/session/abstract_database_session_manager.dart';
 import 'package:portal_eclb/resource/session/database_session_manager.dart';
@@ -23,6 +27,16 @@ final class MariaDBDAOFactory extends AbstractDAOFactory {
     TypeOfPatrimonyDAO dao = new MariaDBTypeOfPatrimonyDAO(sessionManager!, dataMapper);
 
     return dao;
+  }
+
+  @override
+  PatrimonyDAO createPatrimonyDAO() {
+    DatabaseSessionManager sessionManager = AbstractDatabaseSessionManager.getInstance(environmentConfiguration);
+
+    PatrimonyDataMapper dataMapper = new MariadbPatrimonyDataMapper();
+
+    MariaDBPatrimonyDAO patrimonyDAO = new MariaDBPatrimonyDAO(sessionManager, dataMapper);
+    return patrimonyDAO;
   }
 
 
