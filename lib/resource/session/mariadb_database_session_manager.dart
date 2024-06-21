@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:portal_eclb/resource/session/abstract_database_session_manager.dart';
+import 'package:portal_eclb/resource/session/database_session_manager.dart';
 import 'package:portal_eclb/utils/environment_configuration.dart';
 
 ///Subclasse concreta de AbstractDatabaseSessionManager. Ela implementa todo o
@@ -25,9 +26,10 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
       );
 
       try {
+        this.isOpened = true;
         this._connection = await MySqlConnection.connect(settings);
-        super.isOpened = true;
       } catch(e) {
+        this.isOpened = false;
         rethrow;
       }
     }
@@ -74,7 +76,6 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
       throw new Exception("Statement sql can not be empty.");
     }
 
-
     Results? results = null;
 
     try {
@@ -84,8 +85,7 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
         results = await this._connection?.query(sql, values);
       }
     } catch(e) {
-      String msg = e.toString();
-      throw new Exception(msg.split(":")[1]);
+      rethrow;
     }
 
     return results != null;
@@ -136,6 +136,11 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
     }
     super.isOnTransaction = true;
     await this._connection?.query("START TRANSACTION");
+  }
+
+  @override
+  DatabaseSessionManager clone() {
+    return new MariaDBDatabaseSessionManager(_environmentConfiguration);
   }
 
 }

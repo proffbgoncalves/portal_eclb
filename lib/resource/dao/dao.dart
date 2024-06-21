@@ -39,4 +39,6 @@ abstract interface class DAO {
   ///O método recupera apenas uma quantidade linhas, conforme os valores definidos
   ///neste parâmetro.
   Future<List> findAll([int limit, int offset]);
+
+  Future<int> count();
 }

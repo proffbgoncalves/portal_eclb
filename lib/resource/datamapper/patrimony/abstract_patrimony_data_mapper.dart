@@ -80,7 +80,7 @@ abstract class AbstractPatrimonyDataMapper implements PatrimonyDataMapper {
 
     List statement = ["UPDATE PATRIMONIES SET "
         "NAME = ?, DESCRIPTION = ?, UNESCOCLASSIFICATION = ?, TYPEOFPATRIMONYID = ?,"
-        "COMPOSITEPARIMONYID = ?, HASLOCATION = ?, COUNTRY = ?, STATE = ?, CITY = ?,"
+        "COMPOSITEPATRIMONYID = ?, HASLOCATION = ?, COUNTRY = ?, STATE = ?, CITY = ?,"
         "DISTRICT = ?, ADDRESS = ?, POSTALCODE = ?, LONGITUDE = ?, LATITUDE = ?,"
         "ALTITUDE = ? WHERE ID = ?",
       [
@@ -92,6 +92,11 @@ abstract class AbstractPatrimonyDataMapper implements PatrimonyDataMapper {
       ]
     ];
 
+    return statement;
+  }
+
+  List generateCountStatement() {
+    List statement =["SELECT COUNT(ID) FROM PATRIMONIES"];
     return statement;
   }
 }

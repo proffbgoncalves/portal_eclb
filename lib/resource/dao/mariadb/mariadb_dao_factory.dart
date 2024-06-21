@@ -1,7 +1,11 @@
 import 'package:portal_eclb/resource/dao/abstract_dao_factory.dart';
+import 'package:portal_eclb/resource/dao/mariadb/patrimony/mariadb_patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/mariadb_type_of_patrimony_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart';
+import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/mariadb_patrimony_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/mariadb_type_of_patrimony_data_mapper.dart';
+import 'package:portal_eclb/resource/datamapper/patrimony/patrimony_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/patrimony/type_of_patrimony_data_mapper.dart';
 import 'package:portal_eclb/resource/session/abstract_database_session_manager.dart';
 import 'package:portal_eclb/resource/session/database_session_manager.dart';
@@ -13,16 +17,24 @@ import 'package:portal_eclb/utils/environment_configuration.dart';
 final class MariaDBDAOFactory extends AbstractDAOFactory {
 
   ///Método construtor respeitando o método construtor da superclasse AbstractDAOFactory.
-  MariaDBDAOFactory(super.environmentConfiguration);
+  MariaDBDAOFactory(super._environmentConfiguration);
 
   ///Este método é responsável por instanciar a classe MariaDBTypeOfPatrimonyDAO.
-  TypeOfPatrimonyDAO createTypeOfPatrimonyDAO() {
-    DatabaseSessionManager sessionManager = AbstractDatabaseSessionManager.getInstance(environmentConfiguration);
+  TypeOfPatrimonyDAO createTypeOfPatrimonyDAO(DatabaseSessionManager databaseSessionManager) {
 
     TypeOfPatrimonyDataMapper dataMapper = new MariaDBTypeOfPatrimonyDataMapper();
-    TypeOfPatrimonyDAO dao = new MariaDBTypeOfPatrimonyDAO(sessionManager!, dataMapper);
+    TypeOfPatrimonyDAO dao = new MariaDBTypeOfPatrimonyDAO(databaseSessionManager, dataMapper);
 
     return dao;
+  }
+
+  @override
+  PatrimonyDAO createPatrimonyDAO(DatabaseSessionManager databaseSessionManager) {
+
+    PatrimonyDataMapper dataMapper = new MariadbPatrimonyDataMapper();
+
+    MariaDBPatrimonyDAO patrimonyDAO = new MariaDBPatrimonyDAO(databaseSessionManager, dataMapper);
+    return patrimonyDAO;
   }
 
 

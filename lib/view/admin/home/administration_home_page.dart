@@ -1,15 +1,16 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:portal_eclb/view/admin/abstract_portal_administration_page.dart';
+import 'package:portal_eclb/view/admin/base_page.dart';
 
-final class AdministrationHomePage extends AbstractPortalAdministrationPage {
+class AdministrationHomePage extends BasePage {
 
   AdministrationHomePage({super.key});
 
   @override
-  Widget createChild(context) {
-    return new Container(
-      margin: EdgeInsets.all(16),
+  Widget createChild(BuildContext context) {
+    // TODO: implement createChild
+    return new Column(
+      mainAxisAlignment: MainAxisAlignment.start,
     );
   }
 
