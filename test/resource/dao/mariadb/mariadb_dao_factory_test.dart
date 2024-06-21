@@ -33,7 +33,7 @@ void main() {
 
       MariaDBDAOFactory factory = new MariaDBDAOFactory(environmentConfiguration);
 
-      expect(factory.createTypeOfPatrimonyDAO() is TypeOfPatrimonyDAO, isTrue);
+      expect(factory.createTypeOfPatrimonyDAO(databaseSessionManager) is TypeOfPatrimonyDAO, isTrue);
 
     });
 

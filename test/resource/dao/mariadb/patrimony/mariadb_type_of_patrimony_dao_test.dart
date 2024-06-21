@@ -287,6 +287,26 @@ void main() {
         await manager.close();
       }
     });
+
+    test("testCountTypesOfPatrimonies", () async {
+      EnvironmentConfiguration? configuration = await EnvironmentConfiguration.fromFile(".env_dev");
+      MariaDBDatabaseSessionManager manager = new MariaDBDatabaseSessionManager(configuration);
+
+      TypeOfPatrimonyDataMapper dataMapper = new MariaDBTypeOfPatrimonyDataMapper();
+      TypeOfPatrimonyDAO dao = MariaDBTypeOfPatrimonyDAO(manager, dataMapper);
+
+      try {
+        await manager.open();
+
+        int count = await dao.count();
+        expect(count, equals(3));
+
+      } catch (error) {
+        rethrow;
+      } finally {
+        await manager.clone();
+      }
+    });
     
   });
 }

@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:portal_eclb/dependency/dependecy_injector.dart';
+import 'package:portal_eclb/model/entity/patrimony/patrimony_entity_object.dart';
 import 'package:portal_eclb/model/entity/patrimony/patrimony_entity_object_impl.dart';
 import 'package:portal_eclb/resource/dao/mariadb/mariadb_dao_factory.dart';
 import 'package:portal_eclb/resource/session/abstract_database_session_manager.dart';
@@ -90,7 +91,7 @@ void main() {
       EnvironmentConfiguration configuration = await EnvironmentConfiguration.fromFile(".env_dev");
       DatabaseSessionManager manager = AbstractDatabaseSessionManager.getInstance(configuration);
 
-      PatrimonyEntityObjectImpl patrimony = new PatrimonyEntityObjectImpl(configuration, "Teste", "Descrição", 0, typeOfPatrimonyId, 0);
+      PatrimonyEntityObjectImpl patrimony = new PatrimonyEntityObjectImpl(manager, configuration, "Teste", "Descrição", 0, typeOfPatrimonyId, 0);
 
       try {
         await manager.open();
@@ -100,6 +101,12 @@ void main() {
         expect(patrimony.id, greaterThan(0));
 
         await manager.commit();
+
+        PatrimonyEntityObject patrimony2 = await PatrimonyEntityObjectImpl.getById(manager, configuration, patrimony.id!);
+        expect(patrimony.id, equals(patrimony2.id));
+        expect(patrimony.name, equals(patrimony2.name));
+        expect(patrimony.description, equals(patrimony2.description));
+
       } catch(e) {
         await manager.rollback();
         rethrow;
@@ -108,6 +115,8 @@ void main() {
       }
 
     });
+
+    
 
   });
 

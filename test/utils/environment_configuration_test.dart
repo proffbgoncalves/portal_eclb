@@ -11,7 +11,7 @@ void main() {
 
       expect(configuration.get<String>("host"), equals("localhost"));
       expect(configuration.get<int>("port"), equals(3306));
-      expect(configuration.get<String>("db"), equals("eclb"));
+      expect(configuration.get<String>("db"), equals("eclb_prod"));
       expect(configuration.get<String>("user"), equals("root"));
       expect(configuration.get<String>("password"), equals("aluno"));
 

@@ -15,10 +15,10 @@ final class EnvironmentConfiguration {
 
   ///Este método estático atua como um factory método. Ele é responsável por
   ///instanciar EnvironmentConfiguration usando o path do arquivo de configuração.
-  static Future<EnvironmentConfiguration> fromFile(String filename) async {
+  static Future<EnvironmentConfiguration> fromFile(String filename, {bool onTestEnvironment = true}) async {
     EnvironmentConfiguration instance = new EnvironmentConfiguration._();
 
-    String lines = await instance._readFile(filename);
+    String lines = await instance._readFile(filename, onTestEnvironment);
     instance._load(lines);
 
     return instance;
@@ -26,9 +26,18 @@ final class EnvironmentConfiguration {
 
   ///Recebe o path do arquivo e o lê. Após isso, retorna todo o conteúdo do
   ///arquivo em uma única String.
-  Future<String> _readFile(String filename) async {
-    File file = new File(filename);
-    return await file.readAsString();
+  Future<String> _readFile(String filename, bool onTestEnvironment) async {
+    String loadedString = "";
+
+    // if (!onTestEnvironment) {
+    //   WidgetsFlutterBinding.ensureInitialized();
+    //
+    //   loadedString = await rootBundle.loadString(filename);
+    // } else {
+      File file = new File(filename);
+      loadedString = await file.readAsString();
+    //}
+    return loadedString;
   }
 
   ///Carrega os paâmetros da aplicação no atributo paramns. Este método deve

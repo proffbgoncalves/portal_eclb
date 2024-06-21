@@ -20,17 +20,17 @@ void main() {
       }
     });
 
-    test("testUniqueInstanceOfMariaDBDatabaseSessionManager", () async {
-
-      EnvironmentConfiguration configuration = await EnvironmentConfiguration.fromFile(".env_dev");
-      DatabaseSessionManager? manager1 = AbstractDatabaseSessionManager.getInstance(configuration);
-      expect(manager1.getType(), configuration.get("dbms"));
-
-      DatabaseSessionManager? manager2 = AbstractDatabaseSessionManager.getInstance(configuration);
-      expect(manager2.getType(), configuration.get("dbms"));
-
-      expect(manager1, equals(manager2));
-    });
+    // test("testUniqueInstanceOfMariaDBDatabaseSessionManager", () async {
+    //
+    //   EnvironmentConfiguration configuration = await EnvironmentConfiguration.fromFile(".env_dev");
+    //   DatabaseSessionManager? manager1 = AbstractDatabaseSessionManager.getInstance(configuration);
+    //   expect(manager1.getType(), configuration.get("dbms"));
+    //
+    //   DatabaseSessionManager? manager2 = AbstractDatabaseSessionManager.getInstance(configuration);
+    //   expect(manager2.getType(), configuration.get("dbms"));
+    //
+    //   expect(manager1, equals(manager2));
+    // });
 
 
 

@@ -1,5 +1,6 @@
 import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart';
+import 'package:portal_eclb/resource/session/database_session_manager.dart';
 import 'package:portal_eclb/utils/environment_configuration.dart';
 
 ///Esta interface define o contrato para criação de Data Access Objects (DAO).
@@ -9,10 +10,10 @@ abstract interface class DAOFactory {
 
   ///Este método é responsável em instanciar uma classe que implemente o contrato
   ///de TypeOfPatrimonyDAO.
-  TypeOfPatrimonyDAO createTypeOfPatrimonyDAO();
+  TypeOfPatrimonyDAO createTypeOfPatrimonyDAO(DatabaseSessionManager databaseSessionManager);
 
   ///Este método é responsável em instanciar uma classe que implemente o contrato
   ///PatrimonyDAO.
-  PatrimonyDAO createPatrimonyDAO();
+  PatrimonyDAO createPatrimonyDAO(DatabaseSessionManager databaseSessionManager);
   
 }

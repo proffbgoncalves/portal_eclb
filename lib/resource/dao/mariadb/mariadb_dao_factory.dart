@@ -17,25 +17,23 @@ import 'package:portal_eclb/utils/environment_configuration.dart';
 final class MariaDBDAOFactory extends AbstractDAOFactory {
 
   ///Método construtor respeitando o método construtor da superclasse AbstractDAOFactory.
-  MariaDBDAOFactory(super.environmentConfiguration);
+  MariaDBDAOFactory(super._environmentConfiguration);
 
   ///Este método é responsável por instanciar a classe MariaDBTypeOfPatrimonyDAO.
-  TypeOfPatrimonyDAO createTypeOfPatrimonyDAO() {
-    DatabaseSessionManager sessionManager = AbstractDatabaseSessionManager.getInstance(environmentConfiguration);
+  TypeOfPatrimonyDAO createTypeOfPatrimonyDAO(DatabaseSessionManager databaseSessionManager) {
 
     TypeOfPatrimonyDataMapper dataMapper = new MariaDBTypeOfPatrimonyDataMapper();
-    TypeOfPatrimonyDAO dao = new MariaDBTypeOfPatrimonyDAO(sessionManager!, dataMapper);
+    TypeOfPatrimonyDAO dao = new MariaDBTypeOfPatrimonyDAO(databaseSessionManager, dataMapper);
 
     return dao;
   }
 
   @override
-  PatrimonyDAO createPatrimonyDAO() {
-    DatabaseSessionManager sessionManager = AbstractDatabaseSessionManager.getInstance(environmentConfiguration);
+  PatrimonyDAO createPatrimonyDAO(DatabaseSessionManager databaseSessionManager) {
 
     PatrimonyDataMapper dataMapper = new MariadbPatrimonyDataMapper();
 
-    MariaDBPatrimonyDAO patrimonyDAO = new MariaDBPatrimonyDAO(sessionManager, dataMapper);
+    MariaDBPatrimonyDAO patrimonyDAO = new MariaDBPatrimonyDAO(databaseSessionManager, dataMapper);
     return patrimonyDAO;
   }
 

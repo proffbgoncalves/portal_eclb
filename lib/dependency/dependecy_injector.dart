@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:portal_eclb/resource/dao/dao_factory.dart';
 import 'package:portal_eclb/resource/session/database_session_manager.dart';
+import 'package:portal_eclb/utils/environment_configuration.dart';
 
 class DependencyInjector {
 
@@ -11,6 +12,14 @@ class DependencyInjector {
 
   factory DependencyInjector.getInstance() {
     return DependencyInjector._instance;
+  }
+
+  void registerEnvironmentConfiguration(EnvironmentConfiguration environmentConfiguration) {
+    this._getIt.registerSingleton<EnvironmentConfiguration>(environmentConfiguration, instanceName: "configuration");
+  }
+
+  EnvironmentConfiguration getEnvironmentConfigurarion() {
+    return this._getIt.get<EnvironmentConfiguration>(instanceName: "configuration");
   }
 
   void registerDAOFactory(String dbms, DAOFactory daoFactory) {
@@ -44,7 +53,7 @@ class DependencyInjector {
     throwIf(dbms == "", new Exception("DBMS parameteter can not be empty."));
     throwIfNot(this._getIt.isRegistered<DatabaseSessionManager>(instanceName: dbms), new Exception(dbms + "is not a registered instance of Database Session Manager"));
 
-    return this._getIt.get<DatabaseSessionManager>(instanceName: dbms);
+    return this._getIt.get<DatabaseSessionManager>(instanceName: dbms).clone();
   }
 
   bool hasDatabaseSessionManager(String dbms) {

@@ -1,23 +1,23 @@
 import 'package:get_it/get_it.dart';
 import 'package:portal_eclb/model/entity/abstract_entity_object.dart';
 import 'package:portal_eclb/model/entity/patrimony/patrimony_entity_object.dart';
+import 'package:portal_eclb/model/entity/patrimony/type_of_patrimony_entity_object.dart';
+import 'package:portal_eclb/model/entity/patrimony/type_of_patrimony_entity_object_impl.dart';
 import 'package:portal_eclb/model/patrimony/patrimony.dart';
 import 'package:portal_eclb/resource/dao/abstract_dao_factory.dart';
 import 'package:portal_eclb/resource/dao/dao_factory.dart';
 import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
+import 'package:portal_eclb/resource/session/database_session_manager.dart';
 import 'package:portal_eclb/transferency/dto/patrimony/pratrimony_dto.dart';
 import 'package:portal_eclb/utils/environment_configuration.dart';
 
 class PatrimonyEntityObjectImpl extends AbstractEntityObject implements PatrimonyEntityObject {
 
+  TypeOfPatrimonyEntityObject? _typeOfPatrimony;
+
   Patrimony _dto;
 
-  PatrimonyEntityObjectImpl._(super.environmentConfiguration, this._dto);
-
-
-  // int? id, String? name, String? country, String? description,
-  // int? unescoClassification, int? typeOfPatrimonyId, int? compositePatrimonyId,
-  //     int? hasLocation
+  PatrimonyEntityObjectImpl._(super._databaseSessionManager, super.environmentConfiguration, this._dto);
 
   ///Este é um Factory Method que substitui o construtor original. O construtor
   ///original é privado. No entanto, é necessário que todo EntityObject seja
@@ -25,7 +25,7 @@ class PatrimonyEntityObjectImpl extends AbstractEntityObject implements Patrimon
   ///Assim, não é necessária a criação de atributos referentes as coluna da
   ///tabela alvo (Patrimonies) nesta classe.
   ///
-  factory PatrimonyEntityObjectImpl(
+  factory PatrimonyEntityObjectImpl(DatabaseSessionManager databaseSessionManager,
       EnvironmentConfiguration configuration, String name, String description,
       int unescoClassification, int typeOfPatrimonyId, int hasLocation, {int? id, String? country,
         int? compositePatrimonyId, String? state, String? city, String? district,
@@ -39,7 +39,7 @@ class PatrimonyEntityObjectImpl extends AbstractEntityObject implements Patrimon
         address: address, postalCode: postalCode, longitude: longitude, latitude: latitude,
         altitude: altitude
     );
-     return new PatrimonyEntityObjectImpl._(configuration, dto);
+     return new PatrimonyEntityObjectImpl._(databaseSessionManager, configuration, dto);
   }
 
   int? get typeOfPatrimonyId => this._dto.typeOfPatrimonyId;
@@ -146,6 +146,7 @@ class PatrimonyEntityObjectImpl extends AbstractEntityObject implements Patrimon
 
   @override
   Future<bool> insert() async {
+
     throwIf(this._dto.name == "", new Exception("Name attribute is empty."));
     throwIf(this._dto.description == "", new Exception("Description attribute is empty."));
     throwIf(!(this._dto.unescoClassification! >= 0 && this._dto.unescoClassification! <= 2), new Exception("UnescoClassification attribute has invalid value."));
@@ -153,7 +154,7 @@ class PatrimonyEntityObjectImpl extends AbstractEntityObject implements Patrimon
     throwIf(!(this._dto.hasLocation! == 0 || this._dto.hasLocation! == 1), new Exception("HasLocation attribute has invalid value."));
 
     DAOFactory factory = AbstractDAOFactory.getInstance(environmentConfiguration);
-    PatrimonyDAO patrimonyDAO = factory.createPatrimonyDAO();
+    PatrimonyDAO patrimonyDAO = factory.createPatrimonyDAO(databaseSessionManager);
 
     try {
       return patrimonyDAO.insert(this._dto);
@@ -167,6 +168,30 @@ class PatrimonyEntityObjectImpl extends AbstractEntityObject implements Patrimon
   Future<bool> update() {
     // TODO: implement update
     throw UnimplementedError();
+  }
+
+  static Future<PatrimonyEntityObject> getById(DatabaseSessionManager databaseSessionManager,EnvironmentConfiguration environmentConfiguration, int id) async  {
+    throwIf(id <= 0, new Exception("Id parameter has an invalid value."));
+
+    DAOFactory factory = AbstractDAOFactory.getInstance(environmentConfiguration);
+    PatrimonyDAO patrimonyDAO = factory.createPatrimonyDAO(databaseSessionManager);
+
+    try {
+      Patrimony patrimony = (await patrimonyDAO.findById(id)) as Patrimony;
+
+      return PatrimonyEntityObjectImpl._(databaseSessionManager, environmentConfiguration, patrimony);
+    } catch (erro) {
+      rethrow;
+    }
+  }
+
+  @override
+  // TODO: implement typeOfPatrimony
+  Future<TypeOfPatrimonyEntityObject?> get typeOfPatrimony async {
+    if (this._typeOfPatrimony == null) {
+      this._typeOfPatrimony = await TypeOfPatimonyEntityObjectImpl.getById(this.databaseSessionManager, this.environmentConfiguration, this.typeOfPatrimonyId!);
+    }
+    return this._typeOfPatrimony;
   }
 
 }
