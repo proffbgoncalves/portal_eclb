@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:get_it/get_it.dart';
 import 'package:portal_eclb/dependency/dependecy_injector.dart';
 import 'package:portal_eclb/resource/dao/mariadb/mariadb_dao_factory.dart';
 import 'package:portal_eclb/resource/session/mariadb_database_session_manager.dart';
