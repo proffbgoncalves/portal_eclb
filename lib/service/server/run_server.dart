@@ -33,7 +33,7 @@ Middleware corsHeaders() {
 
 Future<void> main() async {
 
-  EnvironmentConfiguration environmentConfiguration = await EnvironmentConfiguration.fromFile("C:\\Users\\fbarr\\StudioProjects\\portal_eclb\\.env");
+  EnvironmentConfiguration environmentConfiguration = await EnvironmentConfiguration.fromFile("C:\\Users\\Aluno\\Documents\\GitHub\\portal_eclb\\.env");
   DatabaseSessionManager databaseSessionManager = new MariaDBDatabaseSessionManager(environmentConfiguration);
   DAOFactory daoFactory = new MariaDBDAOFactory(environmentConfiguration);
 
