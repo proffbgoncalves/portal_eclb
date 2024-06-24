@@ -46,11 +46,11 @@ void main() {
 
       EnvironmentConfiguration environmentConfiguration = await EnvironmentConfiguration.fromFile(".env_dev");
 
-      TypeOfPatrimonyEntityObject entity = new TypeOfPatimonyEntityObjectImpl(environmentConfiguration, "Teste");
+      DatabaseSessionManager sessionManager = AbstractDatabaseSessionManager.getInstance(environmentConfiguration);
+
+      TypeOfPatrimonyEntityObject entity = new TypeOfPatimonyEntityObjectImpl(sessionManager, environmentConfiguration, "Teste");
 
       expect(entity.description, equals("Teste"));
-
-      DatabaseSessionManager sessionManager = AbstractDatabaseSessionManager.getInstance(environmentConfiguration);
 
       try {
         await sessionManager.open();
@@ -76,7 +76,7 @@ void main() {
       try {
         await sessionManager.open();
 
-        TypeOfPatrimonyEntityObject entity = await TypeOfPatimonyEntityObjectImpl.getByDescription(environmentConfiguration, "Imaterial");
+        TypeOfPatrimonyEntityObject entity = await TypeOfPatimonyEntityObjectImpl.getByDescription(sessionManager, environmentConfiguration, "Imaterial");
         expect(entity.description, equals("Imaterial"));
         expect(entity.id, greaterThan(0));
       } catch (e) {
@@ -96,7 +96,7 @@ void main() {
       await sessionManager.open();
       await sessionManager.startTransaction();
 
-      TypeOfPatrimonyEntityObject entity = await TypeOfPatimonyEntityObjectImpl.getByDescription(environmentConfiguration, "Imaterial");
+      TypeOfPatrimonyEntityObject entity = await TypeOfPatimonyEntityObjectImpl.getByDescription(sessionManager, environmentConfiguration, "Imaterial");
 
       expect(entity.description, equals("Imaterial"));
       expect(await entity.delete(), isTrue);
@@ -118,7 +118,7 @@ void main() {
       await sessionManager.open();
       await sessionManager.startTransaction();
 
-      TypeOfPatrimonyEntityObject entity = await TypeOfPatimonyEntityObjectImpl.getByDescription(environmentConfiguration, "Natural");
+      TypeOfPatrimonyEntityObject entity = await TypeOfPatimonyEntityObjectImpl.getByDescription(sessionManager, environmentConfiguration, "Natural");
 
       expect(entity.description, equals("Natural"));
 
@@ -128,7 +128,7 @@ void main() {
 
       await sessionManager.commit();
 
-      entity = await TypeOfPatimonyEntityObjectImpl.getByDescription(environmentConfiguration, "Teste de Atualização");
+      entity = await TypeOfPatimonyEntityObjectImpl.getByDescription(sessionManager, environmentConfiguration, "Teste de Atualização");
       expect(entity.description, equals("Teste de Atualização"));
     } catch(e) {
       await sessionManager.rollback();
@@ -145,11 +145,11 @@ void main() {
     try {
       await sessionManager.open();
 
-      TypeOfPatrimonyEntityObject entity = await TypeOfPatimonyEntityObjectImpl.getByDescription(environmentConfiguration, "Cultural");
+      TypeOfPatrimonyEntityObject entity = await TypeOfPatimonyEntityObjectImpl.getByDescription(sessionManager, environmentConfiguration, "Cultural");
       expect(entity.description, equals("Cultural"));
       expect(entity.id, greaterThan(0));
 
-      TypeOfPatrimonyEntityObject otherEntity = await TypeOfPatimonyEntityObjectImpl.getById(environmentConfiguration, entity.id!);
+      TypeOfPatrimonyEntityObject otherEntity = await TypeOfPatimonyEntityObjectImpl.getById(sessionManager, environmentConfiguration, entity.id!);
       expect(entity.description, equals("Cultural"));
     } catch (e) {
       throw e;
@@ -165,7 +165,7 @@ void main() {
     try {
       await sessionManager.open();
 
-      List<TypeOfPatrimonyEntityObject> entities = await TypeOfPatimonyEntityObjectImpl.getAll(environmentConfiguration);
+      List<TypeOfPatrimonyEntityObject> entities = await TypeOfPatimonyEntityObjectImpl.getAll(sessionManager, environmentConfiguration);
       expect(entities.length, equals(2));
 
       expect(entities[0].description, equals("Cultural"));

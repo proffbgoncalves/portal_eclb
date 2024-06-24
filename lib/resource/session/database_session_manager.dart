@@ -57,4 +57,6 @@ abstract interface class DatabaseSessionManager {
   ///Retarna true se a sessão possui uma transação aberta. Caso contrário,
   ///retorna falso.
   bool get isOnTransaction;
+
+  DatabaseSessionManager clone();
 }

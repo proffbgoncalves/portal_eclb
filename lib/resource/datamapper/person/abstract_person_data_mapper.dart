@@ -66,4 +66,8 @@ abstract class AbstractPersonDataMapper implements PersonDataMapper {
     return statement;
   }
 
+  List generateCountStatement() {
+    List statement = ["SELECT COUNT(ID) FROM PERSONS"];
+    return statement;
+  }
 }

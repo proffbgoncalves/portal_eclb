@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portal_eclb/view/admin/abstract_portal_administration_page.dart';
 
 class LoginForm extends StatefulWidget {
 
@@ -16,7 +15,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return new SizedBox(
-      width: 400,
+      width: 300,
       child: new Container(
         padding: EdgeInsets.all(16.0),
         decoration: BoxDecoration(
@@ -63,10 +62,10 @@ class _LoginFormState extends State<LoginForm> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(0, 58, 0, 100),
-                      foregroundColor: Colors.white,
-                    ),
+                    // style: ElevatedButton.styleFrom(
+                    //   backgroundColor: Theme.of(context).colorScheme.primary,
+                    //   foregroundColor: Theme.of(context).colorScheme.onPrimary
+                    // ),
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
                         Navigator.pushReplacementNamed(context, "/admin");
@@ -77,9 +76,8 @@ class _LoginFormState extends State<LoginForm> {
                   SizedBox(width: 40),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(240, 246, 239, 100),
-                      foregroundColor: Color.fromRGBO(9, 65, 0, 100),
-                      overlayColor: Color.fromRGBO(0, 58, 0, 100),
+                        backgroundColor: Theme.of(context).colorScheme.tertiary,
+                        foregroundColor: Theme.of(context).colorScheme.onTertiary
                     ),
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {

@@ -85,5 +85,10 @@ abstract class AbstractTypeOfPatrimonyDataMapper implements TypeOfPatrimonyDataM
     List statement = ["SELECT * FROM TYPESOFPATRIMONIES WHERE DESCRIPTION = ?", [name]];
     return statement;
   }
+
+  List generateCountStatement() {
+    List statement =["SELECT COUNT(ID) FROM TYPESOFPATRIMONIES"];
+    return statement;
+  }
   
 }

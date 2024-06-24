@@ -1,3 +1,5 @@
+import 'package:portal_eclb/resource/session/database_session_manager.dart';
+
 ///Esta interface define o contrato de métodos de um Entity Object. Entity
 ///Objects são um tipo específico de domain object que têm uma identidade
 ///distinta que perdura ao longo do tempo e das diferentes operações realizadas
@@ -12,6 +14,8 @@
 /// e suas identidades permitem que sejam recuperadas e atualizadas.
 abstract interface class EntityObject {
 
+
+
   ///Este método persiste um EntityObject em uma tabela de m esquema de banco de
   ///dados. Ele cria uma linha em na tabela relacionada ao EntityObject.
   Future<bool> insert();
@@ -23,5 +27,6 @@ abstract interface class EntityObject {
   ///Este método atualizada os dados mantidos pelo EntityObject. Isso é feito
   ///atualizando a linha de uma tabela em um esquema de banco de dados.
   Future<bool> update();
+
 
 }

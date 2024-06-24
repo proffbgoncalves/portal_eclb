@@ -45,4 +45,14 @@ final class MariaDBPersonDAO extends AbstractDAO implements PersonDAO {
     }
   }
 
+  @override
+  Future<int> count() async {
+    throwIf(!this.sessionManager.isOpened, new Exception("Database session is not opened."));
+
+    List statement = this.dataMapper!.generateCountStatement();
+    Results? results = (await this.sessionManager.executeQuery(statement[0])) as Results;
+
+    return results.first[0];
+  }
+
 }

@@ -1,3 +1,4 @@
+import 'package:get_it/get_it.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:portal_eclb/model/patrimony/patrimony.dart';
 import 'package:portal_eclb/resource/dao/abstract_dao.dart';
@@ -49,6 +50,16 @@ final class MariaDBPatrimonyDAO extends AbstractDAO implements PatrimonyDAO {
   Future<List> findAllByUNESCOClassification(int unescoClassification) {
     // TODO: implement findAllByUNESCOClassification
     throw UnimplementedError();
+  }
+
+  @override
+  Future<int> count() async {
+    throwIf(!this.sessionManager.isOpened, new Exception("Database session is not opened."));
+
+    List statement = this.dataMapper!.generateCountStatement();
+    Results? results = (await this.sessionManager.executeQuery(statement[0])) as Results;
+
+    return results.first[0];
   }
 
 }

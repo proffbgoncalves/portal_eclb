@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:get_it/get_it.dart';
 import 'package:portal_eclb/resource/dao/dao.dart';
 import 'package:portal_eclb/resource/datamapper/data_mapper.dart';
 import 'package:portal_eclb/resource/session/database_session_manager.dart';
@@ -115,6 +118,8 @@ abstract class AbstractDAO implements DAO {
       rethrow;
     }
   }
+
+
 
   ///Retorna o objeto DataMapper definido para o DAO. Este objeto não deve ser
   ///utilizado fora de um DAO.
