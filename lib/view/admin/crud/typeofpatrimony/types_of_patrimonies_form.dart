@@ -11,6 +11,7 @@ class TypesOfPatrimoniesForm extends StatefulWidget {
 
   @override
   State<TypesOfPatrimoniesForm> createState() => _TypesOfPatrimoniesFormState();
+
 }
 
 class _TypesOfPatrimoniesFormState extends State<TypesOfPatrimoniesForm> {
@@ -23,7 +24,6 @@ class _TypesOfPatrimoniesFormState extends State<TypesOfPatrimoniesForm> {
 
   @override
   Widget build(BuildContext context) {
-
     return new FutureBuilder(
       future: this._typeOfPatrimonies,
       builder: (context, snapshot) {
@@ -75,7 +75,6 @@ class _TypesOfPatrimoniesFormState extends State<TypesOfPatrimoniesForm> {
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 12, vertical: 8),
                         ),
-
                         items: [
                           new DropdownMenuItem(
                             child: new Text(
@@ -154,7 +153,6 @@ class _TypesOfPatrimoniesFormState extends State<TypesOfPatrimoniesForm> {
                       children: [
                         new DataTable(
                             columnSpacing: 24,
-
                             columns: [
                               new DataColumn(label: new Container(
                                 width: 50, child: new Text("Código"),)),
@@ -196,7 +194,6 @@ class _TypesOfPatrimoniesFormState extends State<TypesOfPatrimoniesForm> {
                                                   iconSize: 12,
                                                   onPressed: () {
                                                     setState(() {
-
                                                       showDialog(
                                                         context: context,
                                                         builder: (context) {
@@ -240,10 +237,6 @@ class _TypesOfPatrimoniesFormState extends State<TypesOfPatrimoniesForm> {
                                                           );
                                                         },
                                                       );
-
-
-
-
                                                     });
                                                   }
                                               ),
@@ -333,7 +326,7 @@ class _TypesOfPatrimoniesFormState extends State<TypesOfPatrimoniesForm> {
   Future<List> _loadData() async {
     http.Response response = await http.get(Uri.parse('http://localhost:8080/api/admin/config/types_of_patrimonies'));
     
-    throwIf(response.statusCode != 200, new Exception("Faile to load types od patrimonies"));
+    throwIf(response.statusCode != 200, new Exception("Failed to load types od patrimonies"));
 
     List<dynamic> data = jsonDecode(response.body);
 
