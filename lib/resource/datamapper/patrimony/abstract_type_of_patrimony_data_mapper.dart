@@ -26,7 +26,7 @@ abstract class AbstractTypeOfPatrimonyDataMapper implements TypeOfPatrimonyDataM
   ///ou parte das linhas de uma tabela de um esquema de banco de dados.
   List<Object> generateFindAllStatement([int limit = 0, int offset = 0]) {
 
-    if (offset > 0 && limit > 0) {
+    if (offset >= 0 && limit > 0) {
       return ["SELECT * FROM TYPESOFPATRIMONIES LIMIT ? OFFSET ?", [limit, offset]];
     } else if (offset == 0 && limit == 0) {
       return ["SELECT * FROM TYPESOFPATRIMONIES"];

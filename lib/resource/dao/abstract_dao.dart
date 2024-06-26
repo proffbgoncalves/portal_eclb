@@ -95,8 +95,8 @@ abstract class AbstractDAO implements DAO {
     }
     try {
       List? statement = null;
-      if (offset > 0 && limit > 0) {
-        statement = this._dataMapper?.generateFindAllStatement(offset, limit);
+      if (offset >= 0 && limit > 0) {
+        statement = this._dataMapper?.generateFindAllStatement(limit, offset);
       } else if (offset == 0 && limit == 0) {
         statement = this._dataMapper?.generateFindAllStatement();
       } else {
