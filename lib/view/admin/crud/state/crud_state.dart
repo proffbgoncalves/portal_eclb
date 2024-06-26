@@ -5,13 +5,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 abstract class CRUDState extends State {
 
   Future<List>? _data;
+
   int _count = 0;
-  int _limit, _offset = 1, _searchOption = 0, _numberOfPages = 0, _currentPage = 1;
+  int _limit, _offset = 0, _searchOption = 0, _numberOfPages = 0, _currentPage = 1;
+
+  bool _isOnSearch = false;
 
   CRUDState(this._limit);
 
   void initState() {
-    this._data = this.load(context, this._limit, 1);
+    this._data = this.load(context, this._limit, this._offset);
   }
 
   @override
@@ -39,6 +42,7 @@ abstract class CRUDState extends State {
                       label: new Text("Inserir"),
                       icon: new Icon(Icons.add),
                       onPressed: () {
+                        this._isOnSearch = false;
                         this.insert(context);
                       },
                     ),
@@ -95,7 +99,9 @@ abstract class CRUDState extends State {
                       icon: new Icon(Icons.search),
                       label: new Text("Buscar"),
                       onPressed: () {
-
+                        setState(() {
+                          this._isOnSearch = true;
+                        });
                       },
                     ),
                     new SizedBox(
@@ -116,8 +122,9 @@ abstract class CRUDState extends State {
                       ),
                       onPressed: () {
                         setState(() {
+                          this._isOnSearch = false;
                           this._currentPage = 1;
-                          this._data = this.load(context, this._limit, 1);
+                          this._data = this.load(context, this._limit, this._offset);
                         });
                       },
 
@@ -159,6 +166,7 @@ abstract class CRUDState extends State {
                                 onPressed: this._currentPage == 1 ? null : (){
                                   setState(() {
                                     this._currentPage = 1;
+                                    this._offset = 0;
                                     this._data = this.load(context, this._limit, this._offset);
                                   });
                                 },
@@ -170,6 +178,8 @@ abstract class CRUDState extends State {
                                 onPressed: this._currentPage == 1 ? null : () {
                                   setState(() {
                                     this._currentPage -= 1;
+                                    this._offset -= this._limit;
+                                    this._data = this.load(context, this._limit, this._offset);
                                   });
                                 },
                               ),
@@ -225,6 +235,8 @@ abstract class CRUDState extends State {
                                 onPressed: this._currentPage == this._numberOfPages ? null : () {
                                   setState(() {
                                     this._currentPage += 1;
+                                    this._offset += this._limit;
+                                    this._data = this.load(context, this._limit, this._offset);
                                   });
                                 },
                               ),
@@ -236,6 +248,8 @@ abstract class CRUDState extends State {
                                 onPressed: this._currentPage == this._numberOfPages ? null : () {
                                   setState(() {
                                     this._currentPage = this._numberOfPages;
+                                    this._offset = this._limit * (this._numberOfPages - 1);
+                                    this._data = this.load(context, this._limit, this._offset);
                                   });
                                 },
                               )
@@ -265,6 +279,8 @@ abstract class CRUDState extends State {
   Future<List>? search(BuildContext context, int searchOption, String searchKey);
 
   Future<int> count(BuildContext context);
+
+  Future<int> searchCount(BuildContext context, int searchOption, String searchKey);
 
   List<DropdownMenuItem> createSearchOptions(BuildContext context);
 

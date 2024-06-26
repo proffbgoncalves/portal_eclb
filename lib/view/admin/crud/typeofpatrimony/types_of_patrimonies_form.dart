@@ -11,7 +11,7 @@ class TypesOfPatrimoniesForm extends StatefulWidget {
   const TypesOfPatrimoniesForm({super.key});
 
   @override
-  _TypesOfPatrimoniesFormState createState() => _TypesOfPatrimoniesFormState(1);
+  _TypesOfPatrimoniesFormState createState() => _TypesOfPatrimoniesFormState(20);
 
 }
 
@@ -42,7 +42,7 @@ class _TypesOfPatrimoniesFormState extends CRUDState {
 
   @override
   Future<List>? load(BuildContext context, int limit, int offset) async {
-      http.Response response = await http.get(Uri.parse('http://localhost:8080/api/admin/config/types_of_patrimonies'));
+      http.Response response = await http.get(Uri.parse('http://localhost:8080/api/admin/config/types_of_patrimonies/$limit/$offset'));
 
       throwIf(response.statusCode != 200, new Exception("Failed to load types od patrimonies"));
 
@@ -134,6 +134,12 @@ class _TypesOfPatrimoniesFormState extends CRUDState {
           ]
       );
     },).toList();
+  }
+
+  @override
+  Future<int> searchCount(BuildContext context, int searchOption, String searchKey) {
+    // TODO: implement searchCount
+    throw UnimplementedError();
   }
 }
 // showDialog(
