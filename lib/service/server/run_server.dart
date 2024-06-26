@@ -44,7 +44,7 @@ Future<void> main() async {
 
   var app = Router();
 
-  app.get('/api/admin/config/types_of_patrimonies', (Request request) async {
+  app.get('/api/admin/config/types_of_patrimonies/<limit>/<offset>', (Request request, String limit, String offset) async {
     List<Map<String, dynamic>> list;
 
     DatabaseSessionManager manager = AbstractDatabaseSessionManager.getInstance(environmentConfiguration);
@@ -52,7 +52,7 @@ Future<void> main() async {
     try {
       await manager.open();
 
-      List<TypeOfPatrimonyEntityObject> typesOfPatrimonies = await TypeOfPatimonyEntityObjectImpl.getAll(manager, environmentConfiguration);
+      List<TypeOfPatrimonyEntityObject> typesOfPatrimonies = await TypeOfPatimonyEntityObjectImpl.getAll(manager, environmentConfiguration, int.parse(limit), int.parse(offset));
 
       list = typesOfPatrimonies.map((e) {
         return {
