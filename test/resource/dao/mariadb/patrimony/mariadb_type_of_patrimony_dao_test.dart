@@ -26,7 +26,7 @@ void main() {
         await manager.commit();
       } catch(e) {
         await manager.rollback();
-        throw e;
+        rethrow;
       } finally {
         await manager.close();
       }
@@ -70,12 +70,12 @@ void main() {
         TypeOfPatrimonyDataMapper dataMapper = new MariaDBTypeOfPatrimonyDataMapper();
         TypeOfPatrimonyDAO dao = MariaDBTypeOfPatrimonyDAO(manager, dataMapper);
 
-        TypeOfPatrimony dto = await  dao.findByDescription("Natural");
+        TypeOfPatrimony? dto = await  dao.findByDescription("Natural");
 
-        expect(dto.id, greaterThan(0));
-        expect(dto.description, equals("Natural"));
+        expect(dto?.id, greaterThan(0));
+        expect(dto?.description, equals("Natural"));
 
-        expect(await dao.delete(dto.id as Object), isTrue);
+        expect(await dao.delete(dto?.id as Object), isTrue);
 
         await manager.commit();
         expect(manager.isOnTransaction, isFalse);
@@ -83,7 +83,6 @@ void main() {
         expect(await  dao.findByDescription("Natural"), isNull);
       } catch (e) {
         await manager.rollback();
-        expect(e.toString(), equals("Exception: Type of patrimony was not found."));
       } finally {
         await manager.close();
       }
@@ -100,20 +99,20 @@ void main() {
         TypeOfPatrimonyDataMapper dataMapper = new MariaDBTypeOfPatrimonyDataMapper();
         TypeOfPatrimonyDAO dao = MariaDBTypeOfPatrimonyDAO(manager, dataMapper);
 
-        TypeOfPatrimony dto = await  dao.findByDescription("Natural");
+        TypeOfPatrimony? dto = await  dao.findByDescription("Natural");
 
-        expect(dto.id, greaterThan(0));
-        expect(dto.description, equals("Natural"));
+        expect(dto?.id, greaterThan(0));
+        expect(dto?.description, equals("Natural"));
 
-        dto.description = "Intangível";
+        dto?.description = "Intangível";
 
-        expect(dto.description, equals("Intangível"));
+        expect(dto?.description, equals("Intangível"));
 
-        expect(await dao.update(dto), isTrue);
+        expect(await dao.update(dto!), isTrue);
 
         dto = await  dao.findByDescription("Intangível");
 
-        expect(dto.description, equals("Intangível"));
+        expect(dto?.description, equals("Intangível"));
 
         await manager.commit();
         expect(manager.isOnTransaction, isFalse);
@@ -134,12 +133,12 @@ void main() {
         TypeOfPatrimonyDataMapper dataMapper = new MariaDBTypeOfPatrimonyDataMapper();
         TypeOfPatrimonyDAO dao = MariaDBTypeOfPatrimonyDAO(manager, dataMapper);
 
-        TypeOfPatrimony dto = await  dao.findByDescription("Imaterial");
+        TypeOfPatrimony? dto = await  dao.findByDescription("Imaterial");
 
-        expect(dto.id, greaterThan(0));
-        expect(dto.description, equals("Imaterial"));
+        expect(dto?.id, greaterThan(0));
+        expect(dto?.description, equals("Imaterial"));
 
-        dto = (await dao.findById(dto.id as Object)) as TypeOfPatrimony;
+        dto = (await dao.findById(dto?.id as Object)) as TypeOfPatrimony;
 
         expect(dto.description, equals("Imaterial"));
 
@@ -186,16 +185,16 @@ void main() {
         TypeOfPatrimonyDataMapper dataMapper = new MariaDBTypeOfPatrimonyDataMapper();
         TypeOfPatrimonyDAO dao = MariaDBTypeOfPatrimonyDAO(manager, dataMapper);
 
-        List typesOfPatrimonies = await dao.findAll(1, 2);
+        List typesOfPatrimonies = await dao.findAll(2, 0);
         expect(typesOfPatrimonies.length, equals(2));
 
         TypeOfPatrimony typeOfPatrimony = typesOfPatrimonies[0];
-        expect(typeOfPatrimony.description, equals("Imaterial"));
+        expect(typeOfPatrimony.description, equals("Cultural"));
 
         typeOfPatrimony = typesOfPatrimonies[1];
-        expect(typeOfPatrimony.description, equals("Natural"));
+        expect(typeOfPatrimony.description, equals("Imaterial"));
       } catch (e) {
-        throw e;
+        rethrow;
       } finally {
         await manager.close();
       }
@@ -214,37 +213,37 @@ void main() {
       try {
         await dao.insert(dto);
       } catch (e) {
-        expect(e.toString(), contains("Database session is not opened."));
+        expect(e.toString(), contains("Conexão com o banco de dados não foi aberta."));
       }
 
       try {
         await dao.update(dto);
       } catch (e) {
-        expect(e.toString(), contains("Database session is not opened."));
+        expect(e.toString(), contains("Conexão com o banco de dados não foi aberta."));
       }
 
       try {
         await dao.delete(10);
       } catch (e) {
-        expect(e.toString(), contains("Database session is not opened."));
+        expect(e.toString(), contains("Conexão com o banco de dados não foi aberta."));
       }
 
       try {
         await dao.findById(10);
       } catch (e) {
-        expect(e.toString(), contains("Database session is not opened."));
+        expect(e.toString(), contains("Conexão com o banco de dados não foi aberta."));
       }
 
       try {
         await dao.findAll();
       } catch (e) {
-        expect(e.toString(), contains("Database session is not opened."));
+        expect(e.toString(), contains("Conexão com o banco de dados não foi aberta."));
       }
 
       try {
         await dao.findByDescription("Material");
       } catch (e) {
-        expect(e.toString(), contains("Database session is not opened."));
+        expect(e.toString(), contains("Conexão com o banco de dados não foi aberta."));
       }
 
     });
@@ -262,25 +261,13 @@ void main() {
         try {
           await dao.findAll(-1, -1);
         } catch (e) {
-          expect(e.toString(), contains("Invalid parameter for findAll method."));
-        }
-
-        try {
-          await dao.findAll();
-        } catch (e) {
-          expect(e.toString(), contains("No record found."));
+          expect(e.toString(), contains("Parâmetros limit e offset são inválidos."));
         }
 
         try {
           await dao.findByDescription("");
         } catch (e) {
-          expect(e.toString(), contains("Description can not be empty"));
-        }
-
-        try {
-          await dao.findByDescription("Teste");
-        } catch (e) {
-          expect(e.toString(), contains("Type of patrimony was not found."));
+          expect(e.toString(), contains("Descrição não pode ser vazio."));
         }
 
       } finally {

@@ -90,14 +90,14 @@ void main() {
         MariaDBTypeOfPatrimonyDataMapper typeOfPatrimonyDataMapper = new MariaDBTypeOfPatrimonyDataMapper();
         MariaDBTypeOfPatrimonyDAO typeOfPatrimonyDAO = new MariaDBTypeOfPatrimonyDAO(manager, typeOfPatrimonyDataMapper);
 
-        TypeOfPatrimony typeOfPatrimony = await typeOfPatrimonyDAO.findByDescription("Natural");
-        expect(typeOfPatrimony.description, equals("Natural"));
+        TypeOfPatrimony? typeOfPatrimony = await typeOfPatrimonyDAO.findByDescription("Natural");
+        expect(typeOfPatrimony?.description, equals("Natural"));
 
         PatrimonyDTO patrimonyDTO = new PatrimonyDTO(
             name: "Pico da Bandeira",
             description: "Monumento natural situado na serra do Caparaó",
             unescoClassification: 1,
-            typeOfPatrimonyId: typeOfPatrimony.id,
+            typeOfPatrimonyId: typeOfPatrimony?.id,
             hasLocation: 1
         );
 

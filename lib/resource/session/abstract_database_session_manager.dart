@@ -21,7 +21,6 @@ abstract class AbstractDatabaseSessionManager implements DatabaseSessionManager 
   ///partir do nome do SGBDR. Atualmente, este projeto suporta somente um único
   ///SGBDR, que é o MariaDB.
   static DatabaseSessionManager getInstance(EnvironmentConfiguration configuration) {
-    throwIf(configuration == null, new Exception("Environment configuration is null."));
 
     String dbms = configuration.get("dbms");
     DependencyInjector dependencyInjector = DependencyInjector.getInstance();
