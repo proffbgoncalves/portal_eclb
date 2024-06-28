@@ -39,7 +39,7 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
 
   Future close() async{
     if (this._connection == null) {
-      throw new Exception("Session is not opened.");
+      throw new Exception("Conexão com o banco de dados não foi aberta.");
     }
     super.isOpened = false;
     this._connection = null;
@@ -49,31 +49,30 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
 
   Future<bool> commit() async {
     if (this._connection == null) {
-      throw new Exception("Session is not opened.");
+      throw new Exception("Conexão com o banco de dados não foi aberta.");
     }
     if (!this.isOnTransaction) {
-      throw new Exception("Transaction was not started.");
+      throw new Exception("Transação não foi iniciada.");
     }
     Results? results;
     try {
       results = await this._connection?.query("COMMIT");
       this.isOnTransaction = false;
     } catch (e) {
-      String msg = e.toString();
-      throw new Exception(msg.split(":")[1]);
+      rethrow;
     }
     return results != null;
   }
 
   Future<bool> execute(String sql, [List? values]) async {
     if (this._connection == null) {
-      throw new Exception("Session is not opened.");
+      throw new Exception("Conexão com o banco de dados não foi aberta.");
     }
     if (!this.isOnTransaction) {
-      throw new Exception("Transaction was not started.");
+      throw new Exception("Transação não foi iniciada.");
     }
     if (sql == "") {
-      throw new Exception("Statement sql can not be empty.");
+      throw new Exception("SQL não pode ser vazio.");
     }
 
     Results? results = null;
@@ -93,8 +92,8 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
   }
 
   Future<Iterable?> executeQuery(String sql, [List<Object>? values]) async {
-    throwIf(this._connection == null, new Exception("Session is not opened."));
-    throwIf(sql == "", new Exception("Statement sql can not be empty."));
+    throwIf(this._connection == null, new Exception("Conexão com o banco de dados não foi aberta."));
+    throwIf(sql == "", new Exception("SQL não pode ser vazio."));
 
     Results? results;
 
@@ -105,8 +104,7 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
         results = await this._connection?.query(sql, values);
       }
     } catch(e) {
-      String msg = e.toString();
-      throw new Exception(msg.split(":")[1]);
+      rethrow;
     }
 
     return results;
@@ -124,8 +122,7 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
       this.isOnTransaction = false;
       await this._connection?.query("ROLLBACK");
     } catch (e) {
-      String msg = e.toString();
-      throw new Exception(msg.split(":")[1]);
+      rethrow;
     }
   }
 

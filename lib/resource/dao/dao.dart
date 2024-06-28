@@ -32,7 +32,7 @@ abstract interface class DAO {
   ///primária. Ele retorna um objeto contendo todos os valores recuperados a
   ///partir da linha retornado por uma consulta à tabela de banco de dados. Caso
   ///nenhuma linha seja retornada, ele levantará uma exceção.
-  Future<Object> findById(Object id);
+  Future<Object?> findById(Object id);
 
   ///Este método executa a recuperação de todas as linhas de uma tabela, caso
   ///os parâmetros offset e limit não sejam informados. Quando informados,
