@@ -7,5 +7,5 @@ import 'package:portal_eclb/resource/dao/dao.dart';
 abstract interface class TypeOfPatrimonyDAO implements DAO {
 
   ///Este método recupera um TypeOfPatrimony utilizando sua descrição.
-  Future<TypeOfPatrimony> findByDescription(String description);
+  Future<TypeOfPatrimony?> findByDescription(String description);
 }

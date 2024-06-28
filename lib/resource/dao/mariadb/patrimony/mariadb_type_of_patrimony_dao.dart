@@ -34,19 +34,17 @@ final class MariaDBTypeOfPatrimonyDAO extends AbstractDAO implements TypeOfPatri
   }
 
   ///Implementação do método abstrato definido pela interface TypeOfPatrimonyDAO.
-  Future<TypeOfPatrimony> findByDescription(String description) async {
+  Future<TypeOfPatrimony?> findByDescription(String description) async {
     if (!this.sessionManager.isOpened) {
-      throw new Exception("Database session is not opened.");
+      throw new Exception("Conexão com o banco de dados não foi aberta.");
     }
-    if (description == null) {
-      throw new Exception("Description parameter is null.");
-    } else if (description == "") {
-      throw new Exception("Description can not be empty");
+    if (description == "") {
+      throw new Exception("Descrição não pode ser vazio.");
     }
     List statement = (this.dataMapper as TypeOfPatrimonyDataMapper).generateFindByDescriptionStatement(description);
     Results results = (await this.sessionManager.executeQuery(statement[0], statement[1])) as Results;
     if (results.length == 0) {
-      throw new Exception("Type of patrimony was not found.");
+      return null;
     }
     TypeOfPatrimony dto = new TypeOfPatrimonyDTO(id: results.first[0], description: results.first[1]);
     return dto;

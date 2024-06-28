@@ -36,7 +36,7 @@ class TypeOfPatimonyEntityObjectImpl extends AbstractEntityObject implements Typ
     try {
       return await dao.delete(this._dto.id as Object);
     } catch (e){
-      throw e;
+      rethrow;
     }
   }
 
@@ -54,7 +54,11 @@ class TypeOfPatimonyEntityObjectImpl extends AbstractEntityObject implements Typ
     try {
       return await dao.insert(this._dto as Object);
     } catch (e) {
-      throw e;
+      if (e.toString().contains("Duplicate entry")) {
+        throw new Exception("Tipo de patrimônio já existe.");
+      } else {
+        rethrow;
+      }
     }
   }
 
@@ -65,7 +69,7 @@ class TypeOfPatimonyEntityObjectImpl extends AbstractEntityObject implements Typ
     try {
       return await dao.update(this._dto as Object);
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -83,29 +87,36 @@ class TypeOfPatimonyEntityObjectImpl extends AbstractEntityObject implements Typ
   @override
   String? get description => this._dto?.description;
 
-  static Future<TypeOfPatrimonyEntityObject> getById(DatabaseSessionManager databaseSessionManager, EnvironmentConfiguration environmentConfiguration, int id) async {
+  static Future<TypeOfPatrimonyEntityObject?> getById(DatabaseSessionManager databaseSessionManager, EnvironmentConfiguration environmentConfiguration, int id) async {
     DAOFactory factory = AbstractDAOFactory.getInstance(environmentConfiguration);
     TypeOfPatrimonyDAO dao = factory.createTypeOfPatrimonyDAO(databaseSessionManager);
 
     try {
-      TypeOfPatrimony dto = await dao.findById(id) as TypeOfPatrimony;
+      Object? object = await dao.findById(id);
+      if (object == null) {
+        return null;
+      }
+      TypeOfPatrimony dto = object as TypeOfPatrimony;
       TypeOfPatrimonyEntityObject entity = TypeOfPatimonyEntityObjectImpl._createFromDTO(databaseSessionManager, environmentConfiguration, dto);
       return entity;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
-  static Future<TypeOfPatrimonyEntityObject> getByDescription(DatabaseSessionManager databaseSessionManager, EnvironmentConfiguration environmentConfiguration, String description) async {
+  static Future<TypeOfPatrimonyEntityObject?> getByDescription(DatabaseSessionManager databaseSessionManager, EnvironmentConfiguration environmentConfiguration, String description) async {
     DAOFactory factory = AbstractDAOFactory.getInstance(environmentConfiguration);
     TypeOfPatrimonyDAO dao = factory.createTypeOfPatrimonyDAO(databaseSessionManager);
 
     try {
-       TypeOfPatrimony dto = await dao.findByDescription(description);
+       TypeOfPatrimony? dto = await dao.findByDescription(description);
+       if (dto == null) {
+         return null;
+       }
        TypeOfPatrimonyEntityObject entity = TypeOfPatimonyEntityObjectImpl._createFromDTO(databaseSessionManager, environmentConfiguration, dto);
        return entity;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -126,7 +137,7 @@ class TypeOfPatimonyEntityObjectImpl extends AbstractEntityObject implements Typ
 
       return entities;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 

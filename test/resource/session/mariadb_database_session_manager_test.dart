@@ -121,7 +121,7 @@ void main() {
       try {
         await sessionManager.close();
       } catch (e) {
-        expect(e.toString(), contains("Session is not opened."));
+        expect(e.toString(), contains("Conexão com o banco de dados não foi aberta."));
       }
     });
 
@@ -135,7 +135,7 @@ void main() {
       try {
         await sessionManager.commit();
       } catch (e) {
-        expect(e.toString(), contains("Session is not opened."));
+        expect(e.toString(), contains("Conexão com o banco de dados não foi aberta."));
       }
     });
 
@@ -149,7 +149,7 @@ void main() {
       try {
         await sessionManager.execute("DELETE FROM TYPESOFPATRIMONIES");
       } catch (e) {
-        expect(e.toString(), contains("Session is not opened."));
+        expect(e.toString(), contains("Conexão com o banco de dados não foi aberta."));
       }
     });
 
@@ -165,7 +165,7 @@ void main() {
         await sessionManager.startTransaction();
         await sessionManager.execute("");
       } catch (e) {
-        expect(e.toString(), contains("Exception: Statement sql can not be empty."));
+        expect(e.toString(), contains("Exception: SQL não pode ser vazio."));
       } finally {
         await sessionManager.close();
       }
@@ -182,7 +182,7 @@ void main() {
         await sessionManager.open();
         await sessionManager.execute("DELETE FROM TYPESOFPATRIMONIES");
       } catch (e) {
-        expect(e.toString(), contains("Transaction was not started."));
+        expect(e.toString(), contains("Transação não foi iniciada."));
       } finally {
         await sessionManager.close();
       }

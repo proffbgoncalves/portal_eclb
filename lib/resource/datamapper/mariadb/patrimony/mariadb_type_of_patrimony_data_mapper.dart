@@ -7,25 +7,24 @@ final class MariaDBTypeOfPatrimonyDataMapper extends AbstractTypeOfPatrimonyData
 
   ///Retorna uma coleção de objetos TypeOfPatrimony.
   List generateList(Iterable resultSet) {
-    if (resultSet.length == 0) {
-      throw new Exception("Types of patrimonies can not be generated.");
-    }
-
-    Results results = resultSet as Results;
-
     List typesOfPatrimonies = [];
 
-    for(var row in results) {
-      TypeOfPatrimony typeOfPatrimony = new TypeOfPatrimonyDTO(id: row[0], description: row[1]);
-      typesOfPatrimonies.add(typeOfPatrimony);
+    if (resultSet.isNotEmpty) {
+      Results results = resultSet as Results;
+
+      for (var row in results) {
+        TypeOfPatrimony typeOfPatrimony = new TypeOfPatrimonyDTO(
+            id: row[0], description: row[1]);
+        typesOfPatrimonies.add(typeOfPatrimony);
+      }
     }
     return typesOfPatrimonies;
   }
 
   ///Retorna um objeto TypeOfPatrimony.
-  Object generateObject(Iterable resultSet) {
-    if (resultSet.length == 0) {
-      throw new Exception("Type of Patrimony can not be generated.");
+  Object? generateObject(Iterable resultSet) {
+    if (resultSet.isEmpty) {
+      return null;
     }
 
     Results results = resultSet as Results;

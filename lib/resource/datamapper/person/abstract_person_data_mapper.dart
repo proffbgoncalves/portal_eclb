@@ -6,7 +6,7 @@ abstract class AbstractPersonDataMapper implements PersonDataMapper {
 
   @override
   List generateDeleteStatement(Object id) {
-    throwIf(!(id is int), new Exception("Id parameter is not instance of int."));
+    throwIf(!(id is int), new Exception("Não é possível gerar statement SQL. O parâmetro id não é um int."));
 
     List statement =["DELETE FROM PERSONS WHERE ID = ?", [id]];
     return statement;
@@ -19,13 +19,13 @@ abstract class AbstractPersonDataMapper implements PersonDataMapper {
     } else if (offset == 0 && limit == 0) {
       return ["SELECT * FROM PERSONS"];
     } else {
-      throw new Exception("Invalid parameter for generateFindAllStatements method.");
+      throw new Exception("Não é possível gerar statement SQL. Parâmetros limit e offset são inválidos.");
     }
   }
 
   @override
   List generateFindByIdStatement(Object id) {
-    throwIf(!(id is int), new Exception("Id parameter is not an instance of int."));
+    throwIf(!(id is int), new Exception("Não é possível gerar statement SQL. O parâmetro id não é um int."));
 
     List statement = ["SELECT * FROM PERSONS WHERE ID = ?", [id]];
 
@@ -34,11 +34,11 @@ abstract class AbstractPersonDataMapper implements PersonDataMapper {
 
   @override
   List generateInsertStatement(Object dto) {
-    throwIf(!(dto is Person), new Exception("DTO parameter is not an instance of Person"));
+    throwIf(!(dto is Person), new Exception("Não é possível gerar statement SQL. DTO não é uma instância de Person."));
 
     Person person = dto as Person;
 
-    throwIf(dto.name == "", new Exception("Name field can not be empty."));
+    throwIf(dto.name == "", new Exception("Não é possível gerar statement SQL. Atributo name não pode ser vazio"));
 
     List statement = ["INSERT INTO PERSONS (NAME) VALUES (?)", [dto.name]];
 
@@ -47,7 +47,7 @@ abstract class AbstractPersonDataMapper implements PersonDataMapper {
 
   @override
   List generateUpdateStatement(Object dto) {
-    throwIf(!(dto is Person), new Exception("DTO parameter is not instance of Person"));
+    throwIf(!(dto is Person), new Exception("DTO não é uma instância de Person."));
 
     Person person = (dto as Person);
     throwIf(person.id == null, new Exception("DTO has an invalid id value."));
@@ -59,7 +59,7 @@ abstract class AbstractPersonDataMapper implements PersonDataMapper {
   }
 
   List generateFindByNameStatement(String name) {
-    throwIf(name == "", new Exception("Name parameter can not be empty."));
+    throwIf(name == "", new Exception("Parâmetro name não pode ser vazio."));
 
     List statement = ["SELECT * FROM PERSONS WHERE NAME LIKE ?", ["%"+name+"%"]];
 
