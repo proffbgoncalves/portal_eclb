@@ -1,13 +1,17 @@
 import 'package:portal_eclb/resource/dao/abstract_dao_factory.dart';
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/mariadb_patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/mariadb_type_of_patrimony_dao.dart';
+import 'package:portal_eclb/resource/dao/mariadb/patrimony/media/mariadb_type_of_media_dao.dart';
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/person/mariadb_type_of_acting_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/media/type_of_media_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/person/type_of_acting_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/mariadb_patrimony_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/mariadb_type_of_patrimony_data_mapper.dart';
+import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/media/mariadb_type_of_media_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/person/mariadb_type_of_acting_data_mapper.dart';
+import 'package:portal_eclb/resource/datamapper/patrimony/media/type_of_media_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/patrimony/patrimony_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/patrimony/person/type_of_acting_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/patrimony/type_of_patrimony_data_mapper.dart';
@@ -32,7 +36,6 @@ final class MariaDBDAOFactory extends AbstractDAOFactory {
 
   @override
   PatrimonyDAO createPatrimonyDAO(DatabaseSessionManager databaseSessionManager) {
-
     PatrimonyDataMapper dataMapper = new MariadbPatrimonyDataMapper();
 
     MariaDBPatrimonyDAO patrimonyDAO = new MariaDBPatrimonyDAO(databaseSessionManager, dataMapper);
@@ -45,6 +48,14 @@ final class MariaDBDAOFactory extends AbstractDAOFactory {
 
     MariaDBTypeOfActingDAO typeOfActingDAO = new MariaDBTypeOfActingDAO(databaseSessionManager, dataMapper);
     return typeOfActingDAO;
+  }
+
+  @override
+  TypeOfMediaDAO createTypeOfMediaDAO(DatabaseSessionManager databaseSessionManager) {
+    TypeOfMediaDataMapper dataMapper = new MariaDBTypeOfMediaDataMapper();
+
+    MariaDBTypeOfMediaDAO typeOfMediaDAO = new MariaDBTypeOfMediaDAO(databaseSessionManager, dataMapper);
+    return typeOfMediaDAO;
   }
 
 

@@ -1,3 +1,4 @@
+import 'package:portal_eclb/resource/dao/patrimony/media/type_of_media_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/person/type_of_acting_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart';
@@ -18,4 +19,6 @@ abstract interface class DAOFactory {
   PatrimonyDAO createPatrimonyDAO(DatabaseSessionManager databaseSessionManager);
 
   TypeOfActingDAO createTypeOfActingDAO(DatabaseSessionManager databaseSessionManager);
+
+  TypeOfMediaDAO createTypeOfMediaDAO(DatabaseSessionManager databaseSessionManager);
 }
