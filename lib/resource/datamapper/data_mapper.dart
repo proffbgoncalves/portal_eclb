@@ -32,11 +32,12 @@ abstract interface class DataMapper {
 
   ///Cria um Data Transfer Object baseado nos resultados obtidos de uma consulta SQL
   ///a uma tabela em um esquema de banco de dados.
-  Object generateObject(Iterable resultSet);
+  Object? generateObject(Iterable resultSet);
 
   ///Cria uma coleção contendo Data Transfer Objects baseada nos resultados de uma
   ///consulta SQL a uma tabela em um esquema de banco de dados.
   List generateList(Iterable resultSet);
+
 
   List generateCountStatement();
 }

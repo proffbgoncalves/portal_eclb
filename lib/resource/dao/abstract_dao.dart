@@ -30,7 +30,7 @@ abstract class AbstractDAO implements DAO {
   ///a fim de obter o valor da chave primária e configurar o DTO com este valor.
   Future<bool> insert(Object dto) async {
     if (!this._sessionManager.isOpened) {
-      throw new Exception("Database session is not opened.");
+      throw new Exception("Conexão com o banco de dados não foi aberta.");
     }
     try {
       List? statement = this._dataMapper?.generateInsertStatement(dto);
@@ -45,7 +45,7 @@ abstract class AbstractDAO implements DAO {
   ///linha em uma tabela de um esquema de banco de dados.
   Future<bool> update(Object dto) async {
     if (!this._sessionManager.isOpened) {
-      throw new Exception("Database session is not opened.");
+      throw new Exception("Conexão com o banco de dados não foi aberta.");
     }
     try {
       List? statement = this._dataMapper?.generateUpdateStatement(dto);
@@ -60,7 +60,7 @@ abstract class AbstractDAO implements DAO {
   ///em uma tabela de um esquema de banco de dados.
   Future<bool> delete(Object id) async {
     if (!this._sessionManager.isOpened) {
-      throw new Exception("Database session is not opened.");
+      throw new Exception("Conexão com o banco de dados não foi aberta.");
     }
     try {
       List? statement = this._dataMapper?.generateDeleteStatement(id);
@@ -73,9 +73,9 @@ abstract class AbstractDAO implements DAO {
 
   ///Este método é a implementação padrão para a operação de recuperar uma linha
   ///em uma tebela de um esquema de banco de dados.
-  Future<Object> findById(Object id) async {
+  Future<Object?> findById(Object id) async {
     if (!this._sessionManager.isOpened) {
-      throw new Exception("Database session is not opened.");
+      throw new Exception("Conexão com o banco de dados não foi aberta.");
     }
     try {
       List? statement = this._dataMapper!.generateFindByIdStatement(id);
@@ -91,16 +91,16 @@ abstract class AbstractDAO implements DAO {
   ///em uma tabela em um esquema de banco de dados.
   Future<List> findAll([int limit = 0, int offset = 0]) async {
     if (!this._sessionManager.isOpened) {
-      throw new Exception("Database session is not opened.");
+      throw new Exception("Conexão com o banco de dados não foi aberta.");
     }
     try {
       List? statement = null;
-      if (offset > 0 && limit > 0) {
-        statement = this._dataMapper?.generateFindAllStatement(offset, limit);
+      if (offset >= 0 && limit > 0) {
+        statement = this._dataMapper?.generateFindAllStatement(limit, offset);
       } else if (offset == 0 && limit == 0) {
         statement = this._dataMapper?.generateFindAllStatement();
       } else {
-        throw new Exception("Invalid parameter for findAll method.");
+        throw new Exception("Parâmetros limit e offset são inválidos.");
       }
       var resultSet;
       if (statement?.length == 1) {
@@ -109,17 +109,11 @@ abstract class AbstractDAO implements DAO {
         resultSet = await this._sessionManager.executeQuery(statement?[0], statement?[1]);
       }
 
-      if ((resultSet as Iterable).length == 0) {
-          throw new Exception("No record found.");
-      }
-
       return this._dataMapper!.generateList(resultSet);
     } catch(e) {
       rethrow;
     }
   }
-
-
 
   ///Retorna o objeto DataMapper definido para o DAO. Este objeto não deve ser
   ///utilizado fora de um DAO.
