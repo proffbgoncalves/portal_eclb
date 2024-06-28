@@ -1,4 +1,5 @@
 import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/person/type_of_acting_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart';
 import 'package:portal_eclb/resource/session/database_session_manager.dart';
 import 'package:portal_eclb/utils/environment_configuration.dart';
@@ -15,5 +16,6 @@ abstract interface class DAOFactory {
   ///Este método é responsável em instanciar uma classe que implemente o contrato
   ///PatrimonyDAO.
   PatrimonyDAO createPatrimonyDAO(DatabaseSessionManager databaseSessionManager);
-  
+
+  TypeOfActingDAO createTypeOfActingDAO(DatabaseSessionManager databaseSessionManager);
 }
