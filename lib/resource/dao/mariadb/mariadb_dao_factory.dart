@@ -3,6 +3,7 @@ import 'package:portal_eclb/resource/dao/mariadb/patrimony/mariadb_patrimony_dao
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/mariadb_type_of_patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/media/mariadb_type_of_media_dao.dart';
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/person/mariadb_type_of_acting_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/media/type_of_media_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/person/type_of_acting_dao.dart';
@@ -56,6 +57,12 @@ final class MariaDBDAOFactory extends AbstractDAOFactory {
 
     MariaDBTypeOfMediaDAO typeOfMediaDAO = new MariaDBTypeOfMediaDAO(databaseSessionManager, dataMapper);
     return typeOfMediaDAO;
+  }
+
+  @override
+  TypeOfEventDAO createTypeOfEventDAO(DatabaseSessionManager databaseSessionManager) {
+    // TODO: implement createTypeOfEventDAO
+    throw UnimplementedError();
   }
 
 
