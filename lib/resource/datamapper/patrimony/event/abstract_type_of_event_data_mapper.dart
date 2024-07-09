@@ -21,8 +21,10 @@ abstract class AbstractTypeOfEventDataMapper implements TypeOfEventDataMapper {
 
   @override
   List generateDeleteStatement(Object id) {
-    // TODO: implement generateDeleteStatement
-    throw UnimplementedError();
+    int idValue = id as int;
+
+    List statement = ["DELETE FROM TYPESOFEVENTS WHERE ID = ?", [idValue]];
+    return statement;
   }
 
   @override
@@ -45,6 +47,10 @@ abstract class AbstractTypeOfEventDataMapper implements TypeOfEventDataMapper {
 
     ///Converte o dto em TypeOfEvent.
     TypeOfEvent typeOfEvent = dto as TypeOfEvent;
+
+    throwIf(typeOfEvent.description == null, new Exception("O atributo description não pode ser nulo."));
+    throwIf(typeOfEvent.description == "", new Exception("O atributo description não pode ser vazio."));
+
     ///Lista contendo a código SQL e os valores para preenchimento;
     List statement = ["INSERT INTO TYPESOFEVENTS (DESCRIPTION) VALUES (?)", [dto.description]];
     ///Retorna a lista.
