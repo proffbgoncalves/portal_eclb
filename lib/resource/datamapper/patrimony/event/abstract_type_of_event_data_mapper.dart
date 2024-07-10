@@ -21,6 +21,7 @@ abstract class AbstractTypeOfEventDataMapper implements TypeOfEventDataMapper {
 
   @override
   List generateDeleteStatement(Object id) {
+    throwIf(id is String, new Exception("Parâmetro id não é um int."));
     int idValue = id as int;
 
     List statement = ["DELETE FROM TYPESOFEVENTS WHERE ID = ?", [idValue]];
