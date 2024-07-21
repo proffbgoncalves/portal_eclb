@@ -35,5 +35,5 @@ jobs:
     #   run: flutter pub get
 
     - name: List files in db/scripts directory
-      run: ls -la ../../lib
+      run: ls -la ../lib
     
