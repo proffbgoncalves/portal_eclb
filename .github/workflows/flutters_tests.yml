@@ -1,6 +1,6 @@
 name: Testes do Portal ECLB
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
 
@@ -35,5 +35,5 @@ jobs:
     #   run: flutter pub get
 
     - name: Create Database Schema
-      run: mariadb -h 127.0.0.1 -P 3306 -u root -paluno eclb_dev < ../db/script/eclb_dev.sql
+      run: mariadb -h 127.0.0.1 -P 3306 -u root -paluno eclb_dev < /db/script/eclb_dev.sql
     
