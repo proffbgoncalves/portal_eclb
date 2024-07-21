@@ -4,6 +4,8 @@ import 'package:portal_eclb/model/entity/patrimony/event/type_of_event_entity_ob
 import 'package:portal_eclb/model/patrimony/event/type_of_event.dart';
 import 'package:portal_eclb/resource/dao/dao_factory.dart';
 import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart';
+import 'package:portal_eclb/resource/session/database_session_manager.dart';
+import 'package:portal_eclb/utils/environment_configuration.dart';
 
 ///Esta classe concreta realiza uma herança de implementação de AbstractEntityObject.
 ///Também realiza uma herança de tipo de TypeOfEventEntityObject.
@@ -23,9 +25,18 @@ final class TypeOfEventEntityObjectImpl extends AbstractEntityObject implements 
   TypeOfEventEntityObjectImpl(super.databaseSessionManager, super.environmentConfiguration, this._dto);
 
   @override
-  Future<bool> delete() {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<bool> delete() async {
+    DependencyInjector dependencyInjector = DependencyInjector.getInstance();
+    
+    DAOFactory factory = dependencyInjector.getDAOFactory(this.environmentConfiguration.get("dbms"));
+
+    TypeOfEventDAO dao = factory.createTypeOfEventDAO(databaseSessionManager);
+
+    try {
+      return await dao.delete(this._dto.id as Object);
+    } catch (error){
+      rethrow;
+    }
   }
 
   ///Este método implementa o método abstrato herdado da interface EntityObject.
@@ -54,9 +65,18 @@ final class TypeOfEventEntityObjectImpl extends AbstractEntityObject implements 
   }
 
   @override
-  Future<bool> update() {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<bool> update() async {
+    DependencyInjector dependencyInjector = DependencyInjector.getInstance();
+
+    DAOFactory daoFactory = dependencyInjector.getDAOFactory(environmentConfiguration.get("dbms"));
+
+    TypeOfEventDAO dao = daoFactory.createTypeOfEventDAO(databaseSessionManager);
+
+    try {
+      return await dao.update(this._dto);
+    } catch (error) {
+      rethrow;
+    }
   }
 
   int? get id {
@@ -74,4 +94,32 @@ final class TypeOfEventEntityObjectImpl extends AbstractEntityObject implements 
   void set description(String? description) {
     this._dto.description = description;
   }
+
+  static Future<TypeOfEvent> getById(DatabaseSessionManager databaseSessionManager, EnvironmentConfiguration environmentConfiguration, int id) async {
+    DependencyInjector dependencyInjector = DependencyInjector.getInstance();
+    DAOFactory daoFactory = dependencyInjector.getDAOFactory(environmentConfiguration.get("dbms"));
+
+    TypeOfEventDAO dao = daoFactory.createTypeOfEventDAO(databaseSessionManager);
+
+    try {
+      return (await dao.findById(id)) as TypeOfEvent;
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  static Future<List>? getAll(DatabaseSessionManager databaseSessionManager, EnvironmentConfiguration environmentConfiguration, [int limit = 0, int offset = 0]) async {
+    DependencyInjector dependencyInjector = DependencyInjector.getInstance();
+    DAOFactory daoFactory = dependencyInjector.getDAOFactory(environmentConfiguration.get("dbms"));
+
+    TypeOfEventDAO dao = daoFactory.createTypeOfEventDAO(databaseSessionManager);
+
+    try {
+      return await dao.findAll(limit, offset);
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+
 }

@@ -191,7 +191,7 @@ abstract class BasePage extends StatelessWidget {
                                 ),
 
                               ],
-                              leading: new Icon(Icons.archive),
+                              leading: new Icon(Icons.tour),
                             ),
                             new Divider(
                               color: Theme.of(context).colorScheme.primary,

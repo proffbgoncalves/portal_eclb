@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:portal_eclb/dependency/dependecy_injector.dart';
 import 'package:portal_eclb/model/entity/patrimony/event/type_of_event_entity_object_impl.dart';
+import 'package:portal_eclb/model/patrimony/event/type_of_event.dart';
 import 'package:portal_eclb/resource/dao/dao_factory.dart';
 import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart';
 import 'package:portal_eclb/resource/session/database_session_manager.dart';
@@ -134,6 +135,135 @@ void main() {
       } finally {
         ///Fecha a conexão com o sistema gerenciador de banco de dados.
         databaseSessionManager.close();
+      }
+    });
+
+    test("testDeleteTypeOfEventEntityObjectImpl", () async {
+      DependencyInjector dependencyInjector = DependencyInjector.getInstance();
+
+      EnvironmentConfiguration environmentConfiguration = dependencyInjector.getEnvironmentConfigurarion();
+
+      DatabaseSessionManager databaseSessionManager = dependencyInjector.getDatabaseSessionManager(environmentConfiguration.get("dbms"));
+
+      DAOFactory daoFactory = dependencyInjector.getDAOFactory(environmentConfiguration.get("dbms"));
+
+      TypeOfEventDAO dao = new MockTypeOfEventDAO();
+
+      when(daoFactory.createTypeOfEventDAO(databaseSessionManager)).thenReturn(dao);
+
+      try {
+        expect(await databaseSessionManager.open(), isTrue);
+        expect(await databaseSessionManager.startTransaction(), isTrue);
+
+        TypeOfEventDTO dto = new TypeOfEventDTO(id: 120);
+
+        when(dao.delete(dto.id as Object)).thenAnswer((_) async => true);
+
+        TypeOfEventEntityObjectImpl impl = new TypeOfEventEntityObjectImpl(databaseSessionManager, environmentConfiguration, dto);
+
+        expect(await impl.delete(), isTrue);
+
+        expect(await databaseSessionManager.commit(), isTrue);
+      } catch(error) {
+        await databaseSessionManager.rollback();
+        rethrow;
+      } finally {
+        await databaseSessionManager.close();
+      }
+    });
+
+    test("testUpdadeTypeOfEventEntityObjectImpl", () async {
+
+      DependencyInjector dependencyInjector = DependencyInjector.getInstance();
+      EnvironmentConfiguration environmentConfiguration = dependencyInjector.getEnvironmentConfigurarion();
+      DatabaseSessionManager databaseSessionManager = dependencyInjector.getDatabaseSessionManager(environmentConfiguration.get("dbms"));
+      DAOFactory daoFactory = dependencyInjector.getDAOFactory(environmentConfiguration.get("dbms"));
+
+      TypeOfEventDAO dao = new MockTypeOfEventDAO();
+
+      when(daoFactory.createTypeOfEventDAO(databaseSessionManager)).thenReturn(dao);
+
+      try {
+        expect(await databaseSessionManager.open() , isTrue);
+        expect(await databaseSessionManager.startTransaction(), isTrue);
+
+        TypeOfEventDTO dto = TypeOfEventDTO(id: 12, description: "Festa");
+
+        TypeOfEventEntityObjectImpl impl = new TypeOfEventEntityObjectImpl(databaseSessionManager, environmentConfiguration, dto);
+
+        when(dao.update(dto)).thenAnswer((_) async => true);
+
+        expect(await impl.update(), isTrue);
+
+        expect(await databaseSessionManager.commit(), isTrue);
+      } catch(error) {
+        await databaseSessionManager.rollback();
+        rethrow;
+      } finally {
+        await databaseSessionManager.close();
+      }
+
+    });
+
+    test("testGetByIdTypeOfEventEntityObjectImpl", () async {
+      DependencyInjector dependencyInjector = DependencyInjector.getInstance();
+      EnvironmentConfiguration environmentConfiguration = dependencyInjector.getEnvironmentConfigurarion();
+      DatabaseSessionManager databaseSessionManager = dependencyInjector.getDatabaseSessionManager(environmentConfiguration.get("dbms"));
+      DAOFactory daoFactory = dependencyInjector.getDAOFactory(environmentConfiguration.get("dbms"));
+
+      TypeOfEventDAO dao = new MockTypeOfEventDAO();
+
+      when(daoFactory.createTypeOfEventDAO(databaseSessionManager)).thenReturn(dao);
+
+      try {
+        expect(await databaseSessionManager.open() , isTrue);
+
+        TypeOfEventDTO dto = new TypeOfEventDTO(id: 1, description: "Comemoração");
+
+        when(dao.findById(1)).thenAnswer((_) async => dto);
+
+        TypeOfEvent typeOfEvent = await TypeOfEventEntityObjectImpl.getById(databaseSessionManager, environmentConfiguration, 1);
+        expect(typeOfEvent.id, equals(1));
+        expect(typeOfEvent.description, "Comemoração");
+
+      } catch(error) {
+        rethrow;
+      } finally {
+        await databaseSessionManager.close();
+      }
+    });
+
+    test("testGetAllTypeOfEventEntityObjectImpl", () async {
+      DependencyInjector dependencyInjector = DependencyInjector.getInstance();
+      EnvironmentConfiguration environmentConfiguration = dependencyInjector.getEnvironmentConfigurarion();
+      DatabaseSessionManager databaseSessionManager = dependencyInjector.getDatabaseSessionManager(environmentConfiguration.get("dbms"));
+      DAOFactory daoFactory = dependencyInjector.getDAOFactory(environmentConfiguration.get("dbms"));
+
+      TypeOfEventDAO dao = new MockTypeOfEventDAO();
+
+      when(daoFactory.createTypeOfEventDAO(databaseSessionManager)).thenReturn(dao);
+
+      try {
+        expect(await databaseSessionManager.open(), isTrue);
+
+        List<TypeOfEvent> listForMock = [
+          new TypeOfEventDTO(id: 1, description: "Comemoração"),
+          new TypeOfEventDTO(id: 2, description: "Festa")
+        ];
+
+        when(dao.findAll(5, 0)).thenAnswer((_) async => listForMock);
+
+        List<TypeOfEvent> typeOfEvents = (await TypeOfEventEntityObjectImpl.getAll(databaseSessionManager, environmentConfiguration, 5, 0)) as List<TypeOfEvent>;
+
+        expect(typeOfEvents[0].id, equals(1));
+        expect(typeOfEvents[0].description, equals("Comemoração"));
+
+        expect(typeOfEvents[1].id, equals(2));
+        expect(typeOfEvents[1].description, equals("Festa"));
+      } catch (error) {
+        rethrow;
+      } finally {
+        await databaseSessionManager.close();
       }
     });
   });
