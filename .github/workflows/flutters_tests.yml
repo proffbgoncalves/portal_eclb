@@ -31,6 +31,13 @@ jobs:
       with:
         flutter-version: '3.22.2'
 
+    - name: Wait for MariaDB to be ready
+      run: |
+        until mariadb -h 127.0.0.1 -P 3306 -u testuser -ptestpassword -e "SELECT 1"; do
+          echo "Waiting for MariaDB..."
+          sleep 1
+        done
+
     - name: Flutter Pub Get
       run: flutter pub get
     
