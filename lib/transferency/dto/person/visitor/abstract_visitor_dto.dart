@@ -1,6 +1,7 @@
 import 'package:portal_eclb/model/person/visitor/visitor.dart';
 
-final class VisitorDTO implements Visitor{
+abstract class AbstractVisitorDTO implements Visitor{
+  //mesmo código do visitorDTO
   int? _personId;
   String? _address;
   int? _number;
@@ -13,7 +14,7 @@ final class VisitorDTO implements Visitor{
   String? _email;
   int? _memoryId;
 
-  VisitorDTO({int? personId,
+  AbstractVisitorDTO({int? personId,
     String? address,
     int? number,
     String? complemento,

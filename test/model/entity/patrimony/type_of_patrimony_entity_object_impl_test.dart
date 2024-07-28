@@ -29,6 +29,7 @@ void main() {
       try {
         await databaseSessionManager.open();
         await databaseSessionManager.startTransaction();
+        await databaseSessionManager.execute("DELETE FROM PATRIMONIES");
         await databaseSessionManager.execute("DELETE FROM TYPESOFPATRIMONIES");
         await databaseSessionManager.execute("INSERT INTO TYPESOFPATRIMONIES (DESCRIPTION) VALUES (?)", ["Natural"]);
         await databaseSessionManager.execute("INSERT INTO TYPESOFPATRIMONIES (DESCRIPTION) VALUES (?)", ["Imaterial"]);

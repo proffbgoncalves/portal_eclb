@@ -19,6 +19,7 @@ void main() {
       try {
         await manager.open();
         await manager.startTransaction();
+        await manager.execute("DELETE FROM PATRIMONIES");
         await manager.execute("DELETE FROM TYPESOFPATRIMONIES");
         await manager.execute("INSERT INTO TYPESOFPATRIMONIES (DESCRIPTION) VALUES (?)", ["Natural"]);
         await manager.execute("INSERT INTO TYPESOFPATRIMONIES (DESCRIPTION) VALUES (?)", ["Imaterial"]);
