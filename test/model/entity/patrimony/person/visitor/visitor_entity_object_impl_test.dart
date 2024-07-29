@@ -117,7 +117,7 @@ void main()  {
         await databaseSessionManager.commit();
       } catch (e){
 
-        //await databaseSessionManager.rollback();
+        await databaseSessionManager.rollback();
         rethrow;
       } finally{
 
