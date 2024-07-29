@@ -3,24 +3,28 @@ import 'package:portal_eclb/resource/dao/mariadb/patrimony/composite/mariadb_vis
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/mariadb_patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/mariadb_type_of_patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/media/mariadb_type_of_media_dao.dart';
+import 'package:portal_eclb/resource/dao/mariadb/patrimony/person/mariadb_notable_person_dao.dart';
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/person/mariadb_type_of_acting_dao.dart';
 import 'package:portal_eclb/resource/dao/mariadb/person/visitor/mariadb_visitor_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_stage_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/media/type_of_media_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/person/notable_person_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/person/type_of_acting_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/person/visitor/visitor_dao.dart';
-import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/composite/visitation_stage_data_mapper.dart';
+import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/composite/mariadb_visitation_stage_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/mariadb_patrimony_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/mariadb_type_of_patrimony_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/media/mariadb_type_of_media_data_mapper.dart';
+import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/person/mariadb_notable_persons_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/person/mariadb_type_of_acting_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/person/visitor/mariadb_visitor_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/patrimony/composite/visitation_stage_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/patrimony/media/type_of_media_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/patrimony/patrimony_data_mapper.dart';
+import 'package:portal_eclb/resource/datamapper/patrimony/person/notable_person_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/patrimony/person/type_of_acting_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/patrimony/type_of_patrimony_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/person/visitor/visitor_data_mapper.dart';
@@ -86,6 +90,13 @@ final class MariaDBDAOFactory extends AbstractDAOFactory {
 
     MariadbVisitationStageDao visitation = new MariadbVisitationStageDao(databaseSessionManager, dataMapper);
    return visitation;
+  }
+
+  @override
+  NotablePersonDAO createNotablePersonDAO(DatabaseSessionManager databaseSessionManager) {
+    NotablePersonDataMapper dataMapper = new MariadbNotablePersonsDataMapper();
+    MariadbNotablePersonDAO dao = new MariadbNotablePersonDAO(databaseSessionManager, dataMapper);
+    return dao;
   }
 
 

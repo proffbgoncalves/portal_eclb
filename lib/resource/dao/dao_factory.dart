@@ -2,6 +2,7 @@ import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_stage_da
 import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/media/type_of_media_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/person/notable_person_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/person/type_of_acting_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/person/visitor/visitor_dao.dart';
@@ -38,5 +39,7 @@ abstract interface class DAOFactory {
   VisitorDAO createVisitorDAO(DatabaseSessionManager databaseSessionManager);
 
   VisitationStageDAO createVisitationStageDAO(DatabaseSessionManager databaseSessionManager);
+
+  NotablePersonDAO createNotablePersonDAO(DatabaseSessionManager databaseSessionManager);
   
 }
