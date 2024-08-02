@@ -1,9 +1,13 @@
 import 'package:mockito/annotations.dart';
 import 'package:portal_eclb/resource/dao/dao_factory.dart';
+
 import 'package:portal_eclb/resource/dao/mariadb/mariadb_dao_factory.dart';
 import 'package:portal_eclb/resource/dao/mariadb/person/visitor/mariadb_visitor_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart';
 import 'package:portal_eclb/resource/dao/person/visitor/visitor_dao.dart';
+
+import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart';
+
 import 'package:portal_eclb/resource/session/database_session_manager.dart';
 
 ///Esta anotação é uma facilidde oferecida pela biblioteca mockito. Ela é responsável
@@ -27,7 +31,7 @@ import 'package:portal_eclb/resource/session/database_session_manager.dart';
   DAOFactory,
   TypeOfEventDAO,
   VisitorDAO,
-  //MariadbVisitorDAO,
-  //MariaDBDAOFactory
+  TypeOfEventDAO
+
 ])
 void main(){}

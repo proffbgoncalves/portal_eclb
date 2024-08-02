@@ -41,6 +41,7 @@ dependencies:
   shelf_router: ^1.0.0
   http: ^0.13.4
   mockito: ^5.4.4
+  build_runner: ^2.4.11
 
 
   # The following adds the Cupertino Icons font to your application.

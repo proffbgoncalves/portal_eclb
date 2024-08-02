@@ -5,8 +5,10 @@ import 'package:portal_eclb/resource/dao/mariadb/patrimony/mariadb_type_of_patri
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/media/mariadb_type_of_media_dao.dart';
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/person/mariadb_notable_person_dao.dart';
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/person/mariadb_type_of_acting_dao.dart';
+
 import 'package:portal_eclb/resource/dao/mariadb/person/visitor/mariadb_visitor_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_stage_dao.dart';
+
 import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/media/type_of_media_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
@@ -76,6 +78,7 @@ final class MariaDBDAOFactory extends AbstractDAOFactory {
     // TODO: implement createTypeOfEventDAO
     throw UnimplementedError();
   }
+
   @override
   VisitorDAO createVisitorDAO(DatabaseSessionManager databaseSessionManager) {
     VisitorDataMapper dataMapper = new MariadbVisitorDataMapper();
@@ -98,6 +101,5 @@ final class MariaDBDAOFactory extends AbstractDAOFactory {
     MariadbNotablePersonDAO dao = new MariadbNotablePersonDAO(databaseSessionManager, dataMapper);
     return dao;
   }
-
 
 }

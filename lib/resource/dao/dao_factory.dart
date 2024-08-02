@@ -34,6 +34,7 @@ abstract interface class DAOFactory {
   ///TypeOfEventDAO.
   TypeOfEventDAO createTypeOfEventDAO(DatabaseSessionManager databaseSessionManager);
 
+
   ///Este método é responsável em instanciar uma classe que implemente o contrato
   ///VisitorDAO.
   VisitorDAO createVisitorDAO(DatabaseSessionManager databaseSessionManager);
@@ -42,4 +43,5 @@ abstract interface class DAOFactory {
 
   NotablePersonDAO createNotablePersonDAO(DatabaseSessionManager databaseSessionManager);
   
+
 }

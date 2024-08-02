@@ -3,6 +3,7 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'dart:async' as _i11;
 
 import 'package:mockito/mockito.dart' as _i1;
@@ -11,6 +12,11 @@ import 'package:portal_eclb/model/person/visitor/visitor.dart' as _i14;
 import 'package:portal_eclb/resource/dao/dao_factory.dart' as _i13;
 import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_stage_dao.dart'
     as _i9;
+import 'dart:async' as _i8;
+
+import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i9;
+import 'package:portal_eclb/resource/dao/dao_factory.dart' as _i10;
 import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart'
     as _i7;
 import 'package:portal_eclb/resource/dao/patrimony/media/type_of_media_dao.dart'
@@ -22,6 +28,7 @@ import 'package:portal_eclb/resource/dao/patrimony/person/type_of_acting_dao.dar
     as _i5;
 import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart'
     as _i3;
+
 import 'package:portal_eclb/resource/dao/person/visitor/visitor_dao.dart'
     as _i8;
 import 'package:portal_eclb/resource/session/database_session_manager.dart'
@@ -169,25 +176,45 @@ class MockDatabaseSessionManager extends _i1.Mock
       ) as bool);
 
   @override
+
   _i11.Future<bool> open() => (super.noSuchMethod(
+
+  _i8.Future<bool> open() => (super.noSuchMethod(
+
         Invocation.method(
           #open,
           [],
         ),
+
         returnValue: _i11.Future<bool>.value(false),
       ) as _i11.Future<bool>);
 
   @override
   _i11.Future<dynamic> close() => (super.noSuchMethod(
+
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<dynamic> close() => (super.noSuchMethod(
+
         Invocation.method(
           #close,
           [],
         ),
+
         returnValue: _i11.Future<dynamic>.value(),
       ) as _i11.Future<dynamic>);
 
   @override
   _i11.Future<Object> execute(
+
+        returnValue: _i8.Future<dynamic>.value(),
+      ) as _i8.Future<dynamic>);
+
+  @override
+  _i8.Future<Object> execute(
+
     String? sql, [
     List<dynamic>? values,
   ]) =>
@@ -199,7 +226,11 @@ class MockDatabaseSessionManager extends _i1.Mock
             values,
           ],
         ),
+
         returnValue: _i11.Future<Object>.value(_FakeObject_0(
+
+        returnValue: _i8.Future<Object>.value(_FakeObject_0(
+
           this,
           Invocation.method(
             #execute,
@@ -209,10 +240,17 @@ class MockDatabaseSessionManager extends _i1.Mock
             ],
           ),
         )),
+
       ) as _i11.Future<Object>);
 
   @override
   _i11.Future<Iterable<dynamic>?> executeQuery(
+
+      ) as _i8.Future<Object>);
+
+  @override
+  _i8.Future<Iterable<dynamic>?> executeQuery(
+
     String? sql, [
     List<Object>? values,
   ]) =>
@@ -224,26 +262,47 @@ class MockDatabaseSessionManager extends _i1.Mock
             values,
           ],
         ),
+
         returnValue: _i11.Future<Iterable<dynamic>?>.value(),
       ) as _i11.Future<Iterable<dynamic>?>);
 
   @override
   _i11.Future<bool> commit() => (super.noSuchMethod(
+
+        returnValue: _i8.Future<Iterable<dynamic>?>.value(),
+      ) as _i8.Future<Iterable<dynamic>?>);
+
+  @override
+  _i8.Future<bool> commit() => (super.noSuchMethod(
+
         Invocation.method(
           #commit,
           [],
         ),
+
         returnValue: _i11.Future<bool>.value(false),
       ) as _i11.Future<bool>);
 
   @override
   _i11.Future<dynamic> rollback() => (super.noSuchMethod(
+
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<dynamic> rollback() => (super.noSuchMethod(
+
         Invocation.method(
           #rollback,
           [],
         ),
+
         returnValue: _i11.Future<dynamic>.value(),
       ) as _i11.Future<dynamic>);
+
+        returnValue: _i8.Future<dynamic>.value(),
+      ) as _i8.Future<dynamic>);
+
 
   @override
   String getType() => (super.noSuchMethod(
@@ -251,7 +310,11 @@ class MockDatabaseSessionManager extends _i1.Mock
           #getType,
           [],
         ),
+
         returnValue: _i12.dummyValue<String>(
+
+        returnValue: _i9.dummyValue<String>(
+
           this,
           Invocation.method(
             #getType,
@@ -261,13 +324,21 @@ class MockDatabaseSessionManager extends _i1.Mock
       ) as String);
 
   @override
+
   _i11.Future<dynamic> startTransaction() => (super.noSuchMethod(
+
+  _i8.Future<dynamic> startTransaction() => (super.noSuchMethod(
+
         Invocation.method(
           #startTransaction,
           [],
         ),
+
         returnValue: _i11.Future<dynamic>.value(),
       ) as _i11.Future<dynamic>);
+
+        returnValue: _i8.Future<dynamic>.value(),
+      ) as _i8.Future<dynamic>);
 
   @override
   _i2.DatabaseSessionManager clone() => (super.noSuchMethod(
@@ -288,7 +359,11 @@ class MockDatabaseSessionManager extends _i1.Mock
 /// A class which mocks [DAOFactory].
 ///
 /// See the documentation for Mockito's code generation for more information.
+
 class MockDAOFactory extends _i1.Mock implements _i13.DAOFactory {
+
+class MockDAOFactory extends _i1.Mock implements _i10.DAOFactory {
+
   MockDAOFactory() {
     _i1.throwOnMissingStub(this);
   }
@@ -378,6 +453,7 @@ class MockDAOFactory extends _i1.Mock implements _i13.DAOFactory {
         ),
       ) as _i7.TypeOfEventDAO);
 
+
   @override
   _i8.VisitorDAO createVisitorDAO(
           _i2.DatabaseSessionManager? databaseSessionManager) =>
@@ -428,6 +504,7 @@ class MockDAOFactory extends _i1.Mock implements _i13.DAOFactory {
           ),
         ),
       ) as _i10.NotablePersonDAO);
+
 }
 
 /// A class which mocks [TypeOfEventDAO].
@@ -439,6 +516,7 @@ class MockTypeOfEventDAO extends _i1.Mock implements _i7.TypeOfEventDAO {
   }
 
   @override
+
   _i11.Future<bool> insert(Object? dto) => (super.noSuchMethod(
         Invocation.method(
           #insert,
@@ -618,42 +696,77 @@ class MockVisitorDAO extends _i1.Mock implements _i8.VisitorDAO {
 
   @override
   _i11.Future<bool> insert(Object? dto) => (super.noSuchMethod(
+
+  _i8.Future<bool> insert(Object? dto) => (super.noSuchMethod(
+
         Invocation.method(
           #insert,
           [dto],
         ),
+
         returnValue: _i11.Future<bool>.value(false),
       ) as _i11.Future<bool>);
 
   @override
   _i11.Future<bool> update(Object? dto) => (super.noSuchMethod(
+
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<bool> update(Object? dto) => (super.noSuchMethod(
+
         Invocation.method(
           #update,
           [dto],
         ),
+
         returnValue: _i11.Future<bool>.value(false),
       ) as _i11.Future<bool>);
 
   @override
   _i11.Future<bool> delete(Object? id) => (super.noSuchMethod(
+
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<bool> delete(Object? id) => (super.noSuchMethod(
+
         Invocation.method(
           #delete,
           [id],
         ),
+
         returnValue: _i11.Future<bool>.value(false),
       ) as _i11.Future<bool>);
 
   @override
   _i11.Future<Object?> findById(Object? id) => (super.noSuchMethod(
+
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<Object?> findById(Object? id) => (super.noSuchMethod(
+
         Invocation.method(
           #findById,
           [id],
         ),
+
         returnValue: _i11.Future<Object?>.value(),
       ) as _i11.Future<Object?>);
 
   @override
   _i11.Future<List<dynamic>> findAll([
+
+        returnValue: _i8.Future<Object?>.value(),
+      ) as _i8.Future<Object?>);
+
+  @override
+  _i8.Future<List<dynamic>> findAll([
+
     int? limit,
     int? offset,
   ]) =>
@@ -665,15 +778,28 @@ class MockVisitorDAO extends _i1.Mock implements _i8.VisitorDAO {
             offset,
           ],
         ),
+
         returnValue: _i11.Future<List<dynamic>>.value(<dynamic>[]),
       ) as _i11.Future<List<dynamic>>);
 
   @override
   _i11.Future<int> count() => (super.noSuchMethod(
+
+        returnValue: _i8.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i8.Future<List<dynamic>>);
+
+  @override
+  _i8.Future<int> count() => (super.noSuchMethod(
+
         Invocation.method(
           #count,
           [],
         ),
+
         returnValue: _i11.Future<int>.value(0),
       ) as _i11.Future<int>);
+
+        returnValue: _i8.Future<int>.value(0),
+      ) as _i8.Future<int>);
+
 }
