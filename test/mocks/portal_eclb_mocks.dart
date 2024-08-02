@@ -30,8 +30,7 @@ import 'package:portal_eclb/resource/session/database_session_manager.dart';
   DatabaseSessionManager,
   DAOFactory,
   TypeOfEventDAO,
-  VisitorDAO,
-  TypeOfEventDAO
+  VisitorDAO
 
 ])
 void main(){}
