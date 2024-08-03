@@ -33,7 +33,7 @@ jobs:
         run: flutter pub get
 
       - name: Create Database Schema
-        run: mysql -u root -paluno eclb_dev < db/script/eclb_dev.sql
+        run: mysql -u root -p aluno
 
       - name: Run tests
         run: flutter test
