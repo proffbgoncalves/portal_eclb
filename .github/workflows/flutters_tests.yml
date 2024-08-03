@@ -33,7 +33,7 @@ jobs:
         run: flutter pub get
 
       - name: Create Database Schema
-        run: mysql
+        run: mysql -u root
 
       - name: Run tests
         run: flutter test
