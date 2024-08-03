@@ -24,17 +24,18 @@ jobs:
           # mysql user: 'root' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
           # mysql password: 'aluno' 
         
-      
-
-      
-      
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Connecting on MariaDB
+      - name: Creating on MariaDB
         run: mysql -h 127.0.0.1 -u root < db/script/eclb_dev.sql
 
-      
+      - name: Showing all tables
+        run: | 
+              mysql -h 127.0.0.1 -u root -e "
+                use eclb_test;
+                show tables;
+              "
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
