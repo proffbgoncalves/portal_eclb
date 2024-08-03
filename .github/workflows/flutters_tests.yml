@@ -11,18 +11,13 @@ jobs:
         image: mariadb:11.3
         env:
           MYSQL_ROOT_PASSWORD: aluno
-        options: >-
-          --health-cmd="mysqladmin ping --silent"
-          --health-interval=10s
-          --health-timeout=20s
-          --health-retries=10
-  
+         
         ports:
           - 3306:3306
           
     steps:
       - name: Connecting on MariaDB
-        run: mysql -u root -h 127.0.0.1 -P 3306
+        run: mysql
       
       - name: Checkout code
         uses: actions/checkout@v3
