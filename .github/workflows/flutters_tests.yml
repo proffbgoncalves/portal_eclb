@@ -17,7 +17,7 @@ jobs:
           
     steps:
       - name: Connecting on MariaDB
-        run: mysql -h 127.0.0.1 -u root -p aluno
+        run: mysql -h 127.0.0.1 -P 3306 -u root -p aluno
       
       - name: Checkout code
         uses: actions/checkout@v3
