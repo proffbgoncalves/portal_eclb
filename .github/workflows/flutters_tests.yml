@@ -6,6 +6,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      mariadb:
+        image: mariadb:latest
+        ports:
+          - 3306:3306
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: eclb_dev
+          MARIADB_USER: root
+          MARIADB_PASSWORD: aluno
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -20,6 +31,8 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+
+      
 
       - name: Run tests
         run: flutter test
