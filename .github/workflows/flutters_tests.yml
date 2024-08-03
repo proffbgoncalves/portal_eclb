@@ -29,14 +29,14 @@ jobs:
 
       - name: Creating on MariaDB
         run: |
-              mariadb -h 127.0.0.1 -u root -paluno -e "
+              mysql -h 127.0.0.1 -u root -paluno -e "
                 source db/script/eclb_dev.sql
               "
         
 
       - name: Showing all tables
         run: | 
-              mariadb -h 127.0.0.1 -u root -paluno -e "
+              mysql -h 127.0.0.1 -u root -paluno -e "
                show databases;
               "
 
