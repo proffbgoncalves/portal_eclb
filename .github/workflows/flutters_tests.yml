@@ -10,10 +10,8 @@ jobs:
       mariadb:
         image: mariadb:latest
         env:
-          MYSQL_ROOT_PASSWORD: root_password
-          MYSQL_DATABASE: test_db
-          MYSQL_USER: test_user
-          MYSQL_PASSWORD: test_password
+          MYSQL_ROOT_PASSWORD: aluno
+  
         options: >-
           --health-cmd="mysqladmin ping --silent"
           --health-interval=10s
