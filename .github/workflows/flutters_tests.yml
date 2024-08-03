@@ -8,7 +8,7 @@ jobs:
 
     services:
       mariadb:
-        image: mariadb:latest
+        image: mariadb:11.3
         env:
           MYSQL_ROOT_PASSWORD: aluno
   
