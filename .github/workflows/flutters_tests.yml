@@ -11,6 +11,11 @@ jobs:
         image: mariadb:11.3
         env:
           MYSQL_ROOT_PASSWORD: aluno
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=20s
+          --health-retries=10
   
         ports:
           - 3306:3306
