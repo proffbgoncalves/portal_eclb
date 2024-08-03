@@ -16,6 +16,9 @@ jobs:
           - 3306:3306
           
     steps:
+      - name: Create permition
+        run: sudo chmod -R 755 /var/run/mysqld
+        
       - name: Connecting on MariaDB
         run: mysql
       
