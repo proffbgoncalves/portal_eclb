@@ -6,16 +6,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      mariadb:
-        image: mariadb:latest
-        ports:
-          - 3306:3306
-        env:
-          MARIADB_ROOT_PASSWORD: root
-          MARIADB_DATABASE: eclb_dev
-          MARIADB_USER: root
-          MARIADB_PASSWORD: aluno
+    # services:
+    #   mariadb:
+    #     image: mariadb:latest
+    #     ports:
+    #       - 3306:3306
+    #     env:
+    #       MARIADB_ROOT_PASSWORD: root
+    #       MARIADB_DATABASE: eclb_dev
+    #       MARIADB_USER: root
+    #       MARIADB_PASSWORD: aluno
 
     steps:
       - name: Checkout code
