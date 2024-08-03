@@ -35,6 +35,7 @@ jobs:
               mysql -h 127.0.0.1 -u root -e "
                 use eclb_dev;
                 show tables;
+                ALTER USER 'root'@'127.0.0.1' IDENTIFIED BY 'aluno';
               "
 
       - name: Set up Flutter
