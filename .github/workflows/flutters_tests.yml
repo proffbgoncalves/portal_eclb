@@ -1,4 +1,4 @@
-clname: Testes do Portal ECLB
+name: Testes do Portal ECLB
 
 on: [push]
 
