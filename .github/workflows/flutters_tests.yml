@@ -14,8 +14,8 @@ jobs:
       - name: Set up MariaDB
         uses: getong/mariadb-action@v1.11
         with:
-          host port: 3307 # Optional, default value is 3306. The port of host
-          container port: 3307 # Optional, default value is 3306. The port of container
+          host port: 3306 # Optional, default value is 3306. The port of host
+          container port: 3306 # Optional, default value is 3306. The port of container
           character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
           collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
           # mariadb version: '11.3.0' # Optional, default value is "latest". The version of the MariaDB
@@ -29,14 +29,14 @@ jobs:
 
       - name: Creating on MariaDB
         run: |
-              mysql -h 127.0.0.1 -P 3307 -u root -paluno -e "
+              mysql -h 127.0.0.1 -P 3306 -u root -paluno -e "
                 source db/script/eclb_dev.sql
               "
         
 
       - name: Showing all tables
         run: | 
-              mysql -h 127.0.0.1 -P 3307 -u root -paluno -e "
+              mysql -h 127.0.0.1 -P 3306 -u root -paluno -e "
                show databases;
               "
 
