@@ -33,7 +33,7 @@ jobs:
       - name: Showing all tables
         run: | 
               mysql -h 127.0.0.1 -u root -e "
-                use eclb_test;
+                use eclb_dev;
                 show tables;
               "
 
