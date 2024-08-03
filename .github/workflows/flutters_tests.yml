@@ -28,15 +28,15 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Creating on MariaDB
-        run: mysql -h 127.0.0.1 -u root < db/script/eclb_dev.sql 
+        run: mysql -h 127.0.0.1 -u root -paluno eclb_dev < db/script/eclb_dev.sql 
         
 
-      # - name: Showing all tables
-      #   run: | 
-      #         mysql -h 127.0.0.1 -u root -e "
-      #           use eclb_dev;
-      #           show tables;
-      #         "
+      - name: Showing all tables
+        run: | 
+              mysql -h 127.0.0.1 -u root -paluno -e "
+                use eclb_dev;
+                show tables;
+              "
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
