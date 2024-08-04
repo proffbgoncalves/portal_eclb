@@ -6,7 +6,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-             
     steps:
       - name: Shutdown Ubuntu MySQL (SUDO)
         run: sudo service mysql stop
@@ -14,15 +13,15 @@ jobs:
       - name: Set up MariaDB
         uses: getong/mariadb-action@v1.11
         with:
-          host port: 3306 # Optional, default value is 3306. The port of host
-          container port: 3306 # Optional, default value is 3306. The port of container
-          character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
-          collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
-          mariadb version: '11.3.2' # Optional, default value is "latest". The version of the MariaDB
-          # mysql database: 'eclb_dev' # Optional, default value is "test". The specified database which will be create
-          mysql root password: 'aluno' # Required if "mysql user" is empty, default is empty. The root superuser password
-          mysql user: 'root' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
-          mysql password: 'aluno' 
+          host port: 3306
+          container port: 3306
+          character set server: 'utf8'
+          collation server: 'utf8_general_ci'
+          mariadb version: '11.3.2'
+          mysql root password: 'aluno'
+          mysql user: 'root'
+          mysql password: 'aluno'
+          mysql database: 'eclb_dev' # Define o banco de dados padrão
         
       - name: Checkout code
         uses: actions/checkout@v3
@@ -30,13 +29,15 @@ jobs:
       - name: Creating on MariaDB
         run: |
               mysql -h 127.0.0.1 -P 3306 -u root -paluno -e "
-                source db/script/eclb_dev.sql
+                USE eclb_dev;
+                source db/script/eclb_dev.sql;
               "
               
-      - name: Showing all tables
+      - name: Confirm database selection
         run: | 
               mysql -h 127.0.0.1 -P 3306 -u root -paluno -e "
-               show databases;
+               SELECT DATABASE();
+               SHOW TABLES;
               "
 
       - name: Set up Flutter
@@ -50,8 +51,5 @@ jobs:
                 flutter pub outdated
                 flutter pub upgrade --major-versions
 
-      
-
       - name: Run tests
         run: flutter test
-    
