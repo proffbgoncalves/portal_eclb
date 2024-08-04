@@ -48,7 +48,7 @@ class VisitationStageEntityObjectImpl extends AbstractEntityObject implements Vi
   }
 
   // Construtor de fábrica para criar uma instância a partir de um DTO existente
-  factory VisitationStageEntityObjectImpl._createFromDTO(
+  factory VisitationStageEntityObjectImpl.createFromDTO(
     DatabaseSessionManager databaseSessionManager,
     EnvironmentConfiguration environmentConfiguration,
     VisitationStage dto,
@@ -76,7 +76,7 @@ class VisitationStageEntityObjectImpl extends AbstractEntityObject implements Vi
       }
 
       VisitationStage dto = object as VisitationStage;
-      VisitationStageEntityObject entity = VisitationStageEntityObjectImpl._createFromDTO(
+      VisitationStageEntityObject entity = VisitationStageEntityObjectImpl.createFromDTO(
         databaseSessionManager,
         environmentConfiguration,
         dto,

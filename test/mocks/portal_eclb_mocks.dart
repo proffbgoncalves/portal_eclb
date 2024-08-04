@@ -1,7 +1,10 @@
 import 'package:mockito/annotations.dart';
 import 'package:portal_eclb/resource/dao/dao_factory.dart';
+import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_stage_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/person/notable_person_dao.dart';
 import 'package:portal_eclb/resource/session/database_session_manager.dart';
+import 'package:portal_eclb/resource/dao/person/visitor/visitor_dao.dart';
 
 ///Esta anotação é uma facilidde oferecida pela biblioteca mockito. Ela é responsável
 ///em gerar as classes de Mock Objects para o processo de Mocking (Mockagem),
@@ -22,6 +25,9 @@ import 'package:portal_eclb/resource/session/database_session_manager.dart';
 @GenerateMocks([
   DatabaseSessionManager,
   DAOFactory,
-  TypeOfEventDAO
+  TypeOfEventDAO,
+  VisitorDAO,
+  NotablePersonDAO,
+  VisitationStageDAO
 ])
 void main(){}
