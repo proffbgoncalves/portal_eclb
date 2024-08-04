@@ -45,7 +45,11 @@ jobs:
           flutter-version: '3.22.2'
 
       - name: Install dependencies
-        run: flutter pub get
+        run: | 
+                flutter pub get
+                flutter pub outdated
+
+      
 
       - name: Run tests
         run: flutter test
