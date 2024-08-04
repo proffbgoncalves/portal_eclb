@@ -28,7 +28,7 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
       try {
         this.isOpened = true;
         this._connection = await MySqlConnection.connect(settings);
-        await this._connection?.query('USE ${this._environmentConfiguration.get("db")};');
+        await this._connection?.query('USE eclb_dev;');
       } catch(e) {
         this.isOpened = false;
         rethrow;
