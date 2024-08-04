@@ -4,6 +4,7 @@ import 'package:portal_eclb/utils/environment_configuration.dart';
 
 void main() {
   group("MariaDBDatabaseSessionManagerTest", () {
+
     test("testOpenAndCloseDabaseSession", () async {
       EnvironmentConfiguration environmentConfiguration =
           await EnvironmentConfiguration.fromFile(".env_dev");
