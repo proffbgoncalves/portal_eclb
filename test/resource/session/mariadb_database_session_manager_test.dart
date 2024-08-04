@@ -4,6 +4,7 @@ import 'package:portal_eclb/utils/environment_configuration.dart';
 
 void main() {
   group("MariaDBDatabaseSessionManagerTest", () {
+
     test("testOpenAndCloseDabaseSession", () async {
       EnvironmentConfiguration environmentConfiguration =
           await EnvironmentConfiguration.fromFile(".env_dev");
@@ -36,10 +37,10 @@ void main() {
 
         sessionManager.startTransaction();
 
-        await sessionManager.execute("DELETE FROM  TYPESOFPATRIMONIES");
+        await sessionManager.execute("DELETE FROM  eclb_dev.TYPESOFPATRIMONIES");
 
         await sessionManager.execute(
-            "INSERT INTO TYPESOFPATRIMONIES (DESCRIPTION) VALUES (?)",
+            "INSERT INTO eclb_dev.TYPESOFPATRIMONIES (DESCRIPTION) VALUES (?)",
             ["Material"]);
 
         await sessionManager.commit();
@@ -69,10 +70,10 @@ void main() {
 
         sessionManager.startTransaction();
 
-        await sessionManager.execute("DELETE FROM  TYPESOFPATRIMONIES");
+        await sessionManager.execute("DELETE FROM  eclb_dev.TYPESOFPATRIMONIES");
 
         await sessionManager.execute(
-            "INSERT INTO TYPESOFPATRIMONIES (DESCRIPTION) VALUES (?)",
+            "INSERT INTO eclb_dev.TYPESOFPATRIMONIES (DESCRIPTION) VALUES (?)",
             ["Material"]);
 
         await sessionManager.commit();
@@ -80,7 +81,7 @@ void main() {
         sessionManager.startTransaction();
 
         await sessionManager.execute(
-            "INSERT INTO TYPESOFPATRIMONIES (DESCRIPTION) VALUES (?)",
+            "INSERT INTO eclb_dev.TYPESOFPATRIMONIES (DESCRIPTION) VALUES (?)",
             ["Material"]);
 
         await sessionManager.commit();
@@ -147,7 +148,7 @@ void main() {
       new MariaDBDatabaseSessionManager(environmentConfiguration);
 
       try {
-        await sessionManager.execute("DELETE FROM TYPESOFPATRIMONIES");
+        await sessionManager.execute("DELETE FROM eclb_dev.TYPESOFPATRIMONIES");
       } catch (e) {
         expect(e.toString(), contains("Conexão com o banco de dados não foi aberta."));
       }
@@ -180,7 +181,7 @@ void main() {
 
       try {
         await sessionManager.open();
-        await sessionManager.execute("DELETE FROM TYPESOFPATRIMONIES");
+        await sessionManager.execute("DELETE FROM eclb_dev.TYPESOFPATRIMONIES");
       } catch (e) {
         expect(e.toString(), contains("Transação não foi iniciada."));
       } finally {
