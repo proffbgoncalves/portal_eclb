@@ -22,12 +22,13 @@ final class MariaDBDatabaseSessionManager extends AbstractDatabaseSessionManager
           port: this._environmentConfiguration.get<int>("port"),
           user: this._environmentConfiguration.get("user"),
           password: this._environmentConfiguration.get("password"),
-          db: this._environmentConfiguration.get("db")
+          // db: this._environmentConfiguration.get("db")
       );
 
       try {
         this.isOpened = true;
         this._connection = await MySqlConnection.connect(settings);
+        await this._connection?.query('USE ${this._environmentConfiguration.get("db")};');
       } catch(e) {
         this.isOpened = false;
         rethrow;
