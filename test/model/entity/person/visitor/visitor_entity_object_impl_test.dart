@@ -32,28 +32,28 @@ void main()  {
       try {
         await databaseSessionManager.open();
         await databaseSessionManager.startTransaction();
-        await databaseSessionManager.execute("DELETE FROM VISITORS");
-        await databaseSessionManager.execute("DELETE FROM MEMORIES");
-        await databaseSessionManager.execute("DELETE FROM PATRIMONIES");
-        await databaseSessionManager.execute("DELETE FROM PERSONS");
-        await databaseSessionManager.execute("DELETE FROM TYPESOFPATRIMONIES");
+        await databaseSessionManager.execute("DELETE FROM `eclb_dev`.VISITORS");
+        await databaseSessionManager.execute("DELETE FROM `eclb_dev`.MEMORIES");
+        await databaseSessionManager.execute("DELETE FROM `eclb_dev`.PATRIMONIES");
+        await databaseSessionManager.execute("DELETE FROM `eclb_dev`.PERSONS");
+        await databaseSessionManager.execute("DELETE FROM `eclb_dev`.TYPESOFPATRIMONIES");
 
         await databaseSessionManager.commit();
         await databaseSessionManager.startTransaction();
 
-        await databaseSessionManager.execute("INSERT INTO persons (name) VALUES (?), (?), (?)",
+        await databaseSessionManager.execute("INSERT INTO `eclb_dev`.persons (name) VALUES (?), (?), (?)",
             ['John Doe', "Jane Smith", "Alice Johnson "]);
-        await databaseSessionManager.execute("INSERT INTO typesofpatrimonies (description) VALUES (?), (?), (?)",
+        await databaseSessionManager.execute("INSERT INTO `eclb_dev`.typesofpatrimonies (description) VALUES (?), (?), (?)",
             ["Cultural", "Imaterial", "Natural"]);
 
         await databaseSessionManager.commit();
         await databaseSessionManager.startTransaction();
 
-        Results? results = (await databaseSessionManager.executeQuery("SELECT id  FROM TYPESOFPATRIMONIES")) as Results;
+        Results? results = (await databaseSessionManager.executeQuery("SELECT id  FROM `eclb_dev`.TYPESOFPATRIMONIES")) as Results;
         print(results);
 
 
-        await databaseSessionManager.execute("INSERT INTO patrimonies (name, description, "
+        await databaseSessionManager.execute("INSERT INTO `eclb_dev`.patrimonies (name, description, "
             "unescoClassification, typeOfPatrimonyId, compositePatrimonyId,"
             " hasLocation, country, state, city, district, address, postalCode, longitude, latitude,"
             " altitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?),"
@@ -62,10 +62,10 @@ void main()  {
               'Great Wall of China', 'Temp description', 2, results.elementAt(1)[0], null, 1, 'China', 'Beijing', 'Beijing', 'Temp district', 'Temp address', 100000, 0, 0, 0,
               'Niagara Falls', 'Temp description', 3, results.elementAt(2)[0], null, 1, 'USA', 'New York', 'Niagara Falls', 'Temp district', 'Temp address', 14303, 0, 0, 0]);
 
-        Results? results2 = (await databaseSessionManager.executeQuery("SELECT id  FROM PATRIMONIES")) as Results;
+        Results? results2 = (await databaseSessionManager.executeQuery("SELECT id  FROM `eclb_dev`.PATRIMONIES")) as Results;
         print(results2);
 
-        await databaseSessionManager.execute("INSERT INTO Memories (date, description, patrimonyId) "
+        await databaseSessionManager.execute("INSERT INTO `eclb_dev`.Memories (date, description, patrimonyId) "
             "VALUES (?, ?, ?), (?, ?, ?),(?, ?, ?) ",
             ['2024-01-01', 'Memory of the Colosseum exhibition', results2.elementAt(0)[0],
               '2024-02-01', 'Memory of the Grand Canyon workshop', results2.elementAt(1)[0],
@@ -74,11 +74,10 @@ void main()  {
 
         await databaseSessionManager.commit();
       } catch (e){
-        print("deu merda");
+        print("deu errado em setupall sql");
         await databaseSessionManager.rollback();
         rethrow;
       } finally{
-        print("acabou");
         await databaseSessionManager.close();
       }
     });
@@ -100,17 +99,17 @@ void main()  {
       try {
         await databaseSessionManager.open();
         await databaseSessionManager.startTransaction();
-        await databaseSessionManager.execute("DELETE FROM VISITORS");
+        await databaseSessionManager.execute("DELETE FROM `eclb_dev`.VISITORS");
 
-        Results? results3 = (await databaseSessionManager.executeQuery("SELECT id FROM PERSONS")) as Results;
+        Results? results3 = (await databaseSessionManager.executeQuery("SELECT id FROM `eclb_dev`.PERSONS")) as Results;
         print(results3);
-        Results? results4 = (await databaseSessionManager.executeQuery("SELECT id FROM MEMORIES")) as Results;
+        Results? results4 = (await databaseSessionManager.executeQuery("SELECT id FROM `eclb_dev`.MEMORIES")) as Results;
         print(results4);
 
-        await databaseSessionManager.execute("INSERT INTO VISITORS (PERSONID, ADDRESS, NUMBER, COMPLEMENTO, DISTRICT, CITY, STATE, POSTALCODE, PHONE, EMAIL, MEMORYID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        await databaseSessionManager.execute("INSERT INTO `eclb_dev`.VISITORS (PERSONID, ADDRESS, NUMBER, COMPLEMENTO, DISTRICT, CITY, STATE, POSTALCODE, PHONE, EMAIL, MEMORYID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             [results3.elementAt(0)[0], "rua", 100, "ali", "centro", "bji","rj",
               "100", "2299", "@gmail.com",results4.elementAt(0)[0]]);
-        await databaseSessionManager.execute("INSERT INTO VISITORS (PERSONID, ADDRESS, NUMBER, COMPLEMENTO, DISTRICT, CITY, STATE, POSTALCODE, PHONE, EMAIL, MEMORYID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        await databaseSessionManager.execute("INSERT INTO `eclb_dev`.VISITORS (PERSONID, ADDRESS, NUMBER, COMPLEMENTO, DISTRICT, CITY, STATE, POSTALCODE, PHONE, EMAIL, MEMORYID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             [results3.elementAt(1)[0], "rua", 100, "ali", "centro", "bji","rj",
               "100", "2299", "@gmail3.com",results4.elementAt(1)[0]]);
 
@@ -134,7 +133,7 @@ void main()  {
         await manager.open();
         await manager.startTransaction();
 
-        await manager.execute("DELETE FROM VISITORS");
+        await manager.execute("DELETE FROM `eclb_dev`.VISITORS");
 
         await manager.commit();
       } catch(e) {
@@ -153,9 +152,9 @@ void main()  {
       DatabaseSessionManager sessionManager = AbstractDatabaseSessionManager.getInstance(environmentConfiguration);
       await sessionManager.open();
       await sessionManager.startTransaction();
-      Results? results3 = (await sessionManager.executeQuery("SELECT id FROM PERSONS")) as Results;
+      Results? results3 = (await sessionManager.executeQuery("SELECT id FROM `eclb_dev`.PERSONS")) as Results;
       print(results3);
-      Results? results4 = (await sessionManager.executeQuery("SELECT id FROM MEMORIES")) as Results;
+      Results? results4 = (await sessionManager.executeQuery("SELECT id FROM `eclb_dev`.MEMORIES")) as Results;
       print(results4);
 
       await sessionManager.close();
@@ -243,11 +242,11 @@ void main()  {
         await manager.open();
         await manager.startTransaction();
 
-        await manager.execute("DELETE FROM VISITORS");
-        await manager.execute("DELETE FROM MEMORIES");
-        await manager.execute("DELETE FROM PATRIMONIES");
-        await manager.execute("DELETE FROM PERSONS");
-        await manager.execute("DELETE FROM TYPESOFPATRIMONIES");
+        await manager.execute("DELETE FROM `eclb_dev`.VISITORS");
+        await manager.execute("DELETE FROM `eclb_dev`.MEMORIES");
+        await manager.execute("DELETE FROM `eclb_dev`.PATRIMONIES");
+        await manager.execute("DELETE FROM `eclb_dev`.PERSONS");
+        await manager.execute("DELETE FROM `eclb_dev`.TYPESOFPATRIMONIES");
         print("deletando tudo -------------------------------------------");
 
         await manager.commit();

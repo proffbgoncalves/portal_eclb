@@ -23,14 +23,13 @@ final class MariadbVisitorDAO extends AbstractDAO implements VisitorDAO{
 
   @override
   Future<bool> insert(Object dto) async {
-    print("printando em visitorDAO 1");
+
     bool result = await super.insert(dto);
-    print("printando em visitorDAO 2");
+
     Results? results = (await super.sessionManager.executeQuery("SELECT LAST_INSERT_ID()")) as Results;
-    print("printando em visitorDAO 3");
     dto as Visitor;
     dto.personId = results.first[0];
-    print("printando em visitorDAO ${results.first[0]}");
+    print("printando em mariadbvisitorDAO ${results.first[0]}");
 
     return result;
 
@@ -62,23 +61,22 @@ final class MariadbVisitorDAO extends AbstractDAO implements VisitorDAO{
 
   @override
   Future<Visitor?> findByEmail(String email)  async{
-    print("printando em findbyemail 1");
     if (!this.sessionManager.isOpened) {
       throw new Exception("Conexão com o banco de dados não foi aberta.");
     }
-    print("printando em findbyemail 2");
+
     if (email == "") {
       throw new Exception("Email não pode ser vazio.");
     }
-    print("printando em findbyemail 3");
+
     List statement = (this.dataMapper as VisitorDataMapper).generateFindAllByEmail(email);
-    print("printando em findbyemail 4");
+
     Results results = (await this.sessionManager.executeQuery(statement[0], statement[1])) as Results;
-    print("printando em findbyemail 5");
+
     if (results.length == 0) {
       return null;
     }
-    print("printando em findbyemail 6");
+
     Visitor dto = new VisitorDTO(personId: results.first[0],
         address: results.first[1],
         number:results.first[2],
@@ -91,7 +89,7 @@ final class MariadbVisitorDAO extends AbstractDAO implements VisitorDAO{
         email:results.first[9],
         memoryId:results.first[10]
     );
-    print("printando em findbyemail 7 ${dto.email}");
+    print("printando em mariadbvisitordaofindbyemail 7 ${dto.email}");
     return dto;
   }
 
