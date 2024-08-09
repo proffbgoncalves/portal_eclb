@@ -31,29 +31,35 @@ void main(){
       try {
         await databaseSessionManager.open();
         await databaseSessionManager.startTransaction();
-        await databaseSessionManager.execute("DELETE FROM VISITATIONSTAGES");
-        await databaseSessionManager.execute("DELETE FROM VISITATIONITINERARY");
-        await databaseSessionManager.execute("DELETE FROM COMPOSITEPATRIMONIES");
-        await databaseSessionManager.execute("DELETE FROM PATRIMONIES");
-        await databaseSessionManager.execute("DELETE FROM TYPESOFCOMPOSITEPATRIMONIES");
-        await databaseSessionManager.execute("DELETE FROM TYPESOFPATRIMONIES");
+
+        await databaseSessionManager.execute("DELETE FROM `eclb_dev`.VISITATIONSTAGES");
+        await databaseSessionManager.execute("DELETE FROM `eclb_dev`.VISITATIONITINERARY");
+        await databaseSessionManager.execute("DELETE FROM `eclb_dev`.COMPOSITEPATRIMONIES");
+        await databaseSessionManager.execute("DELETE FROM `eclb_dev`.PATRIMONIES");
+        await databaseSessionManager.execute("DELETE FROM `eclb_dev`.TYPESOFCOMPOSITEPATRIMONIES");
+        await databaseSessionManager.execute("DELETE FROM `eclb_dev`.TYPESOFPATRIMONIES");
+
 
         await databaseSessionManager.commit();
         await databaseSessionManager.startTransaction();
 
-        await databaseSessionManager.execute("INSERT INTO typesofcompositepatrimonies (id, description) VALUES (?, ?), (?, ?), (?, ?)",
+
+        await databaseSessionManager.execute("INSERT INTO `eclb_dev`.typesofcompositepatrimonies (id, description) VALUES (?, ?), (?, ?), (?, ?)",
             [1, "Architectural Complex", 2, 'Historic District', 3, 'Natural Landmark']);
-        await databaseSessionManager.execute("INSERT INTO typesofpatrimonies (description) VALUES (?), (?), (?)",
+        await databaseSessionManager.execute("INSERT INTO `eclb_dev`.typesofpatrimonies (description) VALUES (?), (?), (?)",
+
             ["Cultural", "Imaterial", "Natural"]);
 
         await databaseSessionManager.commit();
         await databaseSessionManager.startTransaction();
 
-        Results? results = (await databaseSessionManager.executeQuery("SELECT id  FROM TYPESOFPATRIMONIES")) as Results;
+
+        Results? results = (await databaseSessionManager.executeQuery("SELECT id  FROM `eclb_dev`.TYPESOFPATRIMONIES")) as Results;
         print(results);
 
 
-        await databaseSessionManager.execute("INSERT INTO patrimonies (name, description, "
+        await databaseSessionManager.execute("INSERT INTO `eclb_dev`.patrimonies (name, description, "
+
             "unescoClassification, typeOfPatrimonyId, compositePatrimonyId,"
             " hasLocation, country, state, city, district, address, postalCode, longitude, latitude,"
             " altitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?),"
@@ -62,25 +68,31 @@ void main(){
               'Great Wall of China', 'Temp description', 2, results.elementAt(1)[0], null, 1, 'China', 'Beijing', 'Beijing', 'Temp district', 'Temp address', 100000, 0, 0, 0,
               'Niagara Falls', 'Temp description', 3, results.elementAt(2)[0], null, 1, 'USA', 'New York', 'Niagara Falls', 'Temp district', 'Temp address', 14303, 0, 0, 0]);
 
-        Results? results2 = (await databaseSessionManager.executeQuery("SELECT id  FROM PATRIMONIES")) as Results;
-        Results? results22 = (await databaseSessionManager.executeQuery("SELECT id  FROM typesofcompositepatrimonies")) as Results;
+
+        Results? results2 = (await databaseSessionManager.executeQuery("SELECT id  FROM `eclb_dev`.PATRIMONIES")) as Results;
+        Results? results22 = (await databaseSessionManager.executeQuery("SELECT id  FROM `eclb_dev`.typesofcompositepatrimonies")) as Results;
 
 
-        await databaseSessionManager.execute("INSERT INTO compositepatrimonies ( patrimonyId, typeofcompositepatrimonyId) "
+        await databaseSessionManager.execute("INSERT INTO `eclb_dev`.compositepatrimonies ( patrimonyId, typeofcompositepatrimonyId) "
+
             "VALUES (?, ?), (?, ?),(?, ?) ",
             [ results2.elementAt(0)[0], results22.elementAt(0)[0],
               results2.elementAt(1)[0], results22.elementAt(1)[0],
                results2.elementAt(2)[0], results22.elementAt(2)[0]]);
 
-        Results? results3 = (await databaseSessionManager.executeQuery("SELECT patrimonyid  FROM compositepatrimonies")) as Results;
-        await databaseSessionManager.execute("INSERT INTO visitationitinerary ( description, compositypatrimonyId, durattion) "
+
+        Results? results3 = (await databaseSessionManager.executeQuery("SELECT patrimonyid  FROM `eclb_dev`.compositepatrimonies")) as Results;
+        await databaseSessionManager.execute("INSERT INTO `eclb_dev`.visitationitinerary ( description, compositypatrimonyId, durattion) "
+
             "VALUES (?, ?, ?), (?, ?, ?),(?, ?, ?) ",
             [ 'Colosseum Tour', results3.elementAt(0)[0], '02:00:00',
               'Grand Canyon Visit', results3.elementAt(1)[0], '03:00:00',
               'Machu Picchu Exploration', results3.elementAt(2)[0], '04:00:00']);
         await databaseSessionManager.commit();
       } catch (e){
-        print("deu merda em setupall");
+
+        print("deu erro em setupall sql");
+
         await databaseSessionManager.rollback();
         rethrow;
       } finally{
@@ -105,12 +117,14 @@ void main(){
       try {
         await databaseSessionManager.open();
         await databaseSessionManager.startTransaction();
-        await databaseSessionManager.execute("DELETE FROM visitationStages");
+
+        await databaseSessionManager.execute("DELETE FROM `eclb_dev`.visitationStages");
 
 
-        Results? results4 = (await databaseSessionManager.executeQuery("SELECT id FROM visitationitinerary")) as Results;
+        Results? results4 = (await databaseSessionManager.executeQuery("SELECT id FROM `eclb_dev`.visitationitinerary")) as Results;
 
-        await databaseSessionManager.execute("INSERT INTO visitationstages ( name, visitationitineraryId) "
+        await databaseSessionManager.execute("INSERT INTO `eclb_dev`.visitationstages ( name, visitationitineraryId) "
+
             "VALUES (?, ?), (?, ?) ",
             [ 'Stage 1', results4.elementAt(0)[0],
               'Stage 2', results4.elementAt(1)[0],]);
@@ -136,7 +150,9 @@ void main(){
         await manager.open();
         await manager.startTransaction();
 
-        await manager.execute("DELETE FROM VISITATIONSTAGES");
+
+        await manager.execute("DELETE FROM `eclb_dev`.VISITATIONSTAGES");
+
 
         await manager.commit();
       } catch(e) {
@@ -154,12 +170,14 @@ void main(){
         await manager.open();
         await manager.startTransaction();
 
-         await manager.execute("DELETE FROM VISITATIONSTAGES");
-        await manager.execute("DELETE FROM VISITATIONITINERARY");
-        await manager.execute("DELETE FROM COMPOSITEPATRIMONIES");
-        await manager.execute("DELETE FROM PATRIMONIES");
-        await manager.execute("DELETE FROM TYPESOFCOMPOSITEPATRIMONIES");
-        await manager.execute("DELETE FROM TYPESOFPATRIMONIES");
+
+         await manager.execute("DELETE FROM `eclb_dev`.VISITATIONSTAGES");
+        await manager.execute("DELETE FROM `eclb_dev`.VISITATIONITINERARY");
+        await manager.execute("DELETE FROM `eclb_dev`.COMPOSITEPATRIMONIES");
+        await manager.execute("DELETE FROM `eclb_dev`.PATRIMONIES");
+        await manager.execute("DELETE FROM `eclb_dev`.TYPESOFCOMPOSITEPATRIMONIES");
+        await manager.execute("DELETE FROM `eclb_dev`.TYPESOFPATRIMONIES");
+
         print("deletando tudo -------------------------------------------");
 
         await manager.commit();
@@ -181,7 +199,9 @@ void main(){
     DatabaseSessionManager sessionManager = AbstractDatabaseSessionManager.getInstance(environmentConfiguration);
     await sessionManager.open();
     await sessionManager.startTransaction();
-    Results? results4 = (await sessionManager.executeQuery("SELECT id FROM visitationitinerary")) as Results;
+
+    Results? results4 = (await sessionManager.executeQuery("SELECT id FROM `eclb_dev`.visitationitinerary")) as Results;
+
 
     await sessionManager.close();
 
@@ -218,7 +238,9 @@ void main(){
       await sessionManager.open();
       await sessionManager.startTransaction();
 
-    Results? results5 = (await sessionManager.executeQuery("SELECT id FROM visitationstages")) as Results;
+
+    Results? results5 = (await sessionManager.executeQuery("SELECT id FROM `eclb_dev`.visitationstages")) as Results;
+
 
 
       // Obter um VisitationStage pelo ID
@@ -243,7 +265,9 @@ void main(){
     try {
       await sessionManager.open();
       await sessionManager.startTransaction();
-      Results? results5 = (await sessionManager.executeQuery("SELECT id FROM visitationstages")) as Results;
+
+      Results? results5 = (await sessionManager.executeQuery("SELECT id FROM `eclb_dev`.visitationstages")) as Results;
+
 
       // Obter um VisitationStage pelo ID
       VisitationStageEntityObject? entity = await VisitationStageEntityObjectImpl.getById(sessionManager, environmentConfiguration, results5.elementAt(1)[0]);

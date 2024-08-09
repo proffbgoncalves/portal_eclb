@@ -7,15 +7,23 @@ import 'package:portal_eclb/resource/dao/mariadb/patrimony/person/mariadb_notabl
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/person/mariadb_type_of_acting_dao.dart';
 
 import 'package:portal_eclb/resource/dao/mariadb/person/visitor/mariadb_visitor_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_stage_dao.dart';
+
+
+import 'package:portal_eclb/resource/dao/mariadb/person/visitor/mariadb_visitor_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_element_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_stage_dao.dart';
+
 
 import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/historic/type_of_patrimony_historic_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/media/type_of_media_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/news/patrimony_news_media_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
+
+
 import 'package:portal_eclb/resource/dao/patrimony/person/acting_dao.dart';
+
 import 'package:portal_eclb/resource/dao/patrimony/person/notable_person_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/person/type_of_acting_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/quiz/quiz_dao.dart';
@@ -83,6 +91,28 @@ final class MariaDBDAOFactory extends AbstractDAOFactory {
   TypeOfEventDAO createTypeOfEventDAO(DatabaseSessionManager databaseSessionManager) {
     // TODO: implement createTypeOfEventDAO
     throw UnimplementedError();
+  }
+  @override
+  VisitorDAO createVisitorDAO(DatabaseSessionManager databaseSessionManager) {
+    VisitorDataMapper dataMapper = new MariadbVisitorDataMapper();
+
+    MariadbVisitorDAO visitorDAO = new MariadbVisitorDAO(databaseSessionManager, dataMapper);
+    return visitorDAO;
+  }
+
+  @override
+  VisitationStageDAO createVisitationStageDAO(DatabaseSessionManager databaseSessionManager) {
+    VisitationStageDataMapper dataMapper = new MariadbVisitationStageDataMapper();
+
+    MariadbVisitationStageDao visitation = new MariadbVisitationStageDao(databaseSessionManager, dataMapper);
+   return visitation;
+  }
+
+  @override
+  NotablePersonDAO createNotablePersonDAO(DatabaseSessionManager databaseSessionManager) {
+    NotablePersonDataMapper dataMapper = new MariadbNotablePersonsDataMapper();
+    MariadbNotablePersonDAO dao = new MariadbNotablePersonDAO(databaseSessionManager, dataMapper);
+    return dao;
   }
 
   @override
