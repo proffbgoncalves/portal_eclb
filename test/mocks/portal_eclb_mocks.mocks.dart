@@ -3,14 +3,16 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i15;
+import 'dart:async' as _i18;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i16;
+import 'package:mockito/src/dummies.dart' as _i19;
 import 'package:portal_eclb/model/patrimony/news/patrimony_news_media.dart'
-    as _i14;
-import 'package:portal_eclb/model/person/visitor/visitor.dart' as _i18;
-import 'package:portal_eclb/resource/dao/dao_factory.dart' as _i17;
+    as _i17;
+import 'package:portal_eclb/model/person/visitor/visitor.dart' as _i21;
+import 'package:portal_eclb/resource/dao/dao_factory.dart' as _i20;
+import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_element_dao.dart'
+    as _i15;
 import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_stage_dao.dart'
     as _i12;
 import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart'
@@ -22,11 +24,15 @@ import 'package:portal_eclb/resource/dao/patrimony/media/type_of_media_dao.dart'
 import 'package:portal_eclb/resource/dao/patrimony/news/patrimony_news_media_dao.dart'
     as _i8;
 import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart' as _i4;
+import 'package:portal_eclb/resource/dao/patrimony/person/acting_dao.dart'
+    as _i14;
 import 'package:portal_eclb/resource/dao/patrimony/person/notable_person_dao.dart'
     as _i13;
 import 'package:portal_eclb/resource/dao/patrimony/person/type_of_acting_dao.dart'
     as _i5;
 import 'package:portal_eclb/resource/dao/patrimony/quiz/quiz_dao.dart' as _i10;
+import 'package:portal_eclb/resource/dao/patrimony/simple/type_of_simple_patrimony_dao.dart'
+    as _i16;
 import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart'
     as _i3;
 import 'package:portal_eclb/resource/dao/person/visitor/visitor_dao.dart'
@@ -186,9 +192,41 @@ class _FakeNotablePersonDAO_12 extends _i1.SmartFake
         );
 }
 
-class _FakePatrimonyNewsMedia_13 extends _i1.SmartFake
-    implements _i14.PatrimonyNewsMedia {
-  _FakePatrimonyNewsMedia_13(
+class _FakeActingDAO_13 extends _i1.SmartFake implements _i14.ActingDAO {
+  _FakeActingDAO_13(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeVisitationElementDAO_14 extends _i1.SmartFake
+    implements _i15.VisitationElementDAO {
+  _FakeVisitationElementDAO_14(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeTypeOfSimplePatrimonyDAO_15 extends _i1.SmartFake
+    implements _i16.TypeOfSimplePatrimonyDAO {
+  _FakeTypeOfSimplePatrimonyDAO_15(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakePatrimonyNewsMedia_16 extends _i1.SmartFake
+    implements _i17.PatrimonyNewsMedia {
+  _FakePatrimonyNewsMedia_16(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -219,25 +257,25 @@ class MockDatabaseSessionManager extends _i1.Mock
       ) as bool);
 
   @override
-  _i15.Future<bool> open() => (super.noSuchMethod(
+  _i18.Future<bool> open() => (super.noSuchMethod(
         Invocation.method(
           #open,
           [],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<dynamic> close() => (super.noSuchMethod(
+  _i18.Future<dynamic> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i15.Future<dynamic>.value(),
-      ) as _i15.Future<dynamic>);
+        returnValue: _i18.Future<dynamic>.value(),
+      ) as _i18.Future<dynamic>);
 
   @override
-  _i15.Future<Object> execute(
+  _i18.Future<Object> execute(
     String? sql, [
     List<dynamic>? values,
   ]) =>
@@ -249,7 +287,7 @@ class MockDatabaseSessionManager extends _i1.Mock
             values,
           ],
         ),
-        returnValue: _i15.Future<Object>.value(_FakeObject_0(
+        returnValue: _i18.Future<Object>.value(_FakeObject_0(
           this,
           Invocation.method(
             #execute,
@@ -259,10 +297,10 @@ class MockDatabaseSessionManager extends _i1.Mock
             ],
           ),
         )),
-      ) as _i15.Future<Object>);
+      ) as _i18.Future<Object>);
 
   @override
-  _i15.Future<Iterable<dynamic>?> executeQuery(
+  _i18.Future<Iterable<dynamic>?> executeQuery(
     String? sql, [
     List<Object>? values,
   ]) =>
@@ -274,26 +312,26 @@ class MockDatabaseSessionManager extends _i1.Mock
             values,
           ],
         ),
-        returnValue: _i15.Future<Iterable<dynamic>?>.value(),
-      ) as _i15.Future<Iterable<dynamic>?>);
+        returnValue: _i18.Future<Iterable<dynamic>?>.value(),
+      ) as _i18.Future<Iterable<dynamic>?>);
 
   @override
-  _i15.Future<bool> commit() => (super.noSuchMethod(
+  _i18.Future<bool> commit() => (super.noSuchMethod(
         Invocation.method(
           #commit,
           [],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<dynamic> rollback() => (super.noSuchMethod(
+  _i18.Future<dynamic> rollback() => (super.noSuchMethod(
         Invocation.method(
           #rollback,
           [],
         ),
-        returnValue: _i15.Future<dynamic>.value(),
-      ) as _i15.Future<dynamic>);
+        returnValue: _i18.Future<dynamic>.value(),
+      ) as _i18.Future<dynamic>);
 
   @override
   String getType() => (super.noSuchMethod(
@@ -301,7 +339,7 @@ class MockDatabaseSessionManager extends _i1.Mock
           #getType,
           [],
         ),
-        returnValue: _i16.dummyValue<String>(
+        returnValue: _i19.dummyValue<String>(
           this,
           Invocation.method(
             #getType,
@@ -311,13 +349,13 @@ class MockDatabaseSessionManager extends _i1.Mock
       ) as String);
 
   @override
-  _i15.Future<dynamic> startTransaction() => (super.noSuchMethod(
+  _i18.Future<dynamic> startTransaction() => (super.noSuchMethod(
         Invocation.method(
           #startTransaction,
           [],
         ),
-        returnValue: _i15.Future<dynamic>.value(),
-      ) as _i15.Future<dynamic>);
+        returnValue: _i18.Future<dynamic>.value(),
+      ) as _i18.Future<dynamic>);
 
   @override
   _i2.DatabaseSessionManager clone() => (super.noSuchMethod(
@@ -338,7 +376,7 @@ class MockDatabaseSessionManager extends _i1.Mock
 /// A class which mocks [DAOFactory].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDAOFactory extends _i1.Mock implements _i17.DAOFactory {
+class MockDAOFactory extends _i1.Mock implements _i20.DAOFactory {
   MockDAOFactory() {
     _i1.throwOnMissingStub(this);
   }
@@ -529,6 +567,57 @@ class MockDAOFactory extends _i1.Mock implements _i17.DAOFactory {
           ),
         ),
       ) as _i13.NotablePersonDAO);
+
+  @override
+  _i14.ActingDAO createActingDAO(
+          _i2.DatabaseSessionManager? databaseSessionManager) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createActingDAO,
+          [databaseSessionManager],
+        ),
+        returnValue: _FakeActingDAO_13(
+          this,
+          Invocation.method(
+            #createActingDAO,
+            [databaseSessionManager],
+          ),
+        ),
+      ) as _i14.ActingDAO);
+
+  @override
+  _i15.VisitationElementDAO createVisitationElementDAO(
+          _i2.DatabaseSessionManager? databaseSessionManager) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createVisitationElementDAO,
+          [databaseSessionManager],
+        ),
+        returnValue: _FakeVisitationElementDAO_14(
+          this,
+          Invocation.method(
+            #createVisitationElementDAO,
+            [databaseSessionManager],
+          ),
+        ),
+      ) as _i15.VisitationElementDAO);
+
+  @override
+  _i16.TypeOfSimplePatrimonyDAO createTypeOfSimplePatrimonyDAO(
+          _i2.DatabaseSessionManager? databaseSessionManager) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #createTypeOfSimplePatrimonyDAO,
+          [databaseSessionManager],
+        ),
+        returnValue: _FakeTypeOfSimplePatrimonyDAO_15(
+          this,
+          Invocation.method(
+            #createTypeOfSimplePatrimonyDAO,
+            [databaseSessionManager],
+          ),
+        ),
+      ) as _i16.TypeOfSimplePatrimonyDAO);
 }
 
 /// A class which mocks [TypeOfEventDAO].
@@ -540,43 +629,43 @@ class MockTypeOfEventDAO extends _i1.Mock implements _i7.TypeOfEventDAO {
   }
 
   @override
-  _i15.Future<bool> insert(Object? dto) => (super.noSuchMethod(
+  _i18.Future<bool> insert(Object? dto) => (super.noSuchMethod(
         Invocation.method(
           #insert,
           [dto],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<bool> update(Object? dto) => (super.noSuchMethod(
+  _i18.Future<bool> update(Object? dto) => (super.noSuchMethod(
         Invocation.method(
           #update,
           [dto],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<bool> delete(Object? id) => (super.noSuchMethod(
+  _i18.Future<bool> delete(Object? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<Object?> findById(Object? id) => (super.noSuchMethod(
+  _i18.Future<Object?> findById(Object? id) => (super.noSuchMethod(
         Invocation.method(
           #findById,
           [id],
         ),
-        returnValue: _i15.Future<Object?>.value(),
-      ) as _i15.Future<Object?>);
+        returnValue: _i18.Future<Object?>.value(),
+      ) as _i18.Future<Object?>);
 
   @override
-  _i15.Future<List<dynamic>> findAll([
+  _i18.Future<List<dynamic>> findAll([
     int? limit,
     int? offset,
   ]) =>
@@ -588,17 +677,17 @@ class MockTypeOfEventDAO extends _i1.Mock implements _i7.TypeOfEventDAO {
             offset,
           ],
         ),
-        returnValue: _i15.Future<List<dynamic>>.value(<dynamic>[]),
-      ) as _i15.Future<List<dynamic>>);
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
 
   @override
-  _i15.Future<int> count() => (super.noSuchMethod(
+  _i18.Future<int> count() => (super.noSuchMethod(
         Invocation.method(
           #count,
           [],
         ),
-        returnValue: _i15.Future<int>.value(0),
-      ) as _i15.Future<int>);
+        returnValue: _i18.Future<int>.value(0),
+      ) as _i18.Future<int>);
 }
 
 /// A class which mocks [QuizDAO].
@@ -617,43 +706,43 @@ class MockQuizDAO extends _i1.Mock implements _i10.QuizDAO {
       ));
 
   @override
-  _i15.Future<bool> insert(Object? dto) => (super.noSuchMethod(
+  _i18.Future<bool> insert(Object? dto) => (super.noSuchMethod(
         Invocation.method(
           #insert,
           [dto],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<bool> update(Object? dto) => (super.noSuchMethod(
+  _i18.Future<bool> update(Object? dto) => (super.noSuchMethod(
         Invocation.method(
           #update,
           [dto],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<bool> delete(Object? id) => (super.noSuchMethod(
+  _i18.Future<bool> delete(Object? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<Object?> findById(Object? id) => (super.noSuchMethod(
+  _i18.Future<Object?> findById(Object? id) => (super.noSuchMethod(
         Invocation.method(
           #findById,
           [id],
         ),
-        returnValue: _i15.Future<Object?>.value(),
-      ) as _i15.Future<Object?>);
+        returnValue: _i18.Future<Object?>.value(),
+      ) as _i18.Future<Object?>);
 
   @override
-  _i15.Future<List<dynamic>> findAll([
+  _i18.Future<List<dynamic>> findAll([
     int? limit,
     int? offset,
   ]) =>
@@ -665,17 +754,17 @@ class MockQuizDAO extends _i1.Mock implements _i10.QuizDAO {
             offset,
           ],
         ),
-        returnValue: _i15.Future<List<dynamic>>.value(<dynamic>[]),
-      ) as _i15.Future<List<dynamic>>);
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
 
   @override
-  _i15.Future<int> count() => (super.noSuchMethod(
+  _i18.Future<int> count() => (super.noSuchMethod(
         Invocation.method(
           #count,
           [],
         ),
-        returnValue: _i15.Future<int>.value(0),
-      ) as _i15.Future<int>);
+        returnValue: _i18.Future<int>.value(0),
+      ) as _i18.Future<int>);
 }
 
 /// A class which mocks [PatrimonyNewsMediaDAO].
@@ -688,60 +777,60 @@ class MockPatrimonyNewsMediaDAO extends _i1.Mock
   }
 
   @override
-  _i15.Future<_i14.PatrimonyNewsMedia> findByDescription(String? description) =>
+  _i18.Future<_i17.PatrimonyNewsMedia> findByDescription(String? description) =>
       (super.noSuchMethod(
         Invocation.method(
           #findByDescription,
           [description],
         ),
-        returnValue: _i15.Future<_i14.PatrimonyNewsMedia>.value(
-            _FakePatrimonyNewsMedia_13(
+        returnValue: _i18.Future<_i17.PatrimonyNewsMedia>.value(
+            _FakePatrimonyNewsMedia_16(
           this,
           Invocation.method(
             #findByDescription,
             [description],
           ),
         )),
-      ) as _i15.Future<_i14.PatrimonyNewsMedia>);
+      ) as _i18.Future<_i17.PatrimonyNewsMedia>);
 
   @override
-  _i15.Future<bool> insert(Object? dto) => (super.noSuchMethod(
+  _i18.Future<bool> insert(Object? dto) => (super.noSuchMethod(
         Invocation.method(
           #insert,
           [dto],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<bool> update(Object? dto) => (super.noSuchMethod(
+  _i18.Future<bool> update(Object? dto) => (super.noSuchMethod(
         Invocation.method(
           #update,
           [dto],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<bool> delete(Object? id) => (super.noSuchMethod(
+  _i18.Future<bool> delete(Object? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<Object?> findById(Object? id) => (super.noSuchMethod(
+  _i18.Future<Object?> findById(Object? id) => (super.noSuchMethod(
         Invocation.method(
           #findById,
           [id],
         ),
-        returnValue: _i15.Future<Object?>.value(),
-      ) as _i15.Future<Object?>);
+        returnValue: _i18.Future<Object?>.value(),
+      ) as _i18.Future<Object?>);
 
   @override
-  _i15.Future<List<dynamic>> findAll([
+  _i18.Future<List<dynamic>> findAll([
     int? limit,
     int? offset,
   ]) =>
@@ -753,17 +842,17 @@ class MockPatrimonyNewsMediaDAO extends _i1.Mock
             offset,
           ],
         ),
-        returnValue: _i15.Future<List<dynamic>>.value(<dynamic>[]),
-      ) as _i15.Future<List<dynamic>>);
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
 
   @override
-  _i15.Future<int> count() => (super.noSuchMethod(
+  _i18.Future<int> count() => (super.noSuchMethod(
         Invocation.method(
           #count,
           [],
         ),
-        returnValue: _i15.Future<int>.value(0),
-      ) as _i15.Future<int>);
+        returnValue: _i18.Future<int>.value(0),
+      ) as _i18.Future<int>);
 }
 
 /// A class which mocks [TypeOfPatrimonyHistoricDAO].
@@ -783,43 +872,43 @@ class MockTypeOfPatrimonyHistoricDAO extends _i1.Mock
       ));
 
   @override
-  _i15.Future<bool> insert(Object? dto) => (super.noSuchMethod(
+  _i18.Future<bool> insert(Object? dto) => (super.noSuchMethod(
         Invocation.method(
           #insert,
           [dto],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<bool> update(Object? dto) => (super.noSuchMethod(
+  _i18.Future<bool> update(Object? dto) => (super.noSuchMethod(
         Invocation.method(
           #update,
           [dto],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<bool> delete(Object? id) => (super.noSuchMethod(
+  _i18.Future<bool> delete(Object? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<Object?> findById(Object? id) => (super.noSuchMethod(
+  _i18.Future<Object?> findById(Object? id) => (super.noSuchMethod(
         Invocation.method(
           #findById,
           [id],
         ),
-        returnValue: _i15.Future<Object?>.value(),
-      ) as _i15.Future<Object?>);
+        returnValue: _i18.Future<Object?>.value(),
+      ) as _i18.Future<Object?>);
 
   @override
-  _i15.Future<List<dynamic>> findAll([
+  _i18.Future<List<dynamic>> findAll([
     int? limit,
     int? offset,
   ]) =>
@@ -831,17 +920,17 @@ class MockTypeOfPatrimonyHistoricDAO extends _i1.Mock
             offset,
           ],
         ),
-        returnValue: _i15.Future<List<dynamic>>.value(<dynamic>[]),
-      ) as _i15.Future<List<dynamic>>);
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
 
   @override
-  _i15.Future<int> count() => (super.noSuchMethod(
+  _i18.Future<int> count() => (super.noSuchMethod(
         Invocation.method(
           #count,
           [],
         ),
-        returnValue: _i15.Future<int>.value(0),
-      ) as _i15.Future<int>);
+        returnValue: _i18.Future<int>.value(0),
+      ) as _i18.Future<int>);
 }
 
 /// A class which mocks [VisitorDAO].
@@ -853,151 +942,151 @@ class MockVisitorDAO extends _i1.Mock implements _i11.VisitorDAO {
   }
 
   @override
-  _i15.Future<_i18.Visitor?> findByPersonId(int? personId) =>
+  _i18.Future<_i21.Visitor?> findByPersonId(int? personId) =>
       (super.noSuchMethod(
         Invocation.method(
           #findByPersonId,
           [personId],
         ),
-        returnValue: _i15.Future<_i18.Visitor?>.value(),
-      ) as _i15.Future<_i18.Visitor?>);
+        returnValue: _i18.Future<_i21.Visitor?>.value(),
+      ) as _i18.Future<_i21.Visitor?>);
 
   @override
-  _i15.Future<List<dynamic>> findAllByAddress(String? address) =>
+  _i18.Future<List<dynamic>> findAllByAddress(String? address) =>
       (super.noSuchMethod(
         Invocation.method(
           #findAllByAddress,
           [address],
         ),
-        returnValue: _i15.Future<List<dynamic>>.value(<dynamic>[]),
-      ) as _i15.Future<List<dynamic>>);
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
 
   @override
-  _i15.Future<List<dynamic>> findAllByNumber(int? number) =>
+  _i18.Future<List<dynamic>> findAllByNumber(int? number) =>
       (super.noSuchMethod(
         Invocation.method(
           #findAllByNumber,
           [number],
         ),
-        returnValue: _i15.Future<List<dynamic>>.value(<dynamic>[]),
-      ) as _i15.Future<List<dynamic>>);
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
 
   @override
-  _i15.Future<List<dynamic>> findAllByComplemento(String? complemento) =>
+  _i18.Future<List<dynamic>> findAllByComplemento(String? complemento) =>
       (super.noSuchMethod(
         Invocation.method(
           #findAllByComplemento,
           [complemento],
         ),
-        returnValue: _i15.Future<List<dynamic>>.value(<dynamic>[]),
-      ) as _i15.Future<List<dynamic>>);
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
 
   @override
-  _i15.Future<List<dynamic>> findAllByDistrict(String? district) =>
+  _i18.Future<List<dynamic>> findAllByDistrict(String? district) =>
       (super.noSuchMethod(
         Invocation.method(
           #findAllByDistrict,
           [district],
         ),
-        returnValue: _i15.Future<List<dynamic>>.value(<dynamic>[]),
-      ) as _i15.Future<List<dynamic>>);
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
 
   @override
-  _i15.Future<List<dynamic>> findAllByCity(String? city) => (super.noSuchMethod(
+  _i18.Future<List<dynamic>> findAllByCity(String? city) => (super.noSuchMethod(
         Invocation.method(
           #findAllByCity,
           [city],
         ),
-        returnValue: _i15.Future<List<dynamic>>.value(<dynamic>[]),
-      ) as _i15.Future<List<dynamic>>);
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
 
   @override
-  _i15.Future<List<dynamic>> findAllByState(String? state) =>
+  _i18.Future<List<dynamic>> findAllByState(String? state) =>
       (super.noSuchMethod(
         Invocation.method(
           #findAllByState,
           [state],
         ),
-        returnValue: _i15.Future<List<dynamic>>.value(<dynamic>[]),
-      ) as _i15.Future<List<dynamic>>);
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
 
   @override
-  _i15.Future<List<dynamic>> findAllByPostalCode(String? postalCode) =>
+  _i18.Future<List<dynamic>> findAllByPostalCode(String? postalCode) =>
       (super.noSuchMethod(
         Invocation.method(
           #findAllByPostalCode,
           [postalCode],
         ),
-        returnValue: _i15.Future<List<dynamic>>.value(<dynamic>[]),
-      ) as _i15.Future<List<dynamic>>);
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
 
   @override
-  _i15.Future<List<dynamic>> findAllByPhone(String? phone) =>
+  _i18.Future<List<dynamic>> findAllByPhone(String? phone) =>
       (super.noSuchMethod(
         Invocation.method(
           #findAllByPhone,
           [phone],
         ),
-        returnValue: _i15.Future<List<dynamic>>.value(<dynamic>[]),
-      ) as _i15.Future<List<dynamic>>);
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
 
   @override
-  _i15.Future<_i18.Visitor?> findByEmail(String? email) => (super.noSuchMethod(
+  _i18.Future<_i21.Visitor?> findByEmail(String? email) => (super.noSuchMethod(
         Invocation.method(
           #findByEmail,
           [email],
         ),
-        returnValue: _i15.Future<_i18.Visitor?>.value(),
-      ) as _i15.Future<_i18.Visitor?>);
+        returnValue: _i18.Future<_i21.Visitor?>.value(),
+      ) as _i18.Future<_i21.Visitor?>);
 
   @override
-  _i15.Future<_i18.Visitor?> findByMemoryId(int? memoryId) =>
+  _i18.Future<_i21.Visitor?> findByMemoryId(int? memoryId) =>
       (super.noSuchMethod(
         Invocation.method(
           #findByMemoryId,
           [memoryId],
         ),
-        returnValue: _i15.Future<_i18.Visitor?>.value(),
-      ) as _i15.Future<_i18.Visitor?>);
+        returnValue: _i18.Future<_i21.Visitor?>.value(),
+      ) as _i18.Future<_i21.Visitor?>);
 
   @override
-  _i15.Future<bool> insert(Object? dto) => (super.noSuchMethod(
+  _i18.Future<bool> insert(Object? dto) => (super.noSuchMethod(
         Invocation.method(
           #insert,
           [dto],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<bool> update(Object? dto) => (super.noSuchMethod(
+  _i18.Future<bool> update(Object? dto) => (super.noSuchMethod(
         Invocation.method(
           #update,
           [dto],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<bool> delete(Object? id) => (super.noSuchMethod(
+  _i18.Future<bool> delete(Object? id) => (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
         ),
-        returnValue: _i15.Future<bool>.value(false),
-      ) as _i15.Future<bool>);
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
 
   @override
-  _i15.Future<Object?> findById(Object? id) => (super.noSuchMethod(
+  _i18.Future<Object?> findById(Object? id) => (super.noSuchMethod(
         Invocation.method(
           #findById,
           [id],
         ),
-        returnValue: _i15.Future<Object?>.value(),
-      ) as _i15.Future<Object?>);
+        returnValue: _i18.Future<Object?>.value(),
+      ) as _i18.Future<Object?>);
 
   @override
-  _i15.Future<List<dynamic>> findAll([
+  _i18.Future<List<dynamic>> findAll([
     int? limit,
     int? offset,
   ]) =>
@@ -1009,15 +1098,279 @@ class MockVisitorDAO extends _i1.Mock implements _i11.VisitorDAO {
             offset,
           ],
         ),
-        returnValue: _i15.Future<List<dynamic>>.value(<dynamic>[]),
-      ) as _i15.Future<List<dynamic>>);
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
 
   @override
-  _i15.Future<int> count() => (super.noSuchMethod(
+  _i18.Future<int> count() => (super.noSuchMethod(
         Invocation.method(
           #count,
           [],
         ),
-        returnValue: _i15.Future<int>.value(0),
-      ) as _i15.Future<int>);
+        returnValue: _i18.Future<int>.value(0),
+      ) as _i18.Future<int>);
+}
+
+/// A class which mocks [ActingDAO].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockActingDAO extends _i1.Mock implements _i14.ActingDAO {
+  MockActingDAO() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i18.Future<_i14.ActingDAO> findByDescription(String? description) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #findByDescription,
+          [description],
+        ),
+        returnValue: _i18.Future<_i14.ActingDAO>.value(_FakeActingDAO_13(
+          this,
+          Invocation.method(
+            #findByDescription,
+            [description],
+          ),
+        )),
+      ) as _i18.Future<_i14.ActingDAO>);
+
+  @override
+  _i18.Future<bool> insert(Object? dto) => (super.noSuchMethod(
+        Invocation.method(
+          #insert,
+          [dto],
+        ),
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
+
+  @override
+  _i18.Future<bool> update(Object? dto) => (super.noSuchMethod(
+        Invocation.method(
+          #update,
+          [dto],
+        ),
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
+
+  @override
+  _i18.Future<bool> delete(Object? id) => (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [id],
+        ),
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
+
+  @override
+  _i18.Future<Object?> findById(Object? id) => (super.noSuchMethod(
+        Invocation.method(
+          #findById,
+          [id],
+        ),
+        returnValue: _i18.Future<Object?>.value(),
+      ) as _i18.Future<Object?>);
+
+  @override
+  _i18.Future<List<dynamic>> findAll([
+    int? limit,
+    int? offset,
+  ]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #findAll,
+          [
+            limit,
+            offset,
+          ],
+        ),
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
+
+  @override
+  _i18.Future<int> count() => (super.noSuchMethod(
+        Invocation.method(
+          #count,
+          [],
+        ),
+        returnValue: _i18.Future<int>.value(0),
+      ) as _i18.Future<int>);
+}
+
+/// A class which mocks [TypeOfSimplePatrimonyDAO].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTypeOfSimplePatrimonyDAO extends _i1.Mock
+    implements _i16.TypeOfSimplePatrimonyDAO {
+  MockTypeOfSimplePatrimonyDAO() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i18.Future<_i16.TypeOfSimplePatrimonyDAO> findByDescription(
+          String? description) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #findByDescription,
+          [description],
+        ),
+        returnValue: _i18.Future<_i16.TypeOfSimplePatrimonyDAO>.value(
+            _FakeTypeOfSimplePatrimonyDAO_15(
+          this,
+          Invocation.method(
+            #findByDescription,
+            [description],
+          ),
+        )),
+      ) as _i18.Future<_i16.TypeOfSimplePatrimonyDAO>);
+
+  @override
+  _i18.Future<bool> insert(Object? dto) => (super.noSuchMethod(
+        Invocation.method(
+          #insert,
+          [dto],
+        ),
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
+
+  @override
+  _i18.Future<bool> update(Object? dto) => (super.noSuchMethod(
+        Invocation.method(
+          #update,
+          [dto],
+        ),
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
+
+  @override
+  _i18.Future<bool> delete(Object? id) => (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [id],
+        ),
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
+
+  @override
+  _i18.Future<Object?> findById(Object? id) => (super.noSuchMethod(
+        Invocation.method(
+          #findById,
+          [id],
+        ),
+        returnValue: _i18.Future<Object?>.value(),
+      ) as _i18.Future<Object?>);
+
+  @override
+  _i18.Future<List<dynamic>> findAll([
+    int? limit,
+    int? offset,
+  ]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #findAll,
+          [
+            limit,
+            offset,
+          ],
+        ),
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
+
+  @override
+  _i18.Future<int> count() => (super.noSuchMethod(
+        Invocation.method(
+          #count,
+          [],
+        ),
+        returnValue: _i18.Future<int>.value(0),
+      ) as _i18.Future<int>);
+}
+
+/// A class which mocks [VisitationElementDAO].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockVisitationElementDAO extends _i1.Mock
+    implements _i15.VisitationElementDAO {
+  MockVisitationElementDAO() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i18.Future<_i15.VisitationElementDAO> findByDescription(
+          String? description) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #findByDescription,
+          [description],
+        ),
+        returnValue: _i18.Future<_i15.VisitationElementDAO>.value(
+            _FakeVisitationElementDAO_14(
+          this,
+          Invocation.method(
+            #findByDescription,
+            [description],
+          ),
+        )),
+      ) as _i18.Future<_i15.VisitationElementDAO>);
+
+  @override
+  _i18.Future<bool> insert(Object? dto) => (super.noSuchMethod(
+        Invocation.method(
+          #insert,
+          [dto],
+        ),
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
+
+  @override
+  _i18.Future<bool> update(Object? dto) => (super.noSuchMethod(
+        Invocation.method(
+          #update,
+          [dto],
+        ),
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
+
+  @override
+  _i18.Future<bool> delete(Object? id) => (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [id],
+        ),
+        returnValue: _i18.Future<bool>.value(false),
+      ) as _i18.Future<bool>);
+
+  @override
+  _i18.Future<Object?> findById(Object? id) => (super.noSuchMethod(
+        Invocation.method(
+          #findById,
+          [id],
+        ),
+        returnValue: _i18.Future<Object?>.value(),
+      ) as _i18.Future<Object?>);
+
+  @override
+  _i18.Future<List<dynamic>> findAll([
+    int? limit,
+    int? offset,
+  ]) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #findAll,
+          [
+            limit,
+            offset,
+          ],
+        ),
+        returnValue: _i18.Future<List<dynamic>>.value(<dynamic>[]),
+      ) as _i18.Future<List<dynamic>>);
+
+  @override
+  _i18.Future<int> count() => (super.noSuchMethod(
+        Invocation.method(
+          #count,
+          [],
+        ),
+        returnValue: _i18.Future<int>.value(0),
+      ) as _i18.Future<int>);
 }

@@ -7,6 +7,7 @@ import 'package:portal_eclb/resource/dao/mariadb/patrimony/person/mariadb_notabl
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/person/mariadb_type_of_acting_dao.dart';
 
 import 'package:portal_eclb/resource/dao/mariadb/person/visitor/mariadb_visitor_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_element_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_stage_dao.dart';
 
 import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart';
@@ -14,9 +15,11 @@ import 'package:portal_eclb/resource/dao/patrimony/historic/type_of_patrimony_hi
 import 'package:portal_eclb/resource/dao/patrimony/media/type_of_media_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/news/patrimony_news_media_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/person/acting_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/person/notable_person_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/person/type_of_acting_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/quiz/quiz_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/simple/type_of_simple_patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/person/visitor/visitor_dao.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/composite/mariadb_visitation_stage_data_mapper.dart';
@@ -120,6 +123,24 @@ final class MariaDBDAOFactory extends AbstractDAOFactory {
   @override
   TypeOfPatrimonyHistoricDAO createTypeOfPatrimonyHistoricDAO(DatabaseSessionManager databaseSessionManager ) {
     // TODO: implement createTypeOfPatrimonyHistoricDAO
+    throw UnimplementedError();
+  }
+
+  @override
+  ActingDAO createActingDAO(DatabaseSessionManager databaseSessionManager) {
+    // TODO: implement createActingDAO
+    throw UnimplementedError();
+  }
+
+  @override
+  TypeOfSimplePatrimonyDAO createTypeOfSimplePatrimonyDAO(DatabaseSessionManager databaseSessionManager) {
+    // TODO: implement createTypeOfSimplePatrimonyDAO
+    throw UnimplementedError();
+  }
+
+  @override
+  VisitationElementDAO createVisitationElementDAO(DatabaseSessionManager databaseSessionManager) {
+    // TODO: implement createVisitationElementDAO
     throw UnimplementedError();
   }
 
