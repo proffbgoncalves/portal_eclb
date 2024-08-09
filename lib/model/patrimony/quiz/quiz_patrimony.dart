@@ -1,4 +1,4 @@
-abstract interface class PatrimonyNewsMedia{
+abstract interface class QuizPatrimony{
 
   int? get id;
 

@@ -10,10 +10,13 @@ import 'package:portal_eclb/resource/dao/mariadb/person/visitor/mariadb_visitor_
 import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_stage_dao.dart';
 
 import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/historic/type_of_patrimony_historic_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/media/type_of_media_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/news/patrimony_news_media_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/person/notable_person_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/person/type_of_acting_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/quiz/quiz_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/person/visitor/visitor_dao.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/composite/mariadb_visitation_stage_data_mapper.dart';
@@ -92,7 +95,7 @@ final class MariaDBDAOFactory extends AbstractDAOFactory {
     VisitationStageDataMapper dataMapper = new MariadbVisitationStageDataMapper();
 
     MariadbVisitationStageDao visitation = new MariadbVisitationStageDao(databaseSessionManager, dataMapper);
-   return visitation;
+    return visitation;
   }
 
   @override
@@ -100,6 +103,24 @@ final class MariaDBDAOFactory extends AbstractDAOFactory {
     NotablePersonDataMapper dataMapper = new MariadbNotablePersonsDataMapper();
     MariadbNotablePersonDAO dao = new MariadbNotablePersonDAO(databaseSessionManager, dataMapper);
     return dao;
+  }
+
+  @override
+  PatrimonyNewsMediaDAO createPatrimonyNewsMediaDAO(DatabaseSessionManager databaseSessionManager) {
+    // TODO: implement createPatrimonyNewsMediaDAO
+    throw UnimplementedError();
+  }
+
+  @override
+  QuizDAO createQuizDAO(DatabaseSessionManager databaseSessionManager) {
+    // TODO: implement createQuizDAO
+    throw UnimplementedError();
+  }
+
+  @override
+  TypeOfPatrimonyHistoricDAO createTypeOfPatrimonyHistoricDAO(DatabaseSessionManager databaseSessionManager ) {
+    // TODO: implement createTypeOfPatrimonyHistoricDAO
+    throw UnimplementedError();
   }
 
 }
