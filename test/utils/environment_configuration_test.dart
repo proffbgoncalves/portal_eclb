@@ -10,7 +10,7 @@ void main() {
       expect(configuration, isNotNull);
 
       expect(configuration.get<String>("host"), equals("localhost"));
-      expect(configuration.get<int>("port"), equals(3306));
+      expect(configuration.get<int>("port"), equals(8080));
       expect(configuration.get<String>("db"), equals("eclb_prod"));
       expect(configuration.get<String>("user"), equals("root"));
       expect(configuration.get<String>("password"), equals("aluno"));
@@ -22,7 +22,7 @@ void main() {
       expect(configuration, isNotNull);
 
       expect(configuration.get<String>("host"), equals("localhost"));
-      expect(configuration.get<int>("port"), equals(3306));
+      expect(configuration.get<int>("port"), equals(8080));
       expect(configuration.get<String>("db"), equals("eclb_dev"));
       expect(configuration.get<String>("user"), equals("root"));
       expect(configuration.get<String>("password"), equals("aluno"));
