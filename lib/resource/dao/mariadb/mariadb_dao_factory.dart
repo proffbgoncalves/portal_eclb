@@ -115,28 +115,6 @@ final class MariaDBDAOFactory extends AbstractDAOFactory {
     return dao;
   }
 
-  @override
-  VisitorDAO createVisitorDAO(DatabaseSessionManager databaseSessionManager) {
-    VisitorDataMapper dataMapper = new MariadbVisitorDataMapper();
-
-    MariadbVisitorDAO visitorDAO = new MariadbVisitorDAO(databaseSessionManager, dataMapper);
-    return visitorDAO;
-  }
-
-  @override
-  VisitationStageDAO createVisitationStageDAO(DatabaseSessionManager databaseSessionManager) {
-    VisitationStageDataMapper dataMapper = new MariadbVisitationStageDataMapper();
-
-    MariadbVisitationStageDao visitation = new MariadbVisitationStageDao(databaseSessionManager, dataMapper);
-    return visitation;
-  }
-
-  @override
-  NotablePersonDAO createNotablePersonDAO(DatabaseSessionManager databaseSessionManager) {
-    NotablePersonDataMapper dataMapper = new MariadbNotablePersonsDataMapper();
-    MariadbNotablePersonDAO dao = new MariadbNotablePersonDAO(databaseSessionManager, dataMapper);
-    return dao;
-  }
 
   @override
   PatrimonyNewsMediaDAO createPatrimonyNewsMediaDAO(DatabaseSessionManager databaseSessionManager) {
