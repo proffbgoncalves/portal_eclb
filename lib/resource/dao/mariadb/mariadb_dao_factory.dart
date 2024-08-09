@@ -5,13 +5,29 @@ import 'package:portal_eclb/resource/dao/mariadb/patrimony/mariadb_type_of_patri
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/media/mariadb_type_of_media_dao.dart';
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/person/mariadb_notable_person_dao.dart';
 import 'package:portal_eclb/resource/dao/mariadb/patrimony/person/mariadb_type_of_acting_dao.dart';
+
 import 'package:portal_eclb/resource/dao/mariadb/person/visitor/mariadb_visitor_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_stage_dao.dart';
+
+
+import 'package:portal_eclb/resource/dao/mariadb/person/visitor/mariadb_visitor_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_element_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/composite/visitation_stage_dao.dart';
+
+
 import 'package:portal_eclb/resource/dao/patrimony/event/type_of_event_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/historic/type_of_patrimony_historic_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/media/type_of_media_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/news/patrimony_news_media_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/patrimony_dao.dart';
+
+
+import 'package:portal_eclb/resource/dao/patrimony/person/acting_dao.dart';
+
 import 'package:portal_eclb/resource/dao/patrimony/person/notable_person_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/person/type_of_acting_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/quiz/quiz_dao.dart';
+import 'package:portal_eclb/resource/dao/patrimony/simple/type_of_simple_patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/patrimony/type_of_patrimony_dao.dart';
 import 'package:portal_eclb/resource/dao/person/visitor/visitor_dao.dart';
 import 'package:portal_eclb/resource/datamapper/mariadb/patrimony/composite/mariadb_visitation_stage_data_mapper.dart';
@@ -99,5 +115,63 @@ final class MariaDBDAOFactory extends AbstractDAOFactory {
     return dao;
   }
 
+  @override
+  VisitorDAO createVisitorDAO(DatabaseSessionManager databaseSessionManager) {
+    VisitorDataMapper dataMapper = new MariadbVisitorDataMapper();
+
+    MariadbVisitorDAO visitorDAO = new MariadbVisitorDAO(databaseSessionManager, dataMapper);
+    return visitorDAO;
+  }
+
+  @override
+  VisitationStageDAO createVisitationStageDAO(DatabaseSessionManager databaseSessionManager) {
+    VisitationStageDataMapper dataMapper = new MariadbVisitationStageDataMapper();
+
+    MariadbVisitationStageDao visitation = new MariadbVisitationStageDao(databaseSessionManager, dataMapper);
+    return visitation;
+  }
+
+  @override
+  NotablePersonDAO createNotablePersonDAO(DatabaseSessionManager databaseSessionManager) {
+    NotablePersonDataMapper dataMapper = new MariadbNotablePersonsDataMapper();
+    MariadbNotablePersonDAO dao = new MariadbNotablePersonDAO(databaseSessionManager, dataMapper);
+    return dao;
+  }
+
+  @override
+  PatrimonyNewsMediaDAO createPatrimonyNewsMediaDAO(DatabaseSessionManager databaseSessionManager) {
+    // TODO: implement createPatrimonyNewsMediaDAO
+    throw UnimplementedError();
+  }
+
+  @override
+  QuizDAO createQuizDAO(DatabaseSessionManager databaseSessionManager) {
+    // TODO: implement createQuizDAO
+    throw UnimplementedError();
+  }
+
+  @override
+  TypeOfPatrimonyHistoricDAO createTypeOfPatrimonyHistoricDAO(DatabaseSessionManager databaseSessionManager ) {
+    // TODO: implement createTypeOfPatrimonyHistoricDAO
+    throw UnimplementedError();
+  }
+
+  @override
+  ActingDAO createActingDAO(DatabaseSessionManager databaseSessionManager) {
+    // TODO: implement createActingDAO
+    throw UnimplementedError();
+  }
+
+  @override
+  TypeOfSimplePatrimonyDAO createTypeOfSimplePatrimonyDAO(DatabaseSessionManager databaseSessionManager) {
+    // TODO: implement createTypeOfSimplePatrimonyDAO
+    throw UnimplementedError();
+  }
+
+  @override
+  VisitationElementDAO createVisitationElementDAO(DatabaseSessionManager databaseSessionManager) {
+    // TODO: implement createVisitationElementDAO
+    throw UnimplementedError();
+  }
 
 }

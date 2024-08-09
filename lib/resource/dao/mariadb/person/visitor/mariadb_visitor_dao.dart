@@ -24,12 +24,14 @@ final class MariadbVisitorDAO extends AbstractDAO implements VisitorDAO{
   @override
   Future<bool> insert(Object dto) async {
 
+
     bool result = await super.insert(dto);
 
     Results? results = (await super.sessionManager.executeQuery("SELECT LAST_INSERT_ID()")) as Results;
     dto as Visitor;
     dto.personId = results.first[0];
     print("printando em mariadbvisitorDAO ${results.first[0]}");
+
 
     return result;
 
@@ -61,6 +63,7 @@ final class MariadbVisitorDAO extends AbstractDAO implements VisitorDAO{
 
   @override
   Future<Visitor?> findByEmail(String email)  async{
+
     if (!this.sessionManager.isOpened) {
       throw new Exception("Conexão com o banco de dados não foi aberta.");
     }
@@ -77,6 +80,7 @@ final class MariadbVisitorDAO extends AbstractDAO implements VisitorDAO{
       return null;
     }
 
+
     Visitor dto = new VisitorDTO(personId: results.first[0],
         address: results.first[1],
         number:results.first[2],
@@ -89,7 +93,9 @@ final class MariadbVisitorDAO extends AbstractDAO implements VisitorDAO{
         email:results.first[9],
         memoryId:results.first[10]
     );
+
     print("printando em mariadbvisitordaofindbyemail 7 ${dto.email}");
+
     return dto;
   }
 

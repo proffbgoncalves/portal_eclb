@@ -30,23 +30,29 @@ void main(){
       try {
         await databaseSessionManager.open();
         await databaseSessionManager.startTransaction();
+
         await databaseSessionManager.execute("DELETE FROM `eclb_dev`.NOTABLEPERSONS");
         await databaseSessionManager.execute("DELETE FROM `eclb_dev`.PATRIMONYPERSONS");
         await databaseSessionManager.execute("DELETE FROM `eclb_dev`.PERSONS");
 
+
         await databaseSessionManager.commit();
         await databaseSessionManager.startTransaction();
 
+
         await databaseSessionManager.execute("INSERT INTO `eclb_dev`.persons (name) VALUES (?), (?), (?)",
+
             ['John Doe', "Jane Smith", "Alice Johnson "]);
 
         await databaseSessionManager.commit();
         await databaseSessionManager.startTransaction();
 
+
         Results? results = (await databaseSessionManager.executeQuery("SELECT id FROM `eclb_dev`.PERSONS")) as Results;
         print(results);
 
         await databaseSessionManager.execute("INSERT INTO `eclb_dev`.patrimonypersons (personId, birthday, biography, deathDate, photo) "
+
             "VALUES (?, ?, ?, ?, ?), (?, ?, ?, ?, ?),(?, ?, ?, ?, ?) ",
             [ results.elementAt(0)[0],'2024-01-01', 'Famous for contributions to art.', null, null,
                results.elementAt(1)[0],'2024-02-01', 'Notable historian and author.', null, null,
@@ -79,6 +85,7 @@ void main(){
       try {
         await databaseSessionManager.open();
         await databaseSessionManager.startTransaction();
+
         await databaseSessionManager.execute("DELETE FROM `eclb_dev`.NOTABLEPERSONS");
 
         Results? results2 = (await databaseSessionManager.executeQuery("SELECT personId FROM `eclb_dev`.patrimonypersons")) as Results;
@@ -87,6 +94,7 @@ void main(){
         await databaseSessionManager.execute("INSERT INTO `eclb_dev`.notablepersons (patrimonyPersonId) VALUES (?)",
             [results2.elementAt(0)[0]]);
         await databaseSessionManager.execute("INSERT INTO `eclb_dev`.notablepersons (patrimonyPersonId) VALUES (?)",
+
             [results2.elementAt(1)[0]]);
 
 
@@ -110,7 +118,9 @@ void main(){
         await manager.open();
         await manager.startTransaction();
 
+
         await manager.execute("DELETE FROM `eclb_dev`.NOTABLEPERSONS");
+
 
         await manager.commit();
       } catch(e) {
@@ -128,9 +138,11 @@ void main(){
         await manager.open();
         await manager.startTransaction();
 
+
         await manager.execute("DELETE FROM `eclb_dev`.NOTABLEPERSONS");
         await manager.execute("DELETE FROM `eclb_dev`.PATRIMONYPERSONS");
         await manager.execute("DELETE FROM `eclb_dev`.PERSONS");
+
 
         await manager.commit();
       } catch(e) {
@@ -148,7 +160,9 @@ void main(){
       await sessionManager.open();
       await sessionManager.startTransaction();
 
+
       Results? results3 = (await sessionManager.executeQuery("SELECT personId FROM `eclb_dev`.PATRIMONYPERSONS")) as Results;
+
       print(results3);
 
       NotablePersonEntityObject notablePerson = new NotablePersonEntityObjectImpl(
@@ -179,6 +193,7 @@ void main(){
       EnvironmentConfiguration environmentConfiguration = await EnvironmentConfiguration.fromFile(".env_dev");
       DatabaseSessionManager sessionManager = AbstractDatabaseSessionManager.getInstance(environmentConfiguration);
 
+
       try {
         await sessionManager.open();
         await sessionManager.startTransaction();
@@ -186,6 +201,7 @@ void main(){
         Results? results3 = (await sessionManager.executeQuery("SELECT personId FROM `eclb_dev`.PATRIMONYPERSONS")) as Results;
 
         NotablePersonEntityObject? entity = await NotablePersonEntityObjectImpl.getById(sessionManager, environmentConfiguration, results3.elementAt(0)[0]);
+
 
 
 
@@ -207,7 +223,9 @@ void main(){
     //   try {
     //     await sessionManager.open();
     //     await sessionManager.startTransaction();
+
     //     Results? results3 = (await sessionManager.executeQuery("SELECT id FROM `eclb_dev`.PATRIMONYPERSONS")) as Results;
+
     //
     //     NotablePersonEntityObject? entity = await NotablePersonEntityObjectImpl.getById(sessionManager, environmentConfiguration, results3.elementAt(1)[0]);
     //

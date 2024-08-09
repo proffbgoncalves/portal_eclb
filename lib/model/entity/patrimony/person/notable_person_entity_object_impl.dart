@@ -39,7 +39,9 @@ class NotablePersonEntityObjectImpl extends AbstractEntityObject implements Nota
         databaseSessionManager, environmentConfiguration, dto);
   }
 
+
   factory NotablePersonEntityObjectImpl.createFromDTO(
+
       DatabaseSessionManager databaseSessionManager,
       EnvironmentConfiguration environmentConfiguration,
       NotablePerson dto) {
@@ -87,7 +89,9 @@ class NotablePersonEntityObjectImpl extends AbstractEntityObject implements Nota
     DAOFactory factory = AbstractDAOFactory.getInstance(environmentConfiguration);
     NotablePersonDAO notablePersonDAO = factory.createNotablePersonDAO(databaseSessionManager);
     try {
-      return await notablePersonDAO.update(this._dto as Object);
+
+      return await notablePersonDAO.update(this._dto.patrimonyPersonId as Object);
+
     } catch (e) {
       rethrow;
     }
@@ -108,7 +112,9 @@ class NotablePersonEntityObjectImpl extends AbstractEntityObject implements Nota
       }
 
       NotablePerson dto = object as NotablePerson;
+
       NotablePersonEntityObject notablePerson = NotablePersonEntityObjectImpl.createFromDTO(
+
           databaseSessionManager, environmentConfiguration, dto);
       return notablePerson;
     } catch (e) {

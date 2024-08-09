@@ -7,21 +7,27 @@ import 'package:portal_eclb/resource/datamapper/patrimony/composite/visitation_s
   @override
   List generateCountStatement() {
     // Não pode passar por parâmetro pois queremos que o SQL puxe genericamente todos id
+
     List statement = ["SELECT COUNT(id) FROM `eclb_dev`.VISITATIONSTAGES"];
+
     return statement;
   }
 
   @override
   List generateDeleteStatement(Object id) {
     throwIf(!(id is int), Exception("Id parameter is not an instance of int."));
+
     List statement = ["DELETE FROM `eclb_dev`.VISITATIONSTAGES WHERE id = ?", [id]];
+
     return statement;
   }
 
   @override
   List generateFindByIdStatement(Object id) {
     throwIf(!(id is int), Exception("Id parameter is not an instance of int."));
+
     List statement = ["SELECT * FROM `eclb_dev`.VISITATIONSTAGES WHERE id = ?", [id]];
+
     return statement;
   }
 
@@ -31,7 +37,9 @@ import 'package:portal_eclb/resource/datamapper/patrimony/composite/visitation_s
 
     dto = dto as VisitationStage;
 
+
     List statement = ["INSERT INTO `eclb_dev`.VISITATIONSTAGES (name, visitationitineraryid) VALUES ( ?, ?)",
+
       [ dto.name, dto.visitationItineraryId]];
 
     return statement;
@@ -47,7 +55,9 @@ import 'package:portal_eclb/resource/datamapper/patrimony/composite/visitation_s
       throw Exception("Não é possível gerar statement SQL. Atributo id não é válido.");
     }
 
+
     List statement = ["UPDATE `eclb_dev`.VISITATIONSTAGES SET name = ?, visitationitineraryid = ? WHERE id = ?",
+
       [dto.name, dto.visitationItineraryId, dto.id]];
     return statement;
   }
@@ -55,9 +65,11 @@ import 'package:portal_eclb/resource/datamapper/patrimony/composite/visitation_s
   @override
   List generateFindAllStatement([int limit = 0, int offset = 0]) {
     if (limit > 0 && offset >= 0) {
+
       return ["SELECT * FROM `eclb_dev`.VISITATIONSTAGES LIMIT ? OFFSET ?", [limit, offset]];
     } else if (limit == 0 && offset == 0) {
       return ["SELECT * FROM `eclb_dev`.VISITATIONSTAGES"];
+
     } else {
       throw Exception("Não é possível gerar statement SQL. Parâmetros limit e offset são inválidos");
     }

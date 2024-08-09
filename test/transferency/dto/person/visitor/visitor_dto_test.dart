@@ -29,8 +29,10 @@ void main(){
           personId: 0,
           memoryId: 0,
           address: "rua",
+
           city: "bji",
           state: "rj",
+
           number: 100,
           complemento: "ali",
           district: "centro",
@@ -42,8 +44,10 @@ void main(){
       expect(visitante.personId, 0);
       expect(visitante.memoryId, 0);
       expect(visitante.address, "rua");
+
       expect(visitante.state, "rj");
       expect(visitante.city, "bji");
+
       expect(visitante.number, 100);
       expect(visitante.complemento, "ali");
       expect(visitante.district, "centro");

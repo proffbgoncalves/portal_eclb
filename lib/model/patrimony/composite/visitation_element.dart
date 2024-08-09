@@ -1,11 +1,10 @@
-abstract interface class PatrimonyNewsMedia{
+abstract interface class VisitationElement{
 
   int? get id;
 
   void set id(int? int);
 
-  String? get description;
-
   void set description(String? description);
 
+  String? get description;
 }

@@ -70,7 +70,9 @@ class VisitorEntityObjectImpl extends AbstractEntityObject implements VisitorEnt
     return new VisitorEntityObjectImpl._(databaseSessionManager, enviromentConfiguration, dto);
   }
 
+
   factory VisitorEntityObjectImpl.createFromDTO(DatabaseSessionManager databaseSessionManager, EnvironmentConfiguration environmentConfiguration, Visitor dto) {
+
     VisitorEntityObjectImpl instance = new VisitorEntityObjectImpl._(databaseSessionManager, environmentConfiguration, dto);
     return instance;
   }
@@ -140,7 +142,9 @@ class VisitorEntityObjectImpl extends AbstractEntityObject implements VisitorEnt
       }
 
       Visitor dto = object as Visitor;
+
       VisitorEntityObject visitor =  VisitorEntityObjectImpl.createFromDTO(databaseSessionManager, environmentConfiguration, dto);
+
       return visitor;
 
     }catch(e){
@@ -156,12 +160,14 @@ class VisitorEntityObjectImpl extends AbstractEntityObject implements VisitorEnt
       print("dto ${dto.runtimeType}");
       if (dto == null) {
 
+
         return null;
       }
       VisitorEntityObject entity = VisitorEntityObjectImpl.createFromDTO(databaseSessionManager, environmentConfiguration, dto);
       return entity;
     } catch (e) {
       print("Deu erro no getbyemail $e");
+
       rethrow;
     }
   }
