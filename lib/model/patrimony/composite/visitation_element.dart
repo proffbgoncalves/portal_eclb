@@ -1,4 +1,4 @@
-abstract interface class Acting{
+abstract interface class VisitationElement{
 
   int? get id;
 
