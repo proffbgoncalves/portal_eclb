@@ -1,13 +1,11 @@
-import 'package:portal_eclb/model/person/person.dart';
+import 'package:portal_eclb/resource/dao/dao.dart';
 
-abstract interface class User implements Person {
+abstract interface class UserDAO implements DAO {
 
-  void set login(String? login);
+  Future<List> findAllByPersonId(int personId);
 
-  String? get login;
+  Future<List> findAllByLogin(String login);
 
-  void set password(String? password);
-
-  String? get password;
+  Future<List> findAllByFunction(String function);
 
 }
