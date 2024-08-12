@@ -1,25 +1,40 @@
 import 'package:portal_eclb/model/person/user/user.dart';
-import 'package:portal_eclb/transferency/dto/person/abstract_person_dto.dart';
 
-final class UserDTO extends AbstractPersonDTO implements User {
+final class UserDTO implements User {
 
+  int? _personId;
   String? _login;
   String? _password;
+  String? _function;
 
-  UserDTO({super.id, super.name, String? login, String? password}) {
+  UserDTO({int? personId, String? login, String? password, String? function}) {
+    this._personId = personId;
     this._login = login;
     this._password = password;
+    this._function = function;
   }
 
-  String? get password => _password;
+  int? get personId => this._personId;
 
-  set password(String? value) {
-    _password = value;
+  set personId(int? value) {
+    this._personId = value;
   }
 
-  String? get login => _login;
+  String? get login => this._login;
 
   set login(String? value) {
-    _login = value;
+    this._login = value;
+  }
+
+  String? get password => this._password;
+
+  set password(String? value) {
+    this._password = value;
+  }
+
+  String? get function => this._function;
+
+  set function(String? value) {
+    this._function = value;
   }
 }
