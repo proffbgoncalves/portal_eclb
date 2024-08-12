@@ -17,6 +17,11 @@ import 'package:portal_eclb/resource/datamapper/patrimony/composite/visitation_s
   List generateDeleteStatement(Object id) {
     throwIf(!(id is int), Exception("Id parameter is not an instance of int."));
 
+
+    if (id == null || !(id is int) || id! < 0) {
+      throw Exception("Não é possível gerar statement SQL. Atributo id não é válido.");
+    }
+
     List statement = ["DELETE FROM `eclb_dev`.VISITATIONSTAGES WHERE id = ?", [id]];
 
     return statement;
@@ -36,9 +41,15 @@ import 'package:portal_eclb/resource/datamapper/patrimony/composite/visitation_s
     throwIf(!(dto is VisitationStage), Exception("DTO parameter is not an instance of VisitationStage"));
 
     dto = dto as VisitationStage;
+    if (dto.visitationItineraryId == null || !(dto.visitationItineraryId is int) || dto.visitationItineraryId! < 0) {
+      throw Exception("Não é possível gerar statement SQL. Atributo visitationItineraryId não é válido.");
+    }
+    if (dto.name == null || !(dto.name is String) ) {
+      throw Exception("Não é possível gerar statement SQL. Atributo name não é válido.");
+    }
 
-
-    List statement = ["INSERT INTO `eclb_dev`.VISITATIONSTAGES (name, visitationitineraryid) VALUES ( ?, ?)",
+    List statement = [
+      "INSERT INTO `eclb_dev`.VISITATIONSTAGES (name, visitationitineraryid) VALUES ( ?, ?)",
 
       [ dto.name, dto.visitationItineraryId]];
 
@@ -56,7 +67,8 @@ import 'package:portal_eclb/resource/datamapper/patrimony/composite/visitation_s
     }
 
 
-    List statement = ["UPDATE `eclb_dev`.VISITATIONSTAGES SET name = ?, visitationitineraryid = ? WHERE id = ?",
+    List statement = [
+      "UPDATE `eclb_dev`.VISITATIONSTAGES SET name = ?, visitationitineraryid = ? WHERE id = ?",
 
       [dto.name, dto.visitationItineraryId, dto.id]];
     return statement;
@@ -77,32 +89,31 @@ import 'package:portal_eclb/resource/datamapper/patrimony/composite/visitation_s
 
   @override
   List generateFindAllByName(String name) {
-    // TODO: implement generateFindAllByName
-    throw UnimplementedError();
+    throwIf(!(name is String), new Exception("String parameter is not an instance of String."));
+
+    List statement = ["SELECT * FROM `eclb_dev`.VISITATIONSTAGES WHERE NAME = ?", [name]];
+
+    return statement;
   }
 
   @override
   List generateFindAllByVisitationItineraryId(int visitationItineraryId) {
-    // TODO: implement generateFindAllByVisitationItineraryId
-    throw UnimplementedError();
+    throwIf(!(visitationItineraryId is int), new Exception("Id parameter is not an instance of int."));
+
+    List statement = ["SELECT * FROM `eclb_dev`.VISITATIONSTAGES WHERE VISITATIONITINERARYID = ?", [visitationItineraryId]];
+
+    return statement;
   }
 
   @override
   List generateFindById(int id) {
-    // TODO: implement generateFindById
-    throw UnimplementedError();
+    throwIf(!(id is int), Exception("Id parameter is not an instance of int."));
+
+    List statement = ["SELECT * FROM `eclb_dev`.VISITATIONSTAGES WHERE id = ?", [id]];
+
+    return statement;
   }
 
-  @override
-  List generateList(Iterable resultSet) {
-    // TODO: implement generateList
-    throw UnimplementedError();
-  }
 
-  @override
-  Object? generateObject(Iterable resultSet) {
-    // TODO: implement generateObject
-    throw UnimplementedError();
-  }
 
   }
