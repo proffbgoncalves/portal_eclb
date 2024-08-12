@@ -49,7 +49,9 @@ abstract class AbstractVisitorDataMapper implements VisitorDataMapper{
     }
     //precisa de verificações de nulo para cada campo not null?
 
-    List statement = ["INSERT INTO `eclb_dev`.VISITORS (PERSONID, ADDRESS, NUMBER, COMPLEMENTO, DISTRICT, CITY, STATE, POSTALCODE, PHONE, EMAIL, MEMORYID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    List statement = [
+      "INSERT INTO `eclb_dev`.VISITORS (PERSONID, ADDRESS, NUMBER, COMPLEMENTO, DISTRICT, CITY,"
+          " STATE, POSTALCODE, PHONE, EMAIL, MEMORYID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 
       [dto.personId, dto.address, dto.number, dto.complemento, dto.district, dto.city, dto.state,
         dto.postalCode, dto.phone, dto.email, dto.memoryId]];
@@ -72,7 +74,8 @@ abstract class AbstractVisitorDataMapper implements VisitorDataMapper{
     List statement = ["UPDATE `eclb_dev`.VISITORS SET "
 
         "ADDRESS = ?, NUMBER = ?, COMPLEMENTO = ?, DISTRICT = ?, CITY = ?, STATE = ?,"
-        "POSTALCODE = ?, PHONE = ?, EMAIL = ? WHERE PERSONID = ?", [ dto.address, dto.number, dto.complemento, dto.district, dto.city, dto.state,
+        "POSTALCODE = ?, PHONE = ?, EMAIL = ? WHERE PERSONID = ?",
+      [ dto.address, dto.number, dto.complemento, dto.district, dto.city, dto.state,
       dto.postalCode, dto.phone, dto.email, dto.personId]];
     return statement;
   }
