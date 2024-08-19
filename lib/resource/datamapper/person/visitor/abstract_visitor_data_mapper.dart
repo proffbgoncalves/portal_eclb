@@ -22,7 +22,6 @@ abstract class AbstractVisitorDataMapper implements VisitorDataMapper{
   }
 
 
-
   @override
   List generateFindByIdStatement(Object id) {
     throwIf(!(id is int), new Exception("Id parameter is not an instance of int."));
@@ -55,7 +54,6 @@ abstract class AbstractVisitorDataMapper implements VisitorDataMapper{
 
       [dto.personId, dto.address, dto.number, dto.complemento, dto.district, dto.city, dto.state,
         dto.postalCode, dto.phone, dto.email, dto.memoryId]];
-    //como vou inserir os ids estrangeiros - garantindo que ja existem valores para person e memories?
 
     return statement;
   }
@@ -69,7 +67,6 @@ abstract class AbstractVisitorDataMapper implements VisitorDataMapper{
     if(dto.personId == null ||!(dto.personId is int) || dto.personId! < 0){
       throw new Exception("Não é possível gerar statement SQL. Atributo personId não é valido.");
     }
-    //continuo precisando das verificações pois o where usa o id
 
     List statement = ["UPDATE `eclb_dev`.VISITORS SET "
 
@@ -84,7 +81,7 @@ abstract class AbstractVisitorDataMapper implements VisitorDataMapper{
   List generateFindAllStatement([int limit =0, int offset = 0]) {
     if(limit > 0 && offset >= 0){
 
-      return ["SELECT * FROM `eclb_dev`.VISITORS LIMIT = ? OFFSET = ?", [limit, offset]];
+      return ["SELECT * FROM `eclb_dev`.VISITORS LIMIT ? OFFSET ?", [limit, offset]];
     } else if(limit == 0 && offset == 0){
       return ["SELECT * FROM `eclb_dev`.VISITORS"];
 
@@ -93,53 +90,50 @@ abstract class AbstractVisitorDataMapper implements VisitorDataMapper{
     }
   }
 
-/* implementacao so no maria db?
-  @override
-  List generateList(Iterable resultSet) {
-    // TODO: implement generateList
-    throw UnimplementedError();
-  }
-
-  @override
-  Object? generateObject(Iterable resultSet) {
-    // TODO: implement generateObject
-    throw UnimplementedError();
-  }
-*/
-
-
 
   @override
   List generateFindAllByAddress(String address) {
-    // TODO: implement generateFindAllByAddress
-    throw UnimplementedError();
+    throwIf(address == "", new Exception("Não é possível gerar statement SQL. Parâmetro address não pode ser vazio."));
+
+    List statement = ["SELECT * FROM `eclb_dev`.VISITORS WHERE ADDRESS = ?",[address]];
+
+    return statement;
   }
 
   @override
   List generateFindAllByCity(String city) {
-    // TODO: implement generateFindAllByCity
-    throw UnimplementedError();
+    throwIf(city == "", new Exception("Não é possível gerar statement SQL. Parâmetro city não pode ser vazio."));
+
+    List statement = ["SELECT * FROM `eclb_dev`.VISITORS WHERE CITY = ?",[city]];
+
+    return statement;
   }
 
   @override
   List generateFindAllByComplemento(String complemento) {
-    // TODO: implement generateFindAllByComplemento
-    throw UnimplementedError();
+    if(complemento == "" || complemento.isEmpty){
+      List statement = ["SELECT * FROM `eclb_dev`.VISITORS WHERE COMPLEMENTO IS NULL"];
+     return statement;
+    }
+
+    List statement = ["SELECT * FROM `eclb_dev`.VISITORS WHERE COMPLEMENTO = ?", [complemento]];
+    return statement;
   }
 
   @override
   List generateFindAllByDistrict(String district) {
-    // TODO: implement generateFindAllByDistrict
-    throw UnimplementedError();
+    throwIf(district == "", new Exception("Não é possível gerar statement SQL. Parâmetro district não pode ser vazio."));
+
+    List statement = ["SELECT * FROM `eclb_dev`.VISITORS WHERE DISTRICT = ?",[district]];
+
+    return statement;
   }
 
   @override
   List generateFindAllByEmail(String email) {
 
-
     throwIf(email == "", new Exception("Não é possível gerar statement SQL. Parâmetro email não pode ser vazio."));
     List statement = ["SELECT * FROM `eclb_dev`.VISITORS WHERE EMAIL = ?", [email]];
-    print("printando em mariadbvisitorgeneratefindemail $email");
 
     return statement;
   }
@@ -147,38 +141,49 @@ abstract class AbstractVisitorDataMapper implements VisitorDataMapper{
 
   @override
   List generateFindAllByMemoryId(int memoryId) {
-    // TODO: implement generateFindAllByMemoryId
-    throw UnimplementedError();
+    List statement = ["SELECT * FROM `eclb_dev`.VISITORS WHERE MEMORYID = ?", [memoryId]];
+
+    return statement;
   }
 
   @override
   List generateFindAllByNumber(int number) {
-    // TODO: implement generateFindAllByNumber
-    throw UnimplementedError();
+    List statement = ["SELECT * FROM `eclb_dev`.VISITORS WHERE NUMBER = ?", [number]];
+
+    return statement;
   }
 
   @override
   List generateFindAllByPersonId(int personId) {
-    // TODO: implement generateFindAllByPersonId
-    throw UnimplementedError();
+    List statement = ["SELECT * FROM `eclb_dev`.VISITORS WHERE PERSONID = ?", [personId]];
+    return statement;
   }
 
   @override
   List generateFindAllByPhone(String phone) {
-    // TODO: implement generateFindAllByPhone
-    throw UnimplementedError();
+    throwIf(phone == "", new Exception("Não é possível gerar statement SQL. Parâmetro phone não pode ser vazio."));
+
+    List statement = ["SELECT * FROM `eclb_dev`.VISITORS WHERE PHONE = ?",[phone]];
+
+    return statement;
   }
 
   @override
   List generateFindAllByPostalCode(String postalCode) {
-    // TODO: implement generateFindAllByPostalCode
-    throw UnimplementedError();
+    throwIf(postalCode == "", new Exception("Não é possível gerar statement SQL. Parâmetro postalCode não pode ser vazio."));
+
+    List statement = ["SELECT * FROM `eclb_dev`.VISITORS WHERE POSTALCODE = ?",[postalCode]];
+
+    return statement;
   }
 
   @override
   List generateFindAllByState(String state) {
-    // TODO: implement generateFindAllByState
-    throw UnimplementedError();
+    throwIf(state == "", new Exception("Não é possível gerar statement SQL. Parâmetro state não pode ser vazio."));
+
+      List statement = ["SELECT * FROM `eclb_dev`.VISITORS WHERE STATE  = ?",[state]];
+
+    return statement;
   }
 
 

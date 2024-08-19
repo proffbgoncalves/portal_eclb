@@ -3,12 +3,14 @@ import 'package:mysql1/mysql1.dart';
 import 'package:portal_eclb/model/person/visitor/visitor.dart';
 import 'package:portal_eclb/resource/dao/abstract_dao.dart';
 import 'package:portal_eclb/resource/dao/person/visitor/visitor_dao.dart';
+import 'package:portal_eclb/resource/datamapper/mariadb/person/visitor/mariadb_visitor_data_mapper.dart';
 import 'package:portal_eclb/resource/datamapper/person/visitor/visitor_data_mapper.dart';
+import 'package:portal_eclb/transferency/dto/person/visitor/default_visitor_dto.dart';
 import 'package:portal_eclb/transferency/dto/person/visitor/visitor_dto.dart';
 
 final class MariadbVisitorDAO extends AbstractDAO implements VisitorDAO{
   MariadbVisitorDAO(super.sessionManager, super.dataMapper);
-
+  MariadbVisitorDataMapper _dataMapper = MariadbVisitorDataMapper();
   @override
   Future<int> count() async {
     throwIf(!this.sessionManager.isOpened, new Exception("Database session is not opened."));
@@ -19,29 +21,49 @@ final class MariadbVisitorDAO extends AbstractDAO implements VisitorDAO{
     return results.first[0];
   }
 
-
-
-  @override
-  Future<bool> insert(Object dto) async {
-
-
-    bool result = await super.insert(dto);
-
-    Results? results = (await super.sessionManager.executeQuery("SELECT LAST_INSERT_ID()")) as Results;
-    dto as Visitor;
-    dto.personId = results.first[0];
-    print("printando em mariadbvisitorDAO ${results.first[0]}");
-
-
-    return result;
-
-  }
+  // @override
+  // Future<bool> insert(Object dto) async {
+  //
+  //   bool result = await super.insert(dto);
+  //
+  //   Results? results = (await super.sessionManager.executeQuery("SELECT LAST_INSERT_ID()")) as Results;
+  //   dto as Visitor;
+  //   //dto.personId = results.first[0];da errado igual notable person por ser estrangeira ou é o sql estranho?
+  //
+  //
+  //   return result;
+  //
+  // }
 
   @override
-  Future<List> findAllByAddress(String address) {
-    // TODO: implement findAllByAddress
-    throw UnimplementedError();
+  Future<List> findAllByAddress(String address) async {
+  //  if (!this.sessionManager.isOpened) {
+  //    throw Exception("Conexão com o banco de dados não foi aberta.");
+  //  }
+  //  try {
+  //    if (address.isEmpty) {
+  //      throw Exception("Endereço inválido.");
+  //    }
+//
+  //    List? statement = this._dataMapper.generateFindAllByAddress(address);
+//
+  //    var resultSet;
+  //    if (statement?.length == 1) {
+  //      resultSet = await this.sessionManager.executeQuery(statement![0]);
+  //    } else if (statement?.length == 2) {
+  //      resultSet = await this.sessionManager.executeQuery(statement![0], statement![1]);
+  //    }
+//
+//
+  //    //return this._dataMapper!.generateList(resultSet).cast<DefaultVisitorDTO>();
+//
+  //  } catch(e) {
+  //    rethrow;
+  //  }
+  throw UnimplementedError();
   }
+
+
 
   @override
   Future<List> findAllByCity(String city) {
@@ -80,7 +102,6 @@ final class MariadbVisitorDAO extends AbstractDAO implements VisitorDAO{
       return null;
     }
 
-
     Visitor dto = new VisitorDTO(personId: results.first[0],
         address: results.first[1],
         number:results.first[2],
@@ -93,8 +114,6 @@ final class MariadbVisitorDAO extends AbstractDAO implements VisitorDAO{
         email:results.first[9],
         memoryId:results.first[10]
     );
-
-    print("printando em mariadbvisitordaofindbyemail 7 ${dto.email}");
 
     return dto;
   }

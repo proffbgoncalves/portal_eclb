@@ -5,7 +5,7 @@ import 'package:portal_eclb/resource/dao/dao.dart';
 
   Future<VisitationStage?> findByid(int id);
 
-  Future<List> findAllByName(String name);
+  Future<VisitationStage> findByName(String name);
   
   Future<VisitationStage?> findByVisitationItineraryId(int visitationItineraryId);
 

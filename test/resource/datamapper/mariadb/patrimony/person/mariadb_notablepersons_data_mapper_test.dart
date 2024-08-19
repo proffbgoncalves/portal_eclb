@@ -84,7 +84,7 @@ void main(){
 
       List statement = dataMapper.generateFindAllStatement(10, 0);
       expect(statement.length, equals(2));
-      expect(statement[0], "SELECT * FROM `eclb_dev`.NOTABLEPERSONS LIMIT = ? OFFSET = ?");
+      expect(statement[0], "SELECT * FROM `eclb_dev`.NOTABLEPERSONS LIMIT ? OFFSET ?");
       expect(statement[1][0], equals(10));
       expect(statement[1][1], equals(0));
     });
