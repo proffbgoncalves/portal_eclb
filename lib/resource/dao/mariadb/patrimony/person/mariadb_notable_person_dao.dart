@@ -23,19 +23,19 @@ final class MariadbNotablePersonDAO extends AbstractDAO implements NotablePerson
     return results.first[0];
   }
 
-  @override
-  Future<bool> insert(Object dto) async {
-    print("printando em notablePersonDAO 1");
-    bool result = await super.insert(dto);
-    print("printando em notablePersonDAO 2");
-    Results? results = (await super.sessionManager.executeQuery("SELECT LAST_INSERT_ID()")) as Results;
-    print("printando em notablePersonDAO 3");
-    dto as NotablePerson;
-    dto.patrimonyPersonId = results.first[0];
-    print("printando em notablePersonDAO ${results.first[0]}");
-
-    return result;
-  }
+  // @override
+  // Future<bool> insert(Object dto) async {
+  //
+  //   bool result = await super.insert(dto);
+  //
+  //   Results? results = (await super.sessionManager.executeQuery("SELECT LAST_INSERT_ID()")) as Results;
+  //
+  //   dto as NotablePerson;
+  //   //dto.patrimonyPersonId = results.first[0];// não dá o id correto mesmo inserindo, dá um 0
+  //
+  //
+  //   return result;
+  // }
 
   @override
   Future<NotablePerson?> findByPatrimonyPersonId(int patrimonyPersonId) async {
@@ -43,7 +43,7 @@ final class MariadbNotablePersonDAO extends AbstractDAO implements NotablePerson
     if (!this.sessionManager.isOpened) {
       throw new Exception("Conexão com o banco de dados não foi aberta.");
     }
-    print("printando em findByPatrimonyPersonId 2");
+
     if (patrimonyPersonId <= 0) {
       throw new Exception("patrimonyPersonId não pode ser menor ou igual a zero.");
     }

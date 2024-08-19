@@ -18,7 +18,7 @@ final class MariadbVisitationStageDao extends AbstractDAO implements VisitationS
 
     return results.first[0];
   }
-
+  /*
   @override
   Future<bool> insert(Object dto) async {
     bool result = await super.insert(dto);
@@ -28,10 +28,22 @@ final class MariadbVisitationStageDao extends AbstractDAO implements VisitationS
 
     return result;
   }
-
+  */
   @override
-  Future<List> findAllByName(String name) {
-    throw UnimplementedError();
+  Future<VisitationStage> findByName(String name) async{
+    if (!this.sessionManager.isOpened) {
+      throw new Exception("Database session is not opened.");
+    }
+
+    List statement = (this.dataMapper as VisitationStageDataMapper).generateFindAllByName(name);
+    Results results = (await this.sessionManager.executeQuery(statement[0], statement[1])) as Results;
+    VisitationStage dto = new VisitationStageDTO(
+      id: results.first[0],
+      name: results.first[1],
+      visitationItineraryId: results.first[2],
+    );
+
+    return dto;
   }
 
 

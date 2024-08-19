@@ -50,9 +50,7 @@ abstract class AbstractNotablePersonDataMapper implements NotablePersonDataMappe
     }
 
     List statement = [
-
       "INSERT INTO `eclb_dev`.NOTABLEPERSONS (PATRIMONYPERSONID) VALUES (?)",
-
       [
         dto.patrimonyPersonId,
       ]
@@ -86,7 +84,7 @@ abstract class AbstractNotablePersonDataMapper implements NotablePersonDataMappe
   List generateFindAllStatement([int limit = 0, int offset = 0]) {
     if (limit > 0 && offset >= 0) {
 
-      return ["SELECT * FROM `eclb_dev`.NOTABLEPERSONS LIMIT = ? OFFSET = ?", [limit, offset]];
+      return ["SELECT * FROM `eclb_dev`.NOTABLEPERSONS LIMIT ? OFFSET ?", [limit, offset]];
     } else if (limit == 0 && offset == 0) {
       return ["SELECT * FROM `eclb_dev`.NOTABLEPERSONS"];
 

@@ -168,10 +168,10 @@ void main()  {
       await sessionManager.startTransaction();
 
       Results? results3 = (await sessionManager.executeQuery("SELECT id FROM `eclb_dev`.PERSONS")) as Results;
-      print(results3);
+
       Results? results4 = (await sessionManager.executeQuery("SELECT id FROM `eclb_dev`.MEMORIES")) as Results;
 
-      print(results4);
+
 
       await sessionManager.close();
 

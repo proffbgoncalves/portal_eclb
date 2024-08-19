@@ -163,7 +163,6 @@ void main(){
 
       Results? results3 = (await sessionManager.executeQuery("SELECT personId FROM `eclb_dev`.PATRIMONYPERSONS")) as Results;
 
-      print(results3);
 
       NotablePersonEntityObject notablePerson = new NotablePersonEntityObjectImpl(
           sessionManager,
@@ -181,7 +180,6 @@ void main(){
 
         await sessionManager.commit();
       } catch (e) {
-        print("deu merda $e");
         await sessionManager.rollback();
         rethrow;
       } finally {
