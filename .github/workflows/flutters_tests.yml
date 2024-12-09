@@ -1,1 +1,55 @@
 name: Testes do Portal ECLB
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Shutdown Ubuntu MySQL (SUDO)
+        run: sudo service mysql stop
+      
+      - name: Set up MariaDB
+        uses: getong/mariadb-action@v1.11
+        with:
+          host port: 3306
+          container port: 3306
+          character set server: 'utf8'
+          collation server: 'utf8_general_ci'
+          mariadb version: '11.3.2'
+          mysql root password: 'aluno'
+          mysql user: 'root'
+          mysql password: 'aluno'
+          mysql database: 'eclb_dev' # Define o banco de dados padrão
+        
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Creating on MariaDB
+        run: |
+              mysql -h 127.0.0.1 -P 3306 -u root -paluno -e "
+                USE eclb_dev;
+                source db/script/eclb_dev.sql;
+              "
+              
+      - name: Confirm database selection
+        run: | 
+              mysql -h 127.0.0.1 -P 3306 -u root -paluno -e "
+               USE eclb_dev;
+               SHOW TABLES;
+              "
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.2'
+
+      - name: Install dependencies
+        run: | 
+                flutter pub get
+                flutter pub outdated
+                flutter pub upgrade --major-versions
+
+      - name: Run tests
+        run: flutter test
